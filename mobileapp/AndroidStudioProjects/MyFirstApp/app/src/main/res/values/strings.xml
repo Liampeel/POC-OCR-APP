@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">My First App</string>
+    <string name="button_send">Login</string>
+    <string name="button_register">Register</string>
+    <string name="enter_password">Password</string>
+    <string name="enter_email">Email Address</string>
+    <string name="home">Home</string>
+    <string name="_4_option_4">4. Option 4</string>
+    <string name="_1_cancer_scan">1. Cancer Scan</string>
+    <string name="_2_dipstick_scan">2. Dipstick Scan</string>
+    <string name="_5_option_5">5. Option 5</string>
+    <string name="_3_ab_machine_info">3. Ab Machine Info</string>
+    <string name="password2">Password</string>
+    <string name="email2">Email Address</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="forgotten_password">Forgotten Password?</string>
+    <string name="don_t_have_an_account_register_here">Don\'t have an Account? Register here</string>
+    <string name="logo_image">Logo image</string>
+    <string name="emailView">emailView</string>
+    <string name="passwordView">passwordView</string>
+    <string name="features">Features</string>
+    <string name="email3">Email Address</string>
+    <string name="password3">Password</string>
+    <string name="registerPage">registerPage</string>
+</resources>
