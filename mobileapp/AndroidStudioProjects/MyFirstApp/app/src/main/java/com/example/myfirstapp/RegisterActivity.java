@@ -90,7 +90,6 @@ public class RegisterActivity extends AppCompatActivity {
         AlertDialog alertDialog = termsDialogBuilder.create();
         alertDialog.show();
 
-        //startActivity(intent);
     }
 
 }

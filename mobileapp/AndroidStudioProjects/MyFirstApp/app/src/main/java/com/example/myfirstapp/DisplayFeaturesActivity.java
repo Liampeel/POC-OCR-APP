@@ -1,8 +1,12 @@
 package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,8 +37,8 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        ImageButton btn = (ImageButton) findViewById(R.id.homeButton);
         Button cambtn = (Button) findViewById(R.id.button);
+        ImageButton btn = (ImageButton) findViewById(R.id.homeButton);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,12 +47,33 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
             }
         });
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+        }
+
+
         cambtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent image = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivity(image);
-            }
-            });
+                @Override
+                public void onClick(View v)
+                {
+                    if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                    {
+                        ActivityCompat.requestPermissions(DisplayFeaturesActivity.this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+                    }
+                    else if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
+                    {
+                        Intent image = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivity(image);
+                    }
+                }
+        });
+
     }
+
+
+
+
+
+
 }
