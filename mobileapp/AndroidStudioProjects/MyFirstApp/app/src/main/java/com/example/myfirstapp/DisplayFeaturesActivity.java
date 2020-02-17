@@ -46,8 +46,8 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
         cambtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                startActivity(i);
+                Intent image = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivity(image);
             }
             });
     }
