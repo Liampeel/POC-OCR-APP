@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -71,6 +72,17 @@ public class RegisterActivity extends AppCompatActivity {
             {
                 Toast.makeText(RegisterActivity.this,"Thank you for Registering",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                EditText emailText = findViewById(R.id.emailText);
+                EditText passwordText = findViewById(R.id.passwordText);
+                EditText nameText = findViewById(R.id.nameText);
+                EditText ageText = findViewById(R.id.ageText);
+
+                String email = emailText.getText().toString();
+                String password = passwordText.getText().toString();
+                String name = nameText.getText().toString();
+                String age = ageText.getText().toString();
+
                 startActivity(intent);
             }
         });
