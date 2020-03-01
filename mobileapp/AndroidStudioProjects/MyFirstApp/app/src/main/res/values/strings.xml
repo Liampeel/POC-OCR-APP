@@ -26,6 +26,12 @@
     <string name="have_an_account">Already have an Account? Login here</string>
     <string name="age_input">Age</string>
     <string name="name_input">Name</string>
+    <string name="process_image">Process Image</string>
+    <string name="confirm_text">Would you like to use this image?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="processing">Processing your Image</string>
+    <string name="please_wait">Please Wait</string>
     <string-array name="terms_and_conditions">
     <item>1. TERMS OF USE
 By downloading, browsing, accessing or using this Sample Store mobile application (“Mobile Application”), you agree to be bound by these Terms and Conditions of Use. We reserve the right to amend these terms and conditions at any time. If you disagree with any of these Terms and Conditions of Use, you must immediately discontinue your access to the Mobile Application and your use of the services offered on the Mobile Application. Continued use of the Mobile Application will constitute acceptance of these Terms and Conditions of Use, as may be amended from time to time.

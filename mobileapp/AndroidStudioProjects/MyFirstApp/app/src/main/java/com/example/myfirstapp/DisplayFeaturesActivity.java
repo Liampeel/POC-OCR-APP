@@ -77,8 +77,6 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
                 }
                 else if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
                  {
-                    //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    //startActivity(intent);
                      dispatchTakePictureIntent();
                  }
             }
