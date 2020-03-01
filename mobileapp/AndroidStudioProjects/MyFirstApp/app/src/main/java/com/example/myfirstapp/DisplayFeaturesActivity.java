@@ -33,6 +33,7 @@ import static com.example.myfirstapp.MainActivity.setWindowFlag;
 
 public class DisplayFeaturesActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,8 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
 
         Button cambtn = (Button) findViewById(R.id.button);
         ImageButton btn = (ImageButton) findViewById(R.id.homeButton);
+        final Button processbtn = (Button) findViewById(R.id.fileButton);
+        processbtn.setEnabled(false);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +90,12 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             File imgFile = new  File(myCurrentPhotoPath);
             if(imgFile.exists()){
+                final Button processbtn2 = (Button) findViewById(R.id.fileButton);
+                processbtn2.setEnabled(true);
                 //Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 //ImageView myImage = (ImageView) findViewById(R.id.imageView);
                 //Intent intent = new Intent(this, ImageActivity.class);
