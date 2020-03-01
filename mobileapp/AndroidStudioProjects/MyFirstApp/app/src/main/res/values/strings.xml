@@ -5,11 +5,6 @@
     <string name="enter_password">Password</string>
     <string name="enter_email">Email Address</string>
     <string name="home">Home</string>
-    <string name="_4_option_4">4. Option 4</string>
-    <string name="_1_cancer_scan">1. Cancer Scan</string>
-    <string name="_2_dipstick_scan">2. Dipstick Scan</string>
-    <string name="_5_option_5">5. Option 5</string>
-    <string name="_3_ab_machine_info">3. Ab Machine Info</string>
     <string name="password2">Password</string>
     <string name="email2">Email Address</string>
     <string name="login">Login</string>
@@ -26,6 +21,7 @@
     <string name="have_an_account">Already have an Account? Login here</string>
     <string name="age_input">Age</string>
     <string name="name_input">Name</string>
+    <string name="records">Records</string>
     <string name="process_image">Process Image</string>
     <string name="confirm_text">Would you like to use this image?</string>
     <string name="yes">Yes</string>

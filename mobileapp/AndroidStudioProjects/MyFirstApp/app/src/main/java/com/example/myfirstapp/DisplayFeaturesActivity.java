@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -86,6 +88,17 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
         });
     }
 
+    public static void setWindowFlag(Activity activity, final int bits, boolean on) {
+        Window win = activity.getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
+
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
@@ -148,12 +161,16 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
     }
 
 
-    public void imagePage(View view)
-    {
+    public void imagePage(View view) {
         Intent intent = new Intent(this, ImageActivity.class);
         intent.putExtra(EXTRA_MESSAGE, myCurrentPhotoPath);
         startActivity(intent);
 
+    }
+
+    public void recordsPage(View view){
+        Intent intent = new Intent(this, recordsActivity.class);
+        startActivity(intent);
     }
 
 
