@@ -9,8 +9,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -22,9 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +30,6 @@ import java.util.Date;
 import static com.example.myfirstapp.MainActivity.setWindowFlag;
 
 public class DisplayFeaturesActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +47,10 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
+        Intent intent = getIntent();
+        String email = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String password = intent.getStringExtra(MainActivity.EXTRA_MESSAGE2);
 
         Button cambtn = (Button) findViewById(R.id.button);
         ImageButton btn = (ImageButton) findViewById(R.id.homeButton);
@@ -86,6 +85,8 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
                  }
             }
         });
+
+
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -101,7 +102,6 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
@@ -109,9 +109,10 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
             if(imgFile.exists()){
                 final Button processbtn2 = (Button) findViewById(R.id.fileButton);
                 processbtn2.setEnabled(true);
+
+                //this code below is used to display the picture on the same activity
                 //Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 //ImageView myImage = (ImageView) findViewById(R.id.imageView);
-                //Intent intent = new Intent(this, ImageActivity.class);
                 //myImage.setImageBitmap(myBitmap);
             }
         }
@@ -132,7 +133,6 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
         myCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
-
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

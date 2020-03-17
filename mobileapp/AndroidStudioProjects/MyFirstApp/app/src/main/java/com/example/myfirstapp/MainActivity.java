@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     // Called when the user taps the send button
     public void sendMessage(View view)
     {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        Intent intent = new Intent(this, DisplayFeaturesActivity.class);
 
         EditText emailText = findViewById(R.id.emailText);
         EditText passwordText = findViewById(R.id.passwordText);

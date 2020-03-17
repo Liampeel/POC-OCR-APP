@@ -3,12 +3,17 @@ package com.example.myfirstapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
+
 import android.os.Build;
 import android.os.Bundle;
+
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class recordsActivity extends AppCompatActivity {
@@ -22,7 +27,7 @@ public class recordsActivity extends AppCompatActivity {
             "Great for shoes",
             "Scary."
     };
-    int imageArray = R.drawable.cell;
+    int imageArray = R.drawable.syringe;
     ListView listView;
 
     @Override
@@ -48,6 +53,19 @@ public class recordsActivity extends AppCompatActivity {
         CustomListAdapter listAdapter = new CustomListAdapter(this, nameArray, infoArray, imageArray);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(listAdapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(recordsActivity.this, DetailActivity.class);
+                String message = nameArray[position];
+                intent.putExtra("Record", message);
+                startActivity(intent);
+
+            }
+        });
 
     }
 
