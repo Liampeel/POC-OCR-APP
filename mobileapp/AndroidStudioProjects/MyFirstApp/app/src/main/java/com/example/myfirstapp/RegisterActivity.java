@@ -4,17 +4,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -39,6 +50,29 @@ public class RegisterActivity extends AppCompatActivity {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
+        ArrayList<String> years = new ArrayList<String>();
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        for(int i = 1900; i <= currentYear; i++){
+            years.add(Integer.toString(i));
+        }
+        ArrayAdapter<String> adapterYear = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
+        Spinner spinYear = (Spinner)findViewById(R.id.yearspin);
+        spinYear.setAdapter(adapterYear);
+
+        ArrayList<String> days = new ArrayList<String>();
+        for(int i = 1; i <= 31; i++){
+            days.add(Integer.toString(i));
+        }
+        ArrayAdapter<String> adapterDay = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, days);
+        Spinner spinDay = (Spinner)findViewById(R.id.dayspin);
+        spinDay.setAdapter(adapterDay);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.months, android.R.layout.simple_spinner_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinmonth = (Spinner) findViewById(R.id.monthspin);
+        spinmonth.setAdapter(adapter);
+
     }
 
     public void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -60,47 +94,69 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void Register(View view)
     {
-        Resources res = getResources();
-        String[] terms = res.getStringArray(R.array.terms_and_conditions);
-        AlertDialog.Builder termsDialogBuilder = new AlertDialog.Builder(this);
-        termsDialogBuilder.setTitle("Terms and Conditions");
-        termsDialogBuilder.setMessage(terms[0] + terms[1] + terms[2]+ terms[3] + terms[4] + terms[5] + terms[6]);
-        termsDialogBuilder.setPositiveButton("Accept", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1)
-            {
-                Toast.makeText(RegisterActivity.this,"Thank you for Registering",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        EditText emailText = findViewById(R.id.emailText);
+        EditText passwordText = findViewById(R.id.passwordText);
+        EditText nameText = findViewById(R.id.nameText);
 
-                EditText emailText = findViewById(R.id.emailText);
-                EditText passwordText = findViewById(R.id.passwordText);
-                EditText nameText = findViewById(R.id.nameText);
-                EditText ageText = findViewById(R.id.ageText);
+        String email = emailText.getText().toString();
+        String password = passwordText.getText().toString();
+        String name = nameText.getText().toString();
 
-                String email = emailText.getText().toString();
-                String password = passwordText.getText().toString();
-                String name = nameText.getText().toString();
-                String age = ageText.getText().toString();
+        Intent checkIntent = new Intent(getApplicationContext(), RegisterActivity.class);
 
-                startActivity(intent);
-            }
-        });
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(RegisterActivity.this,"No email was entered, please enter an email to continue",Toast.LENGTH_LONG).show();
+        }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(RegisterActivity.this,"The email address entered is not valid",Toast.LENGTH_LONG).show();
+        }
+        else if(TextUtils.isEmpty(password)){
+            Toast.makeText(RegisterActivity.this,"No password was entered, please enter an password to continue",Toast.LENGTH_LONG).show();
+        }
+        else if (TextUtils.isEmpty(name)){
+            startActivity(checkIntent);
+            Toast.makeText(RegisterActivity.this,"No name was entered, please enter an name to continue",Toast.LENGTH_LONG).show();
+        }
+        else {
+            Resources res = getResources();
+            String[] terms = res.getStringArray(R.array.terms_and_conditions);
+            AlertDialog.Builder termsDialogBuilder = new AlertDialog.Builder(this);
+            termsDialogBuilder.setTitle("Terms and Conditions");
+            termsDialogBuilder.setMessage(terms[0] + terms[1] + terms[2] + terms[3] + terms[4] + terms[5] + terms[6]);
+            termsDialogBuilder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface arg0, int arg1) {
+                    Toast.makeText(RegisterActivity.this, "Thank you for Registering", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
-        termsDialogBuilder.setNegativeButton("Decline",new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                finish();
-                startActivity(intent);
-                Toast.makeText(RegisterActivity.this,"Please Accept the Terms and Conditions",Toast.LENGTH_LONG).show();
-            }
-        });
+                    Spinner yearSpinItem = findViewById(R.id.yearspin);
+                    Spinner monthSpinItem = findViewById(R.id.monthspin);
+                    Spinner daySpinItem = findViewById(R.id.dayspin);
 
-        AlertDialog alertDialog = termsDialogBuilder.create();
-        alertDialog.show();
+                    Integer day = Integer.parseInt((String) daySpinItem.getSelectedItem());
+                    String month = monthSpinItem.getSelectedItem().toString();
+                    Integer year = Integer.parseInt((String) yearSpinItem.getSelectedItem());
+
+                    String dateOfBirth = year + "/" + month + "/" + day;
+
+                    startActivity(intent);
+                }
+            });
+
+            termsDialogBuilder.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                    finish();
+                    startActivity(intent);
+                    Toast.makeText(RegisterActivity.this, "Please Accept the Terms and Conditions", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            AlertDialog alertDialog = termsDialogBuilder.create();
+            alertDialog.show();
+
+        }
 
     }
 
