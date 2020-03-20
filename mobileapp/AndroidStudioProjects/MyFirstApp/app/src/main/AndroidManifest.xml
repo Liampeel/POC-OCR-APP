@@ -5,29 +5,33 @@
     <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="My App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <meta-data android:name="android.max_aspect" android:value="2.1" />
-        <activity android:name=".DetailActivity"></activity>
-        <activity android:name=".recordsActivity" />
-        <activity android:name=".LoadingActivity" />
-        <activity android:name=".ImageActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".DisplayFeaturesActivity" />
+        <activity android:name=".activities.DetailActivity"></activity>
+        <activity android:name=".activities.recordsActivity" />
+        <activity android:name=".activities.LoadingActivity" />
+        <activity android:name=".activities.ImageActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.DisplayFeaturesActivity" />
         <activity
-            android:name=".DisplayMessageActivity"
-            android:parentActivityName=".MainActivity">
+            android:name=".activities.DisplayMessageActivity"
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

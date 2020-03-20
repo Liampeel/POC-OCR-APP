@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_start"
     android:fitsSystemWindows="true"
-    tools:context=".DisplayFeaturesActivity">
+    tools:context=".activities.DisplayFeaturesActivity">
 
     <ImageButton
         android:id="@+id/homeButton"
