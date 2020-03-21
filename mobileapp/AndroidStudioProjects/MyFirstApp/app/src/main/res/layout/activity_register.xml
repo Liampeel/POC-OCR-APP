@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_start"
-    tools:context=".RegisterActivity">
+    tools:context=".activities.RegisterActivity">
 
     <Spinner
         android:id="@+id/dayspin"
@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.627" />
 
     <EditText
-        android:id="@+id/emailText"
+        android:id="@+id/editTextEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -38,12 +38,11 @@
         tools:targetApi="o" />
 
     <Button
-        android:id="@+id/loginDirectButton"
+        android:id="@+id/textViewLogin"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="319dp"
         android:layout_height="48dp"
         android:layout_marginBottom="16dp"
-        android:onClick="LoginDirect"
         android:text="@string/have_an_account"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,13 +53,12 @@
         app:layout_constraintVertical_bias="0.964" />
 
     <Button
-        android:id="@+id/registerDirectButton"
+        android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="468dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:onClick="Register"
         android:text="@string/button_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.986"
@@ -68,7 +66,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/passwordText"
+        android:id="@+id/editTextPassword"
         android:layout_width="214dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -86,7 +84,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/nameText"
+        android:id="@+id/editTextName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

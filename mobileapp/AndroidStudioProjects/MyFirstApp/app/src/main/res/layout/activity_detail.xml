@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_start"
     android:fitsSystemWindows="true"
-    tools:context=".DetailActivity">
+    tools:context=".activities.DetailActivity">
 
     <TextView
         android:id="@+id/diagnosisView"
