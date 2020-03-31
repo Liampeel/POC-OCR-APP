@@ -92,8 +92,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         ArrayAdapter<String> adapterMonth = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, months);
         Spinner spinmonth = (Spinner) findViewById(R.id.monthspin);
         spinmonth.setAdapter(adapterMonth);
-
-
     }
 
     public void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -108,10 +106,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-    private void userSignUp() {
+    private void userSignUp(String dateOfBirth) {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         String name = editTextName.getText().toString().trim();
+
+        System.out.println(dateOfBirth);
+        Log.d("date of birth", "Hello hello hello");
+        Log.d("date of birth", dateOfBirth);
 
         System.out.println("Made it to the user sign up method");
 
@@ -140,18 +142,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             editTextPassword.requestFocus();
             return;
         }
-        else {
-            System.out.println("Made it to the else statement, the bulk of the call");
+
+
+
             Call<DefaultResponse> call = RetrofitClient
                     .getInstance()
                     .getApi()
-                    .createUser(email, password, name);
+                    .createUser(email, password, name, dateOfBirth);
 
             call.enqueue(new Callback<DefaultResponse>() {
                 @Override
                 public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                     System.out.println("Made if to the response code if statement");
-                    if (response.code() == 200) {
+                    if (response.code() == 201) {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         DefaultResponse dr = response.body();
                         Toast.makeText(RegisterActivity.this, dr.getEmailMsg(), Toast.LENGTH_SHORT).show();
@@ -159,7 +162,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         startActivity(intent);
                     }
                     else {
-                        Toast.makeText(RegisterActivity.this, "User already Exists", Toast.LENGTH_SHORT).show();
+                        DefaultResponse dr2 = response.body();
+                        Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
@@ -169,7 +173,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             });
 
         }
-    }
+
 
     public void register()
     {
@@ -194,7 +198,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 String dateOfBirth = year + "/" + month + "/" + day;
                 System.out.println("Date of Birth = " + dateOfBirth);
 
-                userSignUp();
+                userSignUp(dateOfBirth);
 
                 //startActivity(intent);
             }

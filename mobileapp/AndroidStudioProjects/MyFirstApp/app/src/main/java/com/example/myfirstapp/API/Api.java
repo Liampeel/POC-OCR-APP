@@ -14,7 +14,8 @@ public interface Api {
     Call<DefaultResponse> createUser(
             @Field("email") String email,
             @Field("password") String password,
-            @Field("name") String name
+            @Field("name") String name,
+            @Field("date_of_birth") String dateOfBirth
 
 
     );
