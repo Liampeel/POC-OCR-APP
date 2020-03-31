@@ -104,9 +104,10 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
-            File imgFile = new  File(myCurrentPhotoPath);
-            if(imgFile.exists()){
+            File imgFile = new File(myCurrentPhotoPath);
+            if (imgFile.exists()) {
                 final Button processbtn2 = (Button) findViewById(R.id.fileButton);
                 processbtn2.setEnabled(true);
 
@@ -173,6 +174,10 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void aapPage(View view){
+        Intent intent = new Intent(this, aapdiagnosisActivity.class);
+        startActivity(intent);
+    }
 
 }
 

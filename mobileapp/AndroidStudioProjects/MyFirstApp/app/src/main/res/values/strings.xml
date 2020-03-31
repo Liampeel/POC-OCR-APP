@@ -32,6 +32,15 @@
     <string name="date">Date</string>
     <string name="diagnosis">Diagnosis</string>
     <string name="clear_record">Clear Record</string>
+    <string name="your_result">Your Result </string>
+    <string name="no_issue">There doesn\'t look to be a problem!</string>
+    <string name="issue">There looks to be an issue!</string>
+    <string name="good">Good</string>
+    <string name="bad">Bad</string>
+    <string-array name="answers">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
     <string-array name="months">
         <item>January</item>
         <item>February</item>
