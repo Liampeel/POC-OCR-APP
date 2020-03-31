@@ -7,6 +7,9 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -81,7 +84,8 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
                 }
                 else if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
                  {
-                     dispatchTakePictureIntent();
+                     selectImage(DisplayFeaturesActivity.this);
+                     //dispatchTakePictureIntent();
                  }
             }
         });
@@ -161,6 +165,32 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
         this.sendBroadcast(mediaScanIntent);
     }
 
+    private void selectImage(Context context) {
+        final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Choose your Image");
+
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+
+                if (options[item].equals("Take Photo")) {
+                    dispatchTakePictureIntent();
+
+                } else if (options[item].equals("Choose from Gallery")) {
+                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(pickPhoto , 1);
+
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
 
     public void imagePage(View view) {
         Intent intent = new Intent(this, ImageActivity.class);
@@ -178,6 +208,7 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
         Intent intent = new Intent(this, aapdiagnosisActivity.class);
         startActivity(intent);
     }
+
 
 }
 

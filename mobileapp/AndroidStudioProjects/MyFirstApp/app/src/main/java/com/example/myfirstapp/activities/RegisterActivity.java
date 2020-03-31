@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         ArrayList<String> years = new ArrayList<String>();
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        for(int i = 1900; i <= currentYear; i++){
+        for(int i = currentYear; i >= 1900; i-=1){
             years.add(Integer.toString(i));
         }
         ArrayAdapter<String> adapterYear = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
@@ -85,10 +85,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Spinner spinDay = (Spinner)findViewById(R.id.dayspin);
         spinDay.setAdapter(adapterDay);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.months, android.R.layout.simple_spinner_item);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayList<String> months = new ArrayList<String>();
+        for(int i = 1; i <= 12; i++){
+            months.add(Integer.toString(i));
+        }
+        ArrayAdapter<String> adapterMonth = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, months);
         Spinner spinmonth = (Spinner) findViewById(R.id.monthspin);
-        spinmonth.setAdapter(adapter);
+        spinmonth.setAdapter(adapterMonth);
+
 
     }
 
@@ -188,6 +192,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 Integer year = Integer.parseInt((String) yearSpinItem.getSelectedItem());
 
                 String dateOfBirth = year + "/" + month + "/" + day;
+                System.out.println("Date of Birth = " + dateOfBirth);
 
                 userSignUp();
 
