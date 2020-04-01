@@ -43,7 +43,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="592dp"
+        android:layout_marginTop="552dp"
         android:onClick="recordsPage"
         android:text="@string/records"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,19 +108,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/fileButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="imagePage"
-        android:text="@string/process_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.883" />
 
     <Button
         android:id="@+id/button4"

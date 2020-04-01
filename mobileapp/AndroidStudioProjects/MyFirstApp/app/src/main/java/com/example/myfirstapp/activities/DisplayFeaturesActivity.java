@@ -61,8 +61,6 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
 
         Button cambtn = (Button) findViewById(R.id.button);
         ImageButton btn = (ImageButton) findViewById(R.id.homeButton);
-        final Button processbtn = (Button) findViewById(R.id.fileButton);
-        processbtn.setEnabled(false);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,11 +178,12 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        final Button processbtn2 = (Button) findViewById(R.id.fileButton);
         if (requestCode == 0) {
             File imgFile = new File(myCurrentPhotoPath);
             if (imgFile.exists()) {
-                processbtn2.setEnabled(true);
+                Intent intent = new Intent(this, ImageActivity.class);
+                intent.putExtra(EXTRA_MESSAGE, myCurrentPhotoPath);
+                startActivity(intent);
 
                 //this code below is used to display the picture on the same activity
                 //Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
@@ -196,7 +195,9 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
             Uri selectedImageURI = data.getData();
             File finalFile = new File(getRealPathFromURI(selectedImageURI));
             myCurrentPhotoPath = finalFile.getAbsolutePath();
-            processbtn2.setEnabled(true);
+            Intent intent = new Intent(this, ImageActivity.class);
+            intent.putExtra(EXTRA_MESSAGE, myCurrentPhotoPath);
+            startActivity(intent);
         }
     }
 
@@ -208,13 +209,6 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
         result = cursor.getString(idx);
         cursor.close();
         return result;
-    }
-
-    public void imagePage(View view) {
-        Intent intent = new Intent(this, ImageActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, myCurrentPhotoPath);
-        startActivity(intent);
-
     }
 
     public void recordsPage(View view){
