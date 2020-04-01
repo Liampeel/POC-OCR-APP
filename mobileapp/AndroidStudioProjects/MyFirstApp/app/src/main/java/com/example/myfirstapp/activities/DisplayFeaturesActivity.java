@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -27,8 +29,10 @@ import android.widget.Toast;
 
 import com.example.myfirstapp.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -105,24 +109,6 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
     }
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            File imgFile = new File(myCurrentPhotoPath);
-            if (imgFile.exists()) {
-                final Button processbtn2 = (Button) findViewById(R.id.fileButton);
-                processbtn2.setEnabled(true);
-
-                //this code below is used to display the picture on the same activity
-                //Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                //ImageView myImage = (ImageView) findViewById(R.id.imageView);
-                //myImage.setImageBitmap(myBitmap);
-            }
-        }
-    }
-
     String myCurrentPhotoPath;
     public static final String EXTRA_MESSAGE = "filepath";
 
@@ -152,7 +138,7 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this, "com.example.android.fileprovider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                startActivityForResult(takePictureIntent, 0);
             }
         }
     }
@@ -191,6 +177,38 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
         builder.show();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        final Button processbtn2 = (Button) findViewById(R.id.fileButton);
+        if (requestCode == 0) {
+            File imgFile = new File(myCurrentPhotoPath);
+            if (imgFile.exists()) {
+                processbtn2.setEnabled(true);
+
+                //this code below is used to display the picture on the same activity
+                //Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                //ImageView myImage = (ImageView) findViewById(R.id.imageView);
+                //myImage.setImageBitmap(myBitmap);
+            }
+        }
+        if (requestCode == 1) {
+            Uri selectedImageURI = data.getData();
+            File finalFile = new File(getRealPathFromURI(selectedImageURI));
+            myCurrentPhotoPath = finalFile.getAbsolutePath();
+            processbtn2.setEnabled(true);
+        }
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        String result;
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        result = cursor.getString(idx);
+        cursor.close();
+        return result;
+    }
 
     public void imagePage(View view) {
         Intent intent = new Intent(this, ImageActivity.class);
