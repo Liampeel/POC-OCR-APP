@@ -5,12 +5,22 @@ import com.example.myfirstapp.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+
+import java.io.File;
+import java.io.IOException;
+
+import static com.example.myfirstapp.activities.DisplayFeaturesActivity.EXTRA_MESSAGE;
 
 public class resultbadActivity extends AppCompatActivity {
 
@@ -30,6 +40,22 @@ public class resultbadActivity extends AppCompatActivity {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
+        Intent intent = getIntent();
+        String filepath = intent.getStringExtra(EXTRA_MESSAGE);
+
+        File imgFile = new  File(filepath);
+        Bitmap img = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        Bitmap image = null;
+        try {
+            image = modifyOrientation(img, filepath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Bitmap scaledImage = Bitmap.createScaledBitmap(image, 750, 900, false);
+        ImageView myImage = (ImageView) findViewById(R.id.userImageView);
+        myImage.setImageBitmap(scaledImage);
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -41,5 +67,30 @@ public class resultbadActivity extends AppCompatActivity {
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
+    }
+
+    public static Bitmap modifyOrientation(Bitmap bitmap, String image_absolute_path) throws IOException {
+        ExifInterface ei = new ExifInterface(image_absolute_path);
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                return rotate(bitmap, 90);
+
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                return rotate(bitmap, 180);
+
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                return rotate(bitmap, 270);
+
+            default:
+                return bitmap;
+        }
+    }
+
+    public static Bitmap rotate(Bitmap bitmap, float degrees) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degrees);
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
 }

@@ -21,6 +21,8 @@ import com.example.myfirstapp.R;
 import java.io.File;
 import java.io.IOException;
 
+import static com.example.myfirstapp.activities.DisplayFeaturesActivity.EXTRA_MESSAGE;
+
 public class ImageActivity extends AppCompatActivity {
 
     @Override
@@ -45,7 +47,7 @@ public class ImageActivity extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        String filepath = intent.getStringExtra(DisplayFeaturesActivity.EXTRA_MESSAGE);
+        String filepath = intent.getStringExtra(EXTRA_MESSAGE);
 
         File imgFile = new  File(filepath);
         Bitmap img = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
@@ -72,8 +74,12 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     public void sendImage(View view){
-        Intent intent = new Intent( this, LoadingActivity.class);
-        startActivity(intent);
+        Intent oldIntent = getIntent();
+        String filepath = oldIntent.getStringExtra(EXTRA_MESSAGE);
+
+        Intent newIntent = new Intent( this, LoadingActivity.class);
+        newIntent.putExtra(EXTRA_MESSAGE, filepath);
+        startActivity(newIntent);
     }
 
     public void retakeImage(View view){

@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import static com.example.myfirstapp.activities.DisplayFeaturesActivity.EXTRA_MESSAGE;
+
 public class LoadingActivity extends AppCompatActivity {
 
     @Override
@@ -44,13 +46,21 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     public void goodResult(View view){
-        Intent intent = new Intent(this,goodresultActivity.class);
-        startActivity(intent);
+        Intent oldIntent = getIntent();
+        String filepath = oldIntent.getStringExtra(EXTRA_MESSAGE);
+
+        Intent newIntent = new Intent(this,goodresultActivity.class);
+        newIntent.putExtra(EXTRA_MESSAGE, filepath);
+        startActivity(newIntent);
     }
 
     public void badResult(View view){
-        Intent intent = new Intent(this,resultbadActivity.class);
-        startActivity(intent);
+        Intent oldIntent = getIntent();
+        String filepath = oldIntent.getStringExtra(EXTRA_MESSAGE);
+
+        Intent newIntent = new Intent(this,resultbadActivity.class);
+        newIntent.putExtra(EXTRA_MESSAGE, filepath);
+        startActivity(newIntent);
     }
     // when loading is complete, use this line of code below and the loading screen should disappear
     //findViewById(R.id.loadingPanel).setVisibility(View.GONE);
