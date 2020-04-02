@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.aapListAdapter;
+import com.example.myfirstapp.aapListAdapter2;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,16 +15,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
 
-public class aapdiagnosisActivity extends AppCompatActivity {
+public class question1Activity extends AppCompatActivity {
 
 
-    String[] nameArray = {"Sex","Age","Site of pain at Onset","Site of pain at present","Relieving Factors"};
+    String[] nameArray = {"Movement", "Coughing", "Respiration", "Food", "Other", "None"};
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aap_diagnosis);
+        setContentView(R.layout.activity_question_1);
 
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -38,7 +38,7 @@ public class aapdiagnosisActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        aapListAdapter listAdapter = new aapListAdapter(this, nameArray);
+        aapListAdapter2 listAdapter = new aapListAdapter2(this, nameArray);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(listAdapter);
 
@@ -53,11 +53,6 @@ public class aapdiagnosisActivity extends AppCompatActivity {
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
-    }
-
-    public void nextQuestion(View view){
-        Intent intent = new Intent(this,question1Activity.class);
-        startActivity(intent);
     }
 
 }
