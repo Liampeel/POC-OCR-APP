@@ -47,6 +47,7 @@
     <string name="high_risk_info">SkinScanner\'s algorithm has identified your image as high risk.
     This is because there is a strong match between your image and images in our database.</string>
     <string name="high_risk_info2">This is NOT a diagnosis, we advise that you seek a medical professional\'s opinion based on the algorithms results.</string>
+    <string name="another_diagnosis">To use another image click here</string>
     <string-array name="answers">
         <item>Yes</item>
         <item>No</item>

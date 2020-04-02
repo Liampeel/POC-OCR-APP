@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.myfirstapp.CustomListAdapter;
-import com.example.myfirstapp.R;
 
 public class recordsActivity extends AppCompatActivity {
 
