@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities;
+package com.example.myfirstapp.activities.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -13,7 +13,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -28,20 +27,22 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.activities.ImageActivity;
+import com.example.myfirstapp.activities.MainActivity;
+import com.example.myfirstapp.activities.aapdiagnosisActivity;
+import com.example.myfirstapp.activities.recordsActivity;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DisplayFeaturesActivity extends AppCompatActivity {
+public class angusActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_features);
+        setContentView(R.layout.activity_dom);
 
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -65,7 +66,7 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DisplayFeaturesActivity.this, DisplayFeaturesActivity.class));
+                startActivity(new Intent(angusActivity.this, domActivity.class));
             }
         });
 
@@ -82,13 +83,13 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
             {
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
                 {
-                    ActivityCompat.requestPermissions(DisplayFeaturesActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+                    ActivityCompat.requestPermissions(angusActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
                 }
                 else if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
-                 {
-                     selectImage(DisplayFeaturesActivity.this);
-                     //dispatchTakePictureIntent();
-                 }
+                {
+                    selectImage(angusActivity.this);
+                    //dispatchTakePictureIntent();
+                }
             }
         });
 
@@ -223,4 +224,3 @@ public class DisplayFeaturesActivity extends AppCompatActivity {
 
 
 }
-

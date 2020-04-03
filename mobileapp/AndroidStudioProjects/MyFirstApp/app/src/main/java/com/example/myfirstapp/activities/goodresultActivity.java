@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import java.io.File;
 import java.io.IOException;
 
-import static com.example.myfirstapp.activities.DisplayFeaturesActivity.EXTRA_MESSAGE;
+import static com.example.myfirstapp.activities.main.domActivity.EXTRA_MESSAGE;
 
 public class goodresultActivity extends AppCompatActivity {
 

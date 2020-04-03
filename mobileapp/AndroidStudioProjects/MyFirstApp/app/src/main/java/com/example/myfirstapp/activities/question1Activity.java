@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 public class question1Activity extends AppCompatActivity {
@@ -41,6 +43,15 @@ public class question1Activity extends AppCompatActivity {
         aapListAdapter2 listAdapter = new aapListAdapter2(this, nameArray);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(listAdapter);
+
+        Button nextbtn = (Button) findViewById(R.id.nextButton);
+
+        nextbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 

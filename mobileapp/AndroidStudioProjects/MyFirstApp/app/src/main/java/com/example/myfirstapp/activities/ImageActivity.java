@@ -17,11 +17,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.activities.main.domActivity;
 
 import java.io.File;
 import java.io.IOException;
 
-import static com.example.myfirstapp.activities.DisplayFeaturesActivity.EXTRA_MESSAGE;
+import static com.example.myfirstapp.activities.main.domActivity.EXTRA_MESSAGE;
 
 public class ImageActivity extends AppCompatActivity {
 
@@ -83,7 +84,7 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     public void retakeImage(View view){
-        Intent intent = new Intent( this, DisplayFeaturesActivity.class);
+        Intent intent = new Intent( this, domActivity.class);
         startActivity(intent);
     }
 

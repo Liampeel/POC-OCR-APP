@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import static com.example.myfirstapp.activities.DisplayFeaturesActivity.EXTRA_MESSAGE;
+import static com.example.myfirstapp.activities.main.domActivity.EXTRA_MESSAGE;
 
 public class LoadingActivity extends AppCompatActivity {
 

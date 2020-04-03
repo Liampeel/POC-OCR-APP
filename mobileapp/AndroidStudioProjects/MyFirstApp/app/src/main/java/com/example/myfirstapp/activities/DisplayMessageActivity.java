@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.activities.main.domActivity;
 
 
 public class DisplayMessageActivity extends AppCompatActivity{
@@ -57,7 +58,7 @@ public class DisplayMessageActivity extends AppCompatActivity{
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DisplayMessageActivity.this, DisplayFeaturesActivity.class));
+                startActivity(new Intent(DisplayMessageActivity.this, domActivity.class));
             }
         });
 

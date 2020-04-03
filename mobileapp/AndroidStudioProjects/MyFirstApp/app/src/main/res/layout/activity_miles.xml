@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_start"
     android:fitsSystemWindows="true"
-    tools:context=".activities.DisplayFeaturesActivity">
+    tools:context=".activities.main.milesActivity">
 
     <ImageButton
         android:id="@+id/homeButton"
@@ -75,7 +75,7 @@
         android:layout_marginTop="92dp"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
-        android:text="Welcome to SkinScanner"
+        android:text="@string/dip_scan"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +87,7 @@
         android:layout_height="109dp"
         android:layout_marginTop="65dp"
         android:layout_marginBottom="103dp"
-        android:text="Unsure about a mark on your skin? Take a picture, upload it to the app and we will use our process the image to see if it may be harmful."
+        android:text="@string/dip_scan_info"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"

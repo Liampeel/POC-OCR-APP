@@ -5,21 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.LoginResponse;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.activities.main.domActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.myfirstapp.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -165,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.loginButton:
                 userLogin();
-                startActivity(new Intent(this, DisplayFeaturesActivity.class));
+                startActivity(new Intent(this, domActivity.class));
 
                 break;
             case R.id.registerButton:

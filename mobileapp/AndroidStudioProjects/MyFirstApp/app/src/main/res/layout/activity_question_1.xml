@@ -54,7 +54,7 @@
         app:layout_constraintVertical_bias="0.299" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/nextButton"
         android:layout_width="284dp"
         android:layout_height="34dp"
         android:background="@android:color/transparent"

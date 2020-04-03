@@ -19,6 +19,14 @@
     <string name="password3">Password</string>
     <string name="registerPage">registerPage</string>
     <string name="have_an_account">Already have an Account? Login here</string>
+    <string name="skin_scanner">Welcome to SkinScanner</string>
+    <string name="aap_test">Welcome to your AAP testing tool</string>
+    <string name="dip_scan">Welcome to DipScan</string>
+    <string name="num_scan">Welcome to NumScan</string>
+    <string name="skin_scanner_info">Unsure about a mark on your skin? Take a picture, upload it to the app and we will use our process the image to see if it may be harmful.</string>
+    <string name="aap_test_info">Diagnose your acute abdominal pain by answering a simple list of questions.</string>
+    <string name="dip_scan_info"></string>
+    <string name="num_scan_info"></string>
     <string name="age_input">Age</string>
     <string name="name_input">Name</string>
     <string name="records">Records</string>
