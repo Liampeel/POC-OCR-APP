@@ -7,4 +7,10 @@
     <color name="colorGradientStart">#18757c</color>
     <color name="colorGradientCenter">#55bee6</color>
     <color name="colorGradientEnd">#00ffaa</color>
+    <color name="colorGradientStartgood">#089a00</color>
+    <color name="colorGradientCentergood">#28d42d</color>
+    <color name="colorGradientEndgood">#6cff8b</color>
+    <color name="colorGradientStartbad">#9a0000</color>
+    <color name="colorGradientCenterbad">#de270f</color>
+    <color name="colorGradientEndbad">#dd5353</color>
 </resources>

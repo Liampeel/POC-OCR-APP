@@ -5,11 +5,6 @@
     <string name="enter_password">Password</string>
     <string name="enter_email">Email Address</string>
     <string name="home">Home</string>
-    <string name="_4_option_4">4. Option 4</string>
-    <string name="_1_cancer_scan">1. Cancer Scan</string>
-    <string name="_2_dipstick_scan">2. Dipstick Scan</string>
-    <string name="_5_option_5">5. Option 5</string>
-    <string name="_3_ab_machine_info">3. Ab Machine Info</string>
     <string name="password2">Password</string>
     <string name="email2">Email Address</string>
     <string name="login">Login</string>
@@ -24,6 +19,52 @@
     <string name="password3">Password</string>
     <string name="registerPage">registerPage</string>
     <string name="have_an_account">Already have an Account? Login here</string>
+    <string name="skin_scanner">Welcome to SkinScanner</string>
+    <string name="aap_test">Welcome to your AAP testing tool</string>
+    <string name="dip_scan">Welcome to DipScan</string>
+    <string name="num_scan">Welcome to NumScan</string>
+    <string name="skin_scanner_info">Unsure about a mark on your skin? Take a picture, upload it to the app and we will use our process the image to see if it may be harmful.</string>
+    <string name="aap_test_info">Diagnose your acute abdominal pain by answering a simple list of questions.</string>
+    <string name="dip_scan_info"></string>
+    <string name="num_scan_info"></string>
+    <string name="age_input">Age</string>
+    <string name="name_input">Name</string>
+    <string name="records">Records</string>
+    <string name="process_image">Process Image</string>
+    <string name="confirm_text">Would you like to use this image?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="processing">Processing your Image</string>
+    <string name="please_wait">Please Wait</string>
+    <string name="record">Record</string>
+    <string name="date">Date</string>
+    <string name="diagnosis">Diagnosis</string>
+    <string name="clear_record">Clear Record</string>
+    <string name="your_result">Your Result </string>
+    <string name="no_issue">There doesn\'t look to be a problem!</string>
+    <string name="issue">There looks to be an issue!</string>
+    <string name="good">Good</string>
+    <string name="bad">Bad</string>
+    <string name="low_risk">Low Risk</string>
+    <string name="high_risk">High Risk</string>
+    <string name="what_does_this_mean">What does this mean?</string>
+    <string name="low_risk_info">SkinScanner\'s algorithm has identified your image as low risk.
+    This is because there isn\'t a strong match between your image and images in our database.</string>
+    <string name="low_risk_info2">This is NOT a diagnosis, if you are unsure please seek
+    a medical professional who can provide a more informed diagnosis</string>
+    <string name="high_risk_info">SkinScanner\'s algorithm has identified your image as high risk.
+    This is because there is a strong match between your image and images in our database.</string>
+    <string name="high_risk_info2">This is NOT a diagnosis, we advise that you seek a medical professional\'s opinion based on the algorithms results.</string>
+    <string name="another_diagnosis">To use another image click here</string>
+    <string name="please_answer">Please answer the questions below</string>
+    <string name="aap_progress">27/33</string>
+    <string name="next_questions">Click here to see the next question</string>
+    <string name="aggravating_factors">Do you have any aggravating factors?</string>
+    <string name="aap_progress1">28/33</string>
+    <string-array name="answers">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
     <string-array name="terms_and_conditions">
     <item>1. TERMS OF USE
 By downloading, browsing, accessing or using this Sample Store mobile application (“Mobile Application”), you agree to be bound by these Terms and Conditions of Use. We reserve the right to amend these terms and conditions at any time. If you disagree with any of these Terms and Conditions of Use, you must immediately discontinue your access to the Mobile Application and your use of the services offered on the Mobile Application. Continued use of the Mobile Application will constitute acceptance of these Terms and Conditions of Use, as may be amended from time to time.
@@ -38,7 +79,7 @@ In these Terms and Conditions of Use, the following capitalised terms shall have
 "Samples" means samples of Merchant’s products and/or Merchant’s services, including without limitation, any vouchers for the redemption of such services, and "Sample" means any one of them.
 "Services" means all the services provided by Singapore Post Limited via the Mobile Application to Users, and "Service" means any one of them,
 "Users" means users of the Mobile Application, including you and "User" means any one of them.</item>
-    <item>3. GENERAL ISSUES ABOUT THE MOBILE APPLICATION AND THE SERVICES
+        <item>3. GENERAL ISSUES ABOUT THE MOBILE APPLICATION AND THE SERVICES
 3.1 Applicability of terms and conditions: The use of any Services and/or the Mobile Application and the making of any Redemptions are subject to these Terms and Conditions of Use.
 3.2 Location: The Mobile Application, the Services and any Redemptions are intended solely for use by Users who access the Mobile Application in Singapore. We make no representation that the Services (or any goods or services) are available or otherwise suitable for use outside of Singapore. Notwithstanding the above, if you access the Mobile Application, use the Services or make any Redemptions from locations outside Singapore, you do so on your own initiative and are responsible for the consequences and for compliance with all applicable laws.
 3.3 Scope: The Mobile Application, the Services and any Redemptions are for your non-commercial, personal use only and must not be used for business purposes.
@@ -54,7 +95,7 @@ In these Terms and Conditions of Use, the following capitalised terms shall have
 4.5 Restrictions: (a) Reproduction, sale, resale or trading of any products or Samples or Redeemed products is prohibited. (b) If any product or Sample is Redeemed for less than its face value, there is no entitlement to a credit, cash or Sample equal to the difference between the face value and the amount Redeemed. (c) Redemption of products or Samples is subject to availability of the relevant Merchants’ stocks.
 4.6 SingPost Not Liable: For the avoidance of doubt, Singapore Post Limited shall not be liable for any losses or damages suffered by you resulting from a failure by the relevant Merchant to fulfil any Redemptions in accordance with Clause 4.4 or for a failure by us to deliver any products or Samples to you due to the unavailability of such products or Samples pursuant to Clause 4.5(c).
 4.7 Lost/stolen Samples: Neither we nor any Merchant shall be responsible for lost or stolen Samples or products that have been Redeemed.</item>
-    <item>5. LOCATION ALERTS AND NOTIFICATIONS
+        <item>5. LOCATION ALERTS AND NOTIFICATIONS
 5.1 You agree to receive pre-programmed notifications (“Location Alerts”) on the Mobile Application from Merchants if you have turned on locational services on your mobile telephone or other handheld devices (as the case may be).
 6. YOUR OBLIGATIONS
 6.1 Merchant terms: You agree to (and shall) abide by the terms and conditions of the relevant Merchant for which your Redemption relates to, as may be amended from time to time.
@@ -97,7 +138,7 @@ In these Terms and Conditions of Use, the following capitalised terms shall have
 8.4.2 we suspect, on reasonable grounds, that you have, might or will commit a breach of these Terms and Conditions of Use; or
 8.4.3 we suspect, on reasonable grounds, that you may have committed or be committing any fraud against us or any person.
 8.5 Our rights under this Clause 8 shall not prejudice any other right or remedy we may have in respect of any breach or any rights, obligations or liabilities accrued prior to termination.</item>
-    <item>9. DISCLAIMER AND EXCLUSION OF LIABILITY
+        <item>9. DISCLAIMER AND EXCLUSION OF LIABILITY
 9.1 The Mobile Application, the Services, the information on the Mobile Application and use of all related facilities are provided on an "as is, as available" basis without any warranties whether express or implied.
 9.2 To the fullest extent permitted by applicable law, we disclaim all representations and warranties relating to the Mobile Application and its contents, including in relation to any inaccuracies or omissions in the Mobile Application, warranties of merchantability, quality, fitness for a particular purpose, accuracy, availability, non-infringement or implied warranties from course of dealing or usage of trade.
 9.3 We do not warrant that the Mobile Application will always be accessible, uninterrupted, timely, secure, error free or free from computer virus or other invasive or damaging code or that the Mobile Application will not be affected by any acts of God or other force majeure events, including inability to obtain or shortage of necessary materials, equipment facilities, power or telecommunications, lack of telecommunications equipment or facilities and failure of information technology or telecommunications equipment or facilities.
@@ -108,14 +149,14 @@ In these Terms and Conditions of Use, the following capitalised terms shall have
 9.8 Notwithstanding our efforts to ensure that our system is secure, you acknowledge that all electronic data transfers are potentially susceptible to interception by others. We cannot, and do not, warrant that data transfers pursuant to the Mobile Application, or electronic mail transmitted to and from us, will not be monitored or read by others.
 10. INDEMNITY
 You agree to indemnify and keep us indemnified against any claim, action, suit or proceeding brought or threatened to be brought against us which is caused by or arising out of (a) your use of the Services, (b) any other party’s use of the Services using your user ID, verification PIN and/or any identifier number allocated by Singapore Post Limited, and/or (c) your breach of any of these Terms and Conditions of Use, and to pay us damages, costs and interest in connection with such claim, action, suit or proceeding.</item>
-    <item>11. INTELLECTUAL PROPERTY RIGHTS
+        <item>11. INTELLECTUAL PROPERTY RIGHTS
 11.1 All editorial content, information, photographs, illustrations, artwork and other graphic materials, and names, logos and trade marks on the Mobile Application are protected by copyright laws and/or other laws and/or international treaties, and belong to us and/or our suppliers, as the case may be. These works, logos, graphics, sounds or images may not be copied, reproduced, retransmitted, distributed, disseminated, sold, published, broadcasted or circulated whether in whole or in part, unless expressly permitted by us and/or our suppliers, as the case may be.
 11.2 Nothing contained on the Mobile Application should be construed as granting by implication, estoppel, or otherwise, any license or right to use any trademark displayed on the Mobile Application without our written permission. Misuse of any trademarks or any other content displayed on the Mobile Application is prohibited.
 11.3 We will not hesitate to take legal action against any unauthorised usage of our trade marks, name or symbols to preserve and protect its rights in the matter. All rights not expressly granted herein are reserved. Other product and company names mentioned herein may also be the trade marks of their respective owners.
 12. AMENDMENTS
 12.1 We may periodically make changes to the contents of the Mobile Application, including to the descriptions and prices of goods and services advertised, at any time and without notice. We assume no liability or responsibility for any errors or omissions in the content of the Mobile Application.
 12.2 We reserve the right to amend these Terms and Conditions of Use from time to time without notice. The revised Terms and Conditions of Use will be posted on the Mobile Application and shall take effect from the date of such posting. You are advised to review these terms and conditions periodically as they are binding upon you.</item>
-    <item>13. APPLICABLE LAW AND JURISDICTION
+        <item>13. APPLICABLE LAW AND JURISDICTION
 13.1 The Mobile Application can be accessed from all countries around the world where the local technology permits. As each of these places have differing laws, by accessing the Mobile Application both you and we agree that the laws of the Republic of Singapore, without regard to the conflicts of laws principles thereof, will apply to all matters relating to the use of the Mobile Application.
 13.2 You accept and agree that both you and we shall submit to the exclusive jurisdiction of the courts of the Republic of Singapore in respect of any dispute arising out of and/or in connection with these Terms and Conditions of Use.
 14. PRIVACY POLICY
