@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myfirstapp.R;
 
@@ -54,10 +55,14 @@ public class passwordCodeActivity extends AppCompatActivity implements View.OnCl
 
     private void sendCode(){
         String code = editTextCode.getText().toString();
-
-        //Send the code to the api so that the api can validate the user and the user can reset their password
-        //On response, start the resetPasswordActivity
-        startActivity(new Intent( this, resetPasswordActivity.class));
+        if(!code.matches("")){
+            //Send the code to the api so that the api can validate the user and the user can reset their password
+            //On response, start the resetPasswordActivity
+            startActivity(new Intent( this, resetPasswordActivity.class));
+        }
+        else{
+            Toast.makeText(passwordCodeActivity.this, "You haven't entered a code, please enter one and try again", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

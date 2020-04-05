@@ -67,8 +67,8 @@
     <string name="insert_code">Insert the code you received in the email we sent to you.</string>
     <string name="code">Code</string>
     <string name="send_code">Send Code</string>
-    <string name="reset_password">Reset your Password</string>
-    <string name="create_new_password">Type in your new password below, and then type it a second time to verify they are the same.</string>
+    <string name="re_enter_password">Re-enter Password</string>
+    <string name="create_new_password">Type in your new password below, and then type it a second time.</string>
     <string-array name="answers">
         <item>Yes</item>
         <item>No</item>
