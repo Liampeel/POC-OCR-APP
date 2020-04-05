@@ -28,7 +28,6 @@ import android.widget.Toast;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.activities.ImageActivity;
-import com.example.myfirstapp.activities.MainActivity;
 import com.example.myfirstapp.activities.aapdiagnosisActivity;
 import com.example.myfirstapp.activities.recordsActivity;
 
@@ -55,10 +54,6 @@ public class liamActivity extends AppCompatActivity {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-
-        Intent intent = getIntent();
-        String email = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        String password = intent.getStringExtra(MainActivity.EXTRA_MESSAGE2);
 
         Button cambtn = (Button) findViewById(R.id.button);
         ImageButton btn = (ImageButton) findViewById(R.id.homeButton);
