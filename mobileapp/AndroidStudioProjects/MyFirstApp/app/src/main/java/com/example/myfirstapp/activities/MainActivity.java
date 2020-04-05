@@ -164,7 +164,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.loginButton:
                 userLogin();
                 startActivity(new Intent(this, domActivity.class));
-
+                break;
+            case R.id.forgottenPasswordButton:
+                startActivity(new Intent(this,forgotPasswordActivity.class));
                 break;
             case R.id.registerButton:
                 startActivity(new Intent(this, RegisterActivity.class));
