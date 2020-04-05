@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.resetPasswordActivity"></activity>
+        <activity android:name=".activities.passwordCodeActivity"></activity>
+        <activity android:name=".activities.resetPasswordActivity" />
         <activity android:name=".activities.forgotPasswordActivity" />
 
         <meta-data

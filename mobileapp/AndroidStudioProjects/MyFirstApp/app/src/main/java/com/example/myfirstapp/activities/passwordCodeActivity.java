@@ -13,17 +13,16 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.activities.main.domActivity;
 
-public class forgotPasswordActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText editTextEmail;
+public class passwordCodeActivity extends AppCompatActivity implements View.OnClickListener {
+    private EditText editTextCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
+        setContentView(R.layout.activity_password_code);
 
-        editTextEmail = findViewById(R.id.emailText);
+        editTextCode = findViewById(R.id.codeText);
 
         //make translucent statusBar on kitkat devices
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21)
@@ -53,26 +52,24 @@ public class forgotPasswordActivity extends AppCompatActivity implements View.On
         win.setAttributes(winParams);
     }
 
-    private void resetPassword(){
-        String email = editTextEmail.getText().toString();
+    private void sendCode(){
+        String code = editTextCode.getText().toString();
 
-        //Send the email to the api so that an email can be sent to the user
-        //On response, start the passwordCodeActivity
-        startActivity(new Intent( this, passwordCodeActivity.class));
+        //Send the code to the api so that the api can validate the user and the user can reset their password
+        //On response, start the resetPasswordActivity
+        startActivity(new Intent( this, resetPasswordActivity.class));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.resetPasswordButton:
-                resetPassword();
+            case R.id.sendCodeButton:
+                sendCode();
                 break;
             case R.id.registerButton:
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
         }
     }
-
-
 
 }
