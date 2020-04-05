@@ -3,21 +3,26 @@ package com.example.myfirstapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 import com.example.myfirstapp.R;
 
 public class forgotPasswordActivity extends AppCompatActivity {
+    private EditText editTextEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
+
+        editTextEmail = findViewById(R.id.emailText);
 
         //make translucent statusBar on kitkat devices
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21)
@@ -46,6 +51,14 @@ public class forgotPasswordActivity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
+
+    private void forgotPassword(){
+        String email = editTextEmail.getText().toString();
+
+        //Send the email to the api so that an email can be sent to the user
+        startActivity(new Intent( this, resetPasswordActivity.class));
+    }
+
 
 
 

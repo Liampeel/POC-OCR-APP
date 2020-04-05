@@ -61,6 +61,8 @@
     <string name="next_questions">Click here to see the next question</string>
     <string name="aggravating_factors">Do you have any aggravating factors?</string>
     <string name="aap_progress1">28/33</string>
+    <string name="reset_password">To reset your password we just need your email address</string>
+    <string name="reset_your_password">Reset Password</string>
     <string-array name="answers">
         <item>Yes</item>
         <item>No</item>
