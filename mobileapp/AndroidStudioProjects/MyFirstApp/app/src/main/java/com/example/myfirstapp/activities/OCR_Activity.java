@@ -15,8 +15,11 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,8 +38,10 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class OCR_Activity extends AppCompatActivity {
 
-    EditText mResultEt;
+
     ImageView mPreviewIv;
+    TextView mResultEt;
+    Button captureImageBtn, detectTextBtn;
 
     private static final int CAMERA_REQUEST_CODE = 200;
     private static final int STORAGE_REQUEST_CODE = 400;
@@ -60,6 +65,9 @@ public class OCR_Activity extends AppCompatActivity {
 
         mResultEt = findViewById(R.id.resultEt);
         mPreviewIv = findViewById(R.id.imageIv);
+        captureImageBtn = findViewById(R.id.capture_image_btn);
+        detectTextBtn = findViewById(R.id.detect_text_image_btn);
+
 
         //camera permission
         cameraPermission = new String[]{Manifest.permission.CAMERA,
@@ -68,31 +76,36 @@ public class OCR_Activity extends AppCompatActivity {
         //storage permission
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-
+        captureImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImageImportDialog();
+            }
+        });
 
 
     }
 
-    //actionbar menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+//    //actionbar menu
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
 
-    //actionbar item clicks
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.addImage){
-            showImageImportDialog();
-        }
-
-        if (id == R.id.settings){
-            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    //actionbar item clicks
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.addImage){
+//            showImageImportDialog();
+//        }
+//
+//        if (id == R.id.settings){
+//            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void showImageImportDialog() {
         String[] items = {" Camera", " Gallery"};
@@ -206,7 +219,7 @@ public class OCR_Activity extends AppCompatActivity {
                     boolean writeStorageAccepted = grantResults[0] ==
                             PackageManager.PERMISSION_GRANTED;
                     if (writeStorageAccepted){
-                        pickCamera();
+                        pickGallery();
                     }
                     else {
                         Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
@@ -254,6 +267,7 @@ public class OCR_Activity extends AppCompatActivity {
 
                 TextRecognizer recognizer = new TextRecognizer.Builder(getApplicationContext()).build();
 
+
                 if (!recognizer.isOperational()) {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
                 } else {
@@ -264,7 +278,7 @@ public class OCR_Activity extends AppCompatActivity {
                     for (int i = 0; i < items.size(); i++) {
                         TextBlock myItem = items.valueAt(i);
                         sb.append(myItem.getValue());
-                        sb.append("\n");
+                        sb.append(" ");
 
                     }
                     //set text to edit text

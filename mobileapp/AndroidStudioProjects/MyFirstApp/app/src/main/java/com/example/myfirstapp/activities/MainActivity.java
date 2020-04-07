@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.loginButton:
                 userLogin();
-                startActivity(new Intent(this, OCR_Activity.class));
+                startActivity(new Intent(this, FireBaseOCRActivity.class));
 
                 break;
             case R.id.registerButton:

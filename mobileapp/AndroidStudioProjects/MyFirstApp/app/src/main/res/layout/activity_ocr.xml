@@ -9,80 +9,68 @@
     android:background="@drawable/gradient_start"
     android:fitsSystemWindows="true"
     android:gravity="center_horizontal"
-    tools:context=".activities.main.liamActivity">
+    tools:context=".activities.OCR_Activity">
 
-
-    <ScrollView
+    <Button
+        android:id="@+id/capture_image_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="Capture Image"
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/colorPrimary"
-                app:cardUseCompatPadding="true"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <EditText
-                        android:text="Result"
-                        android:id="@+id/resultEt"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <EditText
-                        android:hint=""
-                        android:autoLink="all"
-                        android:background="@null"
-                        android:padding="5dp"
-                        android:textColor="#000"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/colorPrimary"
-                app:cardUseCompatPadding="true"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-                    <TextView
-                        android:text="Image Preview"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:id="@+id/imageIv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+        android:textAllCaps="false"
+        android:background="@color/colorAccent"
+        android:textColor="#fff"
+        android:textSize="17dp"
+        android:layout_marginBottom="10dp"/>
 
 
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+    <ImageView
+        android:id="@+id/imageIv"
+        android:layout_width="match_parent"
+        android:layout_below="@id/textPreview"
+        android:layout_margin="10dp"
+        android:maxLines="10"
+        android:layout_height="300dp"/>
 
-    </ScrollView>
+    <EditText
+        android:id="@+id/resultEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Result"
+        android:layout_below="@id/imageIv"
+
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="all"
+        android:text=""
+        android:textSize="26dp"
+        android:layout_below="@id/resultEt"
+        android:layout_margin="10dp"/>
+
+
+
+    <TextView
+        android:id="@+id/textPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Image Preview"
+        android:layout_below="@id/capture_image_btn"
+
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+
+
+
+
+
+
+
+
 
 </RelativeLayout>
