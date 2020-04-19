@@ -16,6 +16,7 @@ import android.os.Bundle;
 import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.DefaultResponse;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.Storage.SharedPrefManager;
 
 import android.util.Log;
 import android.util.Patterns;
@@ -92,6 +93,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         ArrayAdapter<String> adapterMonth = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, months);
         Spinner spinmonth = (Spinner) findViewById(R.id.monthspin);
         spinmonth.setAdapter(adapterMonth);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+
+        }
     }
 
     public void setWindowFlag(Activity activity, final int bits, boolean on) {

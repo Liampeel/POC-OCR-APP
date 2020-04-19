@@ -4,13 +4,13 @@ public class User {
 
     private int id;
 
-    private String email, name, token;
+    private String email, token;
 
-    public User(int id, String email, String name, String token) {
+    public User(int id, String email, String token) {
         this.id = id;
         this.email = email;
-        this.name = name;
         this.token = token;
+
     }
 
     public int getId() {
@@ -21,11 +21,11 @@ public class User {
         return email;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public String getToken() {
         return token;
     }
+
+//    public int getToken() {
+//        return token;
+//    }
 }

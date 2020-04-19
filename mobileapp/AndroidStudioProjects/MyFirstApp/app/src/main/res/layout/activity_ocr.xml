@@ -22,15 +22,27 @@
         android:textColor="#fff"
         android:textSize="17dp"
         android:layout_marginBottom="10dp"/>
+    <Button
+        android:id="@+id/detect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detect"
+        android:layout_below="@+id/capture_image_btn"
+        android:textAllCaps="false"
+        android:background="@color/colorPrimary"
+        android:textColor="#fff"
+        android:textSize="17dp"
+        android:layout_marginBottom="10dp"/>
 
 
 
     <ImageView
         android:id="@+id/imageIv"
         android:layout_width="match_parent"
-        android:layout_below="@id/textPreview"
+        android:layout_below="@id/detect"
         android:layout_margin="10dp"
         android:maxLines="10"
+
         android:layout_height="300dp"/>
 
     <EditText

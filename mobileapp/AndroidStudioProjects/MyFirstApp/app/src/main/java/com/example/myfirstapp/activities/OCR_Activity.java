@@ -7,6 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -50,6 +55,9 @@ public class OCR_Activity extends AppCompatActivity {
 
     String cameraPermission[];
     String storagePermission[];
+    Bitmap imageBitmap, greyBitmap, conBitmap, bmpBinary;
+    int contrast = 2;
+    int brightness = -50;
 
 
     Uri image_uri;
@@ -66,7 +74,7 @@ public class OCR_Activity extends AppCompatActivity {
         mResultEt = findViewById(R.id.resultEt);
         mPreviewIv = findViewById(R.id.imageIv);
         captureImageBtn = findViewById(R.id.capture_image_btn);
-        detectTextBtn = findViewById(R.id.detect_text_image_btn);
+        detectTextBtn = findViewById(R.id.detect);
 
 
         //camera permission
@@ -77,6 +85,13 @@ public class OCR_Activity extends AppCompatActivity {
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         captureImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImageImportDialog();
+            }
+        });
+
+        detectTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showImageImportDialog();
@@ -264,26 +279,13 @@ public class OCR_Activity extends AppCompatActivity {
                 //get drawable bitmap for text recognition
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) mPreviewIv.getDrawable();
                 Bitmap bitmap = bitmapDrawable.getBitmap();
+                toGrayscale(bitmap);
+                changeBitmapContrastBrightness(greyBitmap, contrast, brightness);
+                toBinary(greyBitmap);
 
-                TextRecognizer recognizer = new TextRecognizer.Builder(getApplicationContext()).build();
 
 
-                if (!recognizer.isOperational()) {
-                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                } else {
-                    Frame frame = new Frame.Builder().setBitmap(bitmap).build();
-                    SparseArray<TextBlock> items = recognizer.detect(frame);
-                    StringBuilder sb = new StringBuilder();
-                    //get text from sb until there is no text
-                    for (int i = 0; i < items.size(); i++) {
-                        TextBlock myItem = items.valueAt(i);
-                        sb.append(myItem.getValue());
-                        sb.append(" ");
 
-                    }
-                    //set text to edit text
-                    mResultEt.setText(sb.toString());
-                }
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 //if there is an error show it
@@ -295,5 +297,92 @@ public class OCR_Activity extends AppCompatActivity {
         }
 
 
+    }
+
+
+    public void Recognizer(Bitmap bitmap){
+        TextRecognizer recognizer = new TextRecognizer.Builder(getApplicationContext()).build();
+
+
+        if (!recognizer.isOperational()) {
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+        } else {
+            Frame frame = new Frame.Builder().setBitmap(bitmap).build();
+            SparseArray<TextBlock> items = recognizer.detect(frame);
+            StringBuilder sb = new StringBuilder();
+            //get text from sb until there is no text
+            for (int i = 0; i < items.size(); i++) {
+                TextBlock myItem = items.valueAt(i);
+                sb.append(myItem.getValue());
+                sb.append(" ");
+
+            }
+            //set text to edit text
+            mResultEt.setText(sb.toString());
+        }
+    }
+
+    public Bitmap toGrayscale(Bitmap bmpOriginal)
+    {
+        int width, height;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+
+        greyBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        Canvas c = new Canvas(greyBitmap);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bmpOriginal, 0, 0, paint);
+        return greyBitmap;
+    }
+
+    public Bitmap changeBitmapContrastBrightness(Bitmap bmp, float contrast, float brightness)
+    {
+        ColorMatrix cm = new ColorMatrix(new float[]
+                {
+                        contrast, 0, 0, 0, brightness,
+                        0, contrast, 0, 0, brightness,
+                        0, 0, contrast, 0, brightness,
+                        0, 0, 0, 1, 0
+                });
+
+        conBitmap = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), bmp.getConfig());
+
+        Canvas canvas = new Canvas(conBitmap);
+
+        Paint paint = new Paint();
+        paint.setColorFilter(new ColorMatrixColorFilter(cm));
+        canvas.drawBitmap(bmp, 0, 0, paint);
+        mPreviewIv.setImageBitmap(conBitmap);
+
+        return conBitmap;
+    }
+
+    public Bitmap toBinary(Bitmap bmpOriginal) {
+        int width, height, threshold;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+        threshold = 127;
+        bmpBinary = Bitmap.createBitmap(bmpOriginal);
+
+        for(int x = 0; x < width; ++x) {
+            for(int y = 0; y < height; ++y) {
+                // get one pixel color
+                int pixel = bmpOriginal.getPixel(x, y);
+                int red = Color.red(pixel);
+
+                //get binary value
+                if(red < threshold){
+                    bmpBinary.setPixel(x, y, 0xFF000000);
+                } else{
+                    bmpBinary.setPixel(x, y, 0xFFFFFFFF);
+                }
+
+            }
+        }mPreviewIv.setImageBitmap(bmpBinary);
+        return bmpBinary;
     }
 }
