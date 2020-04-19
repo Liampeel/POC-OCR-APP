@@ -15,6 +15,7 @@
     <string name="emailView">emailView</string>
     <string name="passwordView">passwordView</string>
     <string name="features">Features</string>
+
     <string name="email3">Email Address</string>
     <string name="password3">Password</string>
     <string name="registerPage">registerPage</string>
