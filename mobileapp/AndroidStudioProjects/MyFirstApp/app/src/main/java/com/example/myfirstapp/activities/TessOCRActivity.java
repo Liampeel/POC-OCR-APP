@@ -452,12 +452,22 @@ public class TessOCRActivity extends AppCompatActivity {
             tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "0123456789:");
 //            Bitmap writeBitmap = WriteFile.writeBitmap(tessBaseAPI.getThresholdedImage());
             String retStr = "No result";
+
+
 //            imageView.setImageBitmap(writeBitmap);
             try {
                 retStr = tessBaseAPI.getUTF8Text();
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
             }
+
+            String s = retStr;
+            String[] words = s.split("\\s");
+            for (int i = 0; i < words.length; i++){
+                words[i] = words[i].replaceAll("[^\\W]", "");
+            }
+
+            System.out.println(words);
             tessBaseAPI.end();
             textView.setText(retStr);
         }

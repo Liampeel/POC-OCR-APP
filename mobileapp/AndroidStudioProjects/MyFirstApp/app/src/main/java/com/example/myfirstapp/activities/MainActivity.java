@@ -157,16 +157,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if(response.code() == 200){
 
-                    if (loginResponse != null) {
-                        System.out.println(response.body());
-                        Log.d("Login response", response.body().toString());
-                        SharedPrefManager.getInstance(MainActivity.this).saveUser(loginResponse.getUser());
-                    }
-
-
-                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+//                    if (loginResponse != null) {
+//                        System.out.println(response.body());
+//                        Log.d("Login response", response.body().toString());
+//                        SharedPrefManager.getInstance(MainActivity.this).saveUser(loginResponse.getUser());
+//                    }
+//
+//
+//                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    startActivity(intent);
 
                     Toast.makeText(MainActivity.this, loginResponse.getToken(), Toast.LENGTH_SHORT).show();
                 } else {
@@ -196,12 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.registerButton:
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
-            case R.id.firebasebtn:
-                startActivity(new Intent(this, FireBaseOCRActivity.class));
-                break;
-            case R.id.googlebtn:
-                startActivity(new Intent(this, OCR_Activity.class));
-                break;
+
         }
     }
 }
