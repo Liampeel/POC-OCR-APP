@@ -62,6 +62,14 @@
     <string name="next_questions">Click here to see the next question</string>
     <string name="aggravating_factors">Do you have any aggravating factors?</string>
     <string name="aap_progress1">28/33</string>
+    <string name="reset_password_info">To reset your password we just need your email address</string>
+    <string name="reset_your_password">Reset Password</string>
+    <string name="check_email">Check your email</string>
+    <string name="insert_code">Insert the code you received in the email we sent to you.</string>
+    <string name="code">Code</string>
+    <string name="send_code">Send Code</string>
+    <string name="re_enter_password">Re-enter Password</string>
+    <string name="create_new_password">Type in your new password below, and then type it a second time.</string>
     <string-array name="answers">
         <item>Yes</item>
         <item>No</item>

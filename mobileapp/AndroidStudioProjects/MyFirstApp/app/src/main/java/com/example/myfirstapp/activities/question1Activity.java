@@ -7,15 +7,22 @@ import com.example.myfirstapp.aapListAdapter;
 import com.example.myfirstapp.aapListAdapter2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class question1Activity extends AppCompatActivity {
 
@@ -44,12 +51,36 @@ public class question1Activity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(listAdapter);
 
-        Button nextbtn = (Button) findViewById(R.id.nextButton);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                CheckBox cb = (CheckBox)view.findViewById(R.id.checkBox);
+                cb.setChecked(!cb.isChecked());
+                String name = nameArray[position];
+                if(name == "None" && (cb.isChecked()==true)){
+                    for ( int i=0; i < listView.getChildCount() - 1; i++) {
+                        View item = listView.getChildAt(i);
+                        CheckBox check = (CheckBox) item.findViewById(R.id.checkBox);
+                        check.setEnabled(false);
+                    }
+                }
+                else{
+                    for ( int i=0; i < listView.getChildCount() - 1; i++) {
+                        View item = listView.getChildAt(i);
+                        CheckBox check = (CheckBox) item.findViewById(R.id.checkBox);
+                        check.setEnabled(true);
+                    }
+                }
+                Toast.makeText(question1Activity.this, name, Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        Button nextbtn = (Button) findViewById(R.id.nextButton);
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Add code for going to the next multi answer question
             }
         });
 

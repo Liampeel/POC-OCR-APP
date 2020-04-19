@@ -26,7 +26,9 @@
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="112dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:clickable="false"/>
 
     </LinearLayout>
 
