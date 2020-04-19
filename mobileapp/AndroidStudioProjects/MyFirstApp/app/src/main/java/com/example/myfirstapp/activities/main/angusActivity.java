@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.activities.aapdiagnosisActivity;
+import com.example.myfirstapp.activities.AAPDiagnosisActivity;
 import com.example.myfirstapp.activities.recordsActivity;
 
 public class angusActivity extends AppCompatActivity {
@@ -49,7 +49,7 @@ public class angusActivity extends AppCompatActivity {
         cambtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(angusActivity.this, aapdiagnosisActivity.class));
+                startActivity(new Intent(angusActivity.this, AAPDiagnosisActivity.class));
             }
         });
     }

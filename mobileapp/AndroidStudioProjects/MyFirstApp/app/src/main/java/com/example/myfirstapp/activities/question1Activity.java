@@ -7,7 +7,6 @@ import com.example.myfirstapp.aapListAdapter;
 import com.example.myfirstapp.aapListAdapter2;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,12 +16,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.List;
 
 public class question1Activity extends AppCompatActivity {
 
@@ -33,7 +28,7 @@ public class question1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question_1);
+        setContentView(R.layout.activity_question);
 
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -46,6 +41,9 @@ public class question1Activity extends AppCompatActivity {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
+//        TextView tv = (TextView)findViewById(R.id.TextView02);
+//        tv.setText("Text to set");
 
         aapListAdapter2 listAdapter = new aapListAdapter2(this, nameArray);
         listView = (ListView) findViewById(R.id.listView);
@@ -80,7 +78,7 @@ public class question1Activity extends AppCompatActivity {
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Add code for going to the next multi answer question
+                //Add code for going to the next muxlti answer question
             }
         });
 

@@ -12,19 +12,21 @@ public class aapListAdapter extends ArrayAdapter {
 
     private final Activity context;
     private final String[] nameArray;
+    private final int[] answersArray;
 
-    public aapListAdapter(Activity context, String[] nameArrayParam){
+    public aapListAdapter(Activity context, String[] nameArrayParam, int[] answersListStrings){
         super(context,R.layout.listview_aap_row , nameArrayParam);
 
         this.context = context;
         this.nameArray = nameArrayParam;
+        this.answersArray = answersListStrings;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
         View rowView=inflater.inflate(R.layout.listview_aap_row, null,true);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.answers, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, answersArray[position], android.R.layout.simple_spinner_item);
         Spinner spinner = (Spinner) rowView.findViewById(R.id.answerSpinner);
         spinner.setAdapter(adapter);
 

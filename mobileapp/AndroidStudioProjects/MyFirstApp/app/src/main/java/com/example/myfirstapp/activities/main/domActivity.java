@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.activities.ImageActivity;
-import com.example.myfirstapp.activities.aapdiagnosisActivity;
+import com.example.myfirstapp.activities.AAPDiagnosisActivity;
 import com.example.myfirstapp.activities.recordsActivity;
 
 import java.io.File;
@@ -213,7 +213,7 @@ public class domActivity extends AppCompatActivity {
     }
 
     public void aapPage(View view){
-        Intent intent = new Intent(this, aapdiagnosisActivity.class);
+        Intent intent = new Intent(this, AAPDiagnosisActivity.class);
         startActivity(intent);
     }
 

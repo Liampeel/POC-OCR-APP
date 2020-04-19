@@ -50,7 +50,7 @@
         </activity>
         <activity android:name=".activities.goodresultActivity" />
         <activity android:name=".activities.resultbadActivity" />
-        <activity android:name=".activities.aapdiagnosisActivity" />
+        <activity android:name=".activities.AAPDiagnosisActivity" />
         <activity android:name=".activities.question1Activity" />
 
         <provider
