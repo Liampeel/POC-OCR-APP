@@ -69,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Call<ExampleResponse> call = RetrofitClient
                 .getInstanceToken(bearer)
                 .getApi()
-                .example(bearer);
+                .example();
 
         call.enqueue(new Callback<ExampleResponse>() {
             @Override

@@ -33,7 +33,7 @@ public interface Api {
 
 
     @GET("example/labels")
-    Call<ExampleResponse> example(@Header("Authorization") String token
+    Call<ExampleResponse> example(
     );
 
 //    @GET("example/labels")
