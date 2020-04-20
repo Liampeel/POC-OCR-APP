@@ -1,11 +1,14 @@
 package com.example.myfirstapp.API;
 
 import com.example.myfirstapp.Model.DefaultResponse;
+import com.example.myfirstapp.Model.ExampleResponse;
 import com.example.myfirstapp.Model.LoginResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface Api {
@@ -27,6 +30,16 @@ public interface Api {
             @Field("password") String password
 
     );
+
+
+    @GET("example/labels")
+    Call<ExampleResponse> example(@Header("Authorization") String token
+    );
+
+//    @GET("example/labels")
+//
+//    Call<ExampleResponse> example(@Header("Bearer") String token
+//    );
 
 
 }

@@ -61,17 +61,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if(SharedPrefManager.getInstance(this).isLoggedIn()){
-            Intent intent = new Intent(this, ProfileActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+//            Intent intent = new Intent(this, ProfileActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+//
+//        }
+//    }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
@@ -122,20 +122,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse loginResponse = response.body();
 
+
                 if(response.code() == 200){
 
                     if (loginResponse != null) {
+                        String token = loginResponse.getToken().toString();
+                        Log.d("token", token);
                         System.out.println(response.body());
                         Log.d("Login response", response.body().toString());
                         SharedPrefManager.getInstance(MainActivity.this).saveUser(loginResponse.getUser());
+                        SharedPrefManager.getInstance(MainActivity.this).saveToken(token);
                     }
 
-
+                    Toast.makeText(MainActivity.this, loginResponse.getToken(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
-                    Toast.makeText(MainActivity.this, loginResponse.getToken(), Toast.LENGTH_SHORT).show();
+
                 } else {
 
                     Toast.makeText(MainActivity.this, "Error Logging in", Toast.LENGTH_SHORT).show();
@@ -156,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.loginButton:
                 userLogin();
-//                startActivity(new Intent(this, TessOCRActivity.class));
+//                startActivity(new Intent(this, FireBaseOCRActivity.class));
 //                startActivity(new Intent(this, OCR_Activity.class));
 
                 break;
