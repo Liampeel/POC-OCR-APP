@@ -34,7 +34,7 @@
             android:theme="@style/Theme.AppCompat.DayNight" />
         <activity android:name=".activities.DetailActivity" />
         <activity android:name=".activities.TessOCRActivity" />
-        <activity android:name=".activities.recordsActivity" />
+        <activity android:name=".activities.RecordsActivity" />
         <activity
             android:name=".activities.OCR_Activity"
             android:theme="@style/Theme.AppCompat.DayNight" />
@@ -47,7 +47,7 @@
         <activity android:name=".activities.ImageActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.main.domActivity" />
-        <activity android:name=".activities.main.angusActivity" />
+        <activity android:name=".activities.main.AngusActivity" />
         <activity android:name="activities.main.milesActivity" />
         <activity android:name=".activities.main.liamActivity" />
         <activity

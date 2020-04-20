@@ -59,7 +59,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 //Delete record from database
-                Intent intent = new Intent(DetailActivity.this, recordsActivity.class);
+                Intent intent = new Intent(DetailActivity.this, RecordsActivity.class);
                 startActivity(intent);
                 Toast.makeText(DetailActivity.this, "The record has been successfully deleted", Toast.LENGTH_LONG).show();
             }

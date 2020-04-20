@@ -29,7 +29,7 @@ import android.widget.Toast;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.activities.ImageActivity;
 import com.example.myfirstapp.activities.AAPDiagnosisActivity;
-import com.example.myfirstapp.activities.recordsActivity;
+import com.example.myfirstapp.activities.RecordsActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -208,7 +208,7 @@ public class liamActivity extends AppCompatActivity {
     }
 
     public void recordsPage(View view){
-        Intent intent = new Intent(this, recordsActivity.class);
+        Intent intent = new Intent(this, RecordsActivity.class);
         startActivity(intent);
     }
 

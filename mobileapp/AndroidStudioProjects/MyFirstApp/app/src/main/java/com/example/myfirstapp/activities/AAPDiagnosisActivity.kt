@@ -1,5 +1,6 @@
 package com.example.myfirstapp.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.myfirstapp.API.AAPDiagnosisRequests
 import com.example.myfirstapp.R
+import com.example.myfirstapp.Storage.SharedPrefManager
 import com.quickbirdstudios.surveykit.*
 import com.quickbirdstudios.surveykit.result.StepResult
 import com.quickbirdstudios.surveykit.result.TaskResult
@@ -489,5 +491,14 @@ class AAPDiagnosisActivity : AppCompatActivity() {
             survey.backPressed()
             true
         } else false
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (!SharedPrefManager.getInstance(this).isLoggedIn) {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
     }
 }

@@ -17,7 +17,7 @@ import com.example.myfirstapp.Storage.SharedPrefManager;
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView textView;
-     Button logoutBtn;
+    Button logoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

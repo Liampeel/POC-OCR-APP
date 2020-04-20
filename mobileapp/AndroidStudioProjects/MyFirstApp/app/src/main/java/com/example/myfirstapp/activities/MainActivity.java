@@ -6,7 +6,7 @@ import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.LoginResponse;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
-import com.example.myfirstapp.activities.main.domActivity;
+import com.example.myfirstapp.activities.main.AngusActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.loginButton).setOnClickListener(this);
         findViewById(R.id.registerButton).setOnClickListener(this);
-        findViewById(R.id.firebasebtn).setOnClickListener(this);
-        findViewById(R.id.googlebtn).setOnClickListener(this);
 
 
         //make translucent statusBar on kitkat devices
@@ -130,16 +128,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         SharedPrefManager.getInstance(MainActivity.this).saveUser(loginResponse.getUser());
                     }
 
-
-                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    Intent intent = new Intent(MainActivity.this, AngusActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-
-                    Toast.makeText(MainActivity.this, loginResponse.getToken(), Toast.LENGTH_SHORT).show();
+                } else if(response.code() == 401) {
+                    Toast.makeText(MainActivity.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
                 } else {
-
                     Toast.makeText(MainActivity.this, "Error Logging in", Toast.LENGTH_SHORT).show();
-
                 }
             }
 
@@ -156,9 +151,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.loginButton:
                 userLogin();
-//                startActivity(new Intent(this, TessOCRActivity.class));
-//                startActivity(new Intent(this, OCR_Activity.class));
-
                 break;
             case R.id.registerButton:
                 startActivity(new Intent(this, RegisterActivity.class));

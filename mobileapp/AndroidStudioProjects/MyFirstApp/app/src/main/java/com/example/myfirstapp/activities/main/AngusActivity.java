@@ -14,10 +14,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.Storage.SharedPrefManager;
 import com.example.myfirstapp.activities.AAPDiagnosisActivity;
-import com.example.myfirstapp.activities.recordsActivity;
+import com.example.myfirstapp.activities.MainActivity;
+import com.example.myfirstapp.activities.RecordsActivity;
 
-public class angusActivity extends AppCompatActivity {
+public class AngusActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,22 +38,37 @@ public class angusActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        Button cambtn = (Button) findViewById(R.id.button);
-        ImageButton btn = (ImageButton) findViewById(R.id.homeButton);
+        Button newDiagnosisButton = findViewById(R.id.newDiagnosisButton);
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        Button logoutButton = findViewById(R.id.logoutButton);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(angusActivity.this, angusActivity.class));
+                startActivity(new Intent(AngusActivity.this, AngusActivity.class));
             }
         });
 
-        cambtn.setOnClickListener(new View.OnClickListener() {
+        newDiagnosisButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(angusActivity.this, AAPDiagnosisActivity.class));
+                startActivity(new Intent(AngusActivity.this, AAPDiagnosisActivity.class));
             }
         });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+    }
+
+    private void logout(){
+        SharedPrefManager.getInstance(this).clear();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -66,9 +83,18 @@ public class angusActivity extends AppCompatActivity {
     }
 
     public void recordsPage(View view){
-        Intent intent = new Intent(this, recordsActivity.class);
+        Intent intent = new Intent(this, RecordsActivity.class);
         startActivity(intent);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+    }
 }

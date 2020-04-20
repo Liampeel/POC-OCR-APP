@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_start"
     android:fitsSystemWindows="true"
-    tools:context=".activities.main.angusActivity">
+    tools:context=".activities.main.AngusActivity">
 
     <ImageButton
         android:id="@+id/homeButton"
@@ -19,7 +19,6 @@
         android:layout_marginRight="353dp"
         android:layout_marginBottom="660dp"
         android:background="?android:attr/panelBackground"
-        android:onClick="aapPage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -29,23 +28,29 @@
         app:srcCompat="@drawable/homeicon" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/newDiagnosisButton"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="480dp"
-        android:text="New Diagnosis"
+        android:layout_marginTop="460dp"
+        android:text="@string/new_diagnosis"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/recordsButton"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="552dp"
         android:onClick="recordsPage"
         android:text="@string/records"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,14 +73,13 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="375dp"
-        android:layout_height="31dp"
+        android:layout_width="373dp"
+        android:layout_height="62dp"
         android:layout_marginStart="72dp"
-        android:layout_marginLeft="72dp"
         android:layout_marginTop="92dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
         android:text="@string/aap_test"
+        android:textAlignment="gravity"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,16 +114,18 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/logoutButton"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="aapPage"
-        android:text="Button"
+        android:text="@string/logout"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.978"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.033" />
+        app:layout_constraintVertical_bias="0.023" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
