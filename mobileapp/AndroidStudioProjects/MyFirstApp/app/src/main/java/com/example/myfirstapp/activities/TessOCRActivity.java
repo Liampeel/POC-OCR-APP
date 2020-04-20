@@ -456,6 +456,8 @@ public class TessOCRActivity extends AppCompatActivity {
             tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "0123456789:");
 //            Bitmap writeBitmap = WriteFile.writeBitmap(tessBaseAPI.getThresholdedImage());
             String retStr = "No result";
+
+
 //            imageView.setImageBitmap(writeBitmap);
             try {
                 retStr = tessBaseAPI.getUTF8Text();
