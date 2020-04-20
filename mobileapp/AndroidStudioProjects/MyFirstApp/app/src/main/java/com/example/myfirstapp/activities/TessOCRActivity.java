@@ -38,12 +38,16 @@ import com.googlecode.tesseract.android.TessBaseAPI;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.annotation.Retention;
+import java.util.Arrays;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
@@ -461,13 +465,7 @@ public class TessOCRActivity extends AppCompatActivity {
                 Log.e(TAG, e.getMessage());
             }
 
-            String s = retStr;
-            String[] words = s.split("\\s");
-            for (int i = 0; i < words.length; i++){
-                words[i] = words[i].replaceAll("[^\\W]", "");
-            }
-
-            System.out.println(words);
+            System.out.println(retStr);
             tessBaseAPI.end();
             textView.setText(retStr);
         }

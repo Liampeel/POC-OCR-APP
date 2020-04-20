@@ -51,6 +51,8 @@ import static com.example.myfirstapp.activities.main.domActivity.EXTRA_MESSAGE;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 public class FireBaseOCRActivity extends AppCompatActivity {
@@ -107,7 +109,7 @@ public class FireBaseOCRActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textView.setText("");
-                detectTextFromImage(conBitmap);
+                detectTextFromImage(greyBitmap);
 
             }
         });
@@ -253,14 +255,21 @@ public class FireBaseOCRActivity extends AppCompatActivity {
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
         }
         else {
+
             StringBuilder sb = new StringBuilder();
             for (FirebaseVisionText.Block block: firebaseVisionText.getBlocks()){
                 String text = block.getText();
                 sb.append(text);
-                sb.append(" ");
+                sb.append(", ");
 
             }
+
+            String string = sb.toString();
+            String[] result = string.split(",|[\\r?\\n]");
+            System.out.println(result[1]);
+            Log.d("result", Arrays.toString(result));
             textView.setText(sb);
+
 
         }
 

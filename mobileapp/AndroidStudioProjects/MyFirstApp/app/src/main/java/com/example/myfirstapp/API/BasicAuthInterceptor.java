@@ -8,13 +8,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class BasicAuthInterceptor implements Interceptor {
-
-
     private String credentials;
 
     public BasicAuthInterceptor(String email, String password) {
         this.credentials = Credentials.basic(email, password);
-
     }
 
     @Override
@@ -24,6 +21,4 @@ public class BasicAuthInterceptor implements Interceptor {
                 .header("Authorization", credentials).build();
         return chain.proceed(authenticatedRequest);
     }
-
-
 }

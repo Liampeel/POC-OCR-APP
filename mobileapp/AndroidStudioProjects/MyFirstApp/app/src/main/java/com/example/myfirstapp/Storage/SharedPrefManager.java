@@ -32,8 +32,6 @@ public class SharedPrefManager {
 
         editor.putInt("id", user.getId());
         editor.putString("email", user.getEmail());
-        editor.putString("name", user.getToken());
-
         editor.apply();
     }
 
@@ -49,18 +47,28 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User(
                 sharedPreferences.getInt("id", -1),
-                sharedPreferences.getString("email", null),
-                sharedPreferences.getString("token", null)
+                sharedPreferences.getString("email", null)
         );
 
     }
 
+    public void saveToken (String token){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("token", token);
+        editor.apply();
+    }
+
+    public String getToken (){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+        return sharedPreferences.getString("token", null);
+    }
     public void clear(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-
     }
-
 }

@@ -4,33 +4,41 @@ package com.example.myfirstapp.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myfirstapp.API.RetrofitClient;
+import com.example.myfirstapp.Model.ExampleResponse;
 import com.example.myfirstapp.Model.User;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView textView;
-    Button logoutBtn;
+    Button requestButton, logoutButton;
+    private String token  = SharedPrefManager.getInstance(this).getToken();
+    private String bearer = ("Bearer " + token);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        findViewById(R.id.logoutButton).setOnClickListener(this);
-
         textView = findViewById(R.id.textView);
-
-
         User user = SharedPrefManager.getInstance(this).getUser();
-        textView.setText("Welcome Back " + user.getEmail());
+
+//        String retrivedToken  = SharedPrefManager.getInstance(this).getToken();
+
+        textView.setText("Welcome Back " + bearer);
     }
 
     @Override
@@ -43,6 +51,31 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(intent);
 
         }
+    }
+
+    private void requestTest() {
+        Call<ExampleResponse> call = RetrofitClient
+                .getInstanceToken(bearer)
+                .getApi()
+                .example();
+
+        call.enqueue(new Callback<ExampleResponse>() {
+            @Override
+            public void onResponse(Call<ExampleResponse> call, Response<ExampleResponse> response) {
+                ExampleResponse exampleResponse = response.body();
+                Log.d("token", bearer);
+                if(response.code() == 200){
+                    Toast.makeText(ProfileActivity.this, exampleResponse.getMammal(), Toast.LENGTH_SHORT).show();
+                } else{
+                    Toast.makeText(ProfileActivity.this, "Wrong response code", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ExampleResponse> call, Throwable t) {
+                Toast.makeText(ProfileActivity.this, "Failure", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void logout(){
@@ -58,8 +91,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.logoutButton:
                 logout();
                 break;
-
-
+            case R.id.requestButton:
+                requestTest();
+                break;
         }
     }
+
 }
