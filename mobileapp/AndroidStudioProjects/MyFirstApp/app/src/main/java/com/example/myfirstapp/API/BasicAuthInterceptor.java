@@ -25,5 +25,4 @@ public class BasicAuthInterceptor implements Interceptor {
         return chain.proceed(authenticatedRequest);
     }
 
-
 }
