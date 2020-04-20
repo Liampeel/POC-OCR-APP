@@ -167,12 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.registerButton:
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
-            case R.id.firebasebtn:
-                startActivity(new Intent(this, FireBaseOCRActivity.class));
-                break;
-            case R.id.googlebtn:
-                startActivity(new Intent(this, OCR_Activity.class));
-                break;
+
         }
     }
 }

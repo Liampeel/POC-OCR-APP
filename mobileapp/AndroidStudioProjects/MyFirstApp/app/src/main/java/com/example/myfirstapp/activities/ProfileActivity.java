@@ -1,6 +1,7 @@
 package com.example.myfirstapp.activities;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.logoutButton).setOnClickListener(this);
 
         textView = findViewById(R.id.textView);
+
 
         User user = SharedPrefManager.getInstance(this).getUser();
 
