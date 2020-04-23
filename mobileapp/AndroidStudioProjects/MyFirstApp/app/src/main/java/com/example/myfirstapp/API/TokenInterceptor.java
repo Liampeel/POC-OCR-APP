@@ -7,10 +7,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class TokenInterceptor implements Interceptor {
-    String bearer;
+    private String bearer;
 
-    public TokenInterceptor(String bearer) {
-        this.bearer = bearer;
+    TokenInterceptor(String bearer) {
+        this.bearer = "Bearer " + bearer;
     }
 
     @Override

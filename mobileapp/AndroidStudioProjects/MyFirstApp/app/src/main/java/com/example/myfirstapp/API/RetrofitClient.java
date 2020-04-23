@@ -1,14 +1,12 @@
 package com.example.myfirstapp.API;
 
-import android.util.Log;
-
 import okhttp3.OkHttpClient;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static final String BASE_URL = "http://192.168.122.1:5000/api/";
+    private static final String BASE_URL = "http://192.168.1.79:5000/api/";
     private static RetrofitClient mInstance, mInstanceAuth, mInstanceToken;
     private Retrofit retrofit;
 
@@ -56,7 +54,6 @@ public class RetrofitClient {
     public static synchronized RetrofitClient getInstanceAuth(String email, String password) {
         if (mInstanceAuth == null) {
             mInstanceAuth = new RetrofitClient(email, password);
-
         }
         return mInstanceAuth;
     }
@@ -64,7 +61,6 @@ public class RetrofitClient {
     public static synchronized RetrofitClient getInstanceToken(String bearer) {
         if (mInstanceToken == null) {
             mInstanceToken = new RetrofitClient(bearer);
-            Log.d("Bearer", bearer);
         }
         return mInstanceToken;
     }

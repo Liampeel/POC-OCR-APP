@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 
 import com.example.myfirstapp.Model.User;
 
-import java.net.ConnectException;
-
 public class SharedPrefManager {
 
     private static final String SHARED_PREF_NAME = "my_shared_preff";
@@ -38,7 +36,7 @@ public class SharedPrefManager {
     public boolean isLoggedIn(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
-//        -1 = user is not logged in, not = -1 user is logged in
+        // -1 = user is not logged in, not = -1 user is logged in
         return sharedPreferences.getInt("id", -1) != -1;
 
     }
@@ -49,10 +47,9 @@ public class SharedPrefManager {
                 sharedPreferences.getInt("id", -1),
                 sharedPreferences.getString("email", null)
         );
-
     }
 
-    public void saveToken (String token){
+    public void saveToken(String token) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -60,7 +57,7 @@ public class SharedPrefManager {
         editor.apply();
     }
 
-    public String getToken (){
+    public String getToken() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
         return sharedPreferences.getString("token", null);
