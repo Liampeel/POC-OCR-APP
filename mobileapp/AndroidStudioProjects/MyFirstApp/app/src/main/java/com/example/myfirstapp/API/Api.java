@@ -4,7 +4,9 @@ import com.example.myfirstapp.Model.DefaultResponse;
 import com.example.myfirstapp.Model.ExampleResponse;
 import com.example.myfirstapp.Model.LoginResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -36,10 +38,17 @@ public interface Api {
     Call<ExampleResponse> example(
     );
 
-//    @GET("example/labels")
-//
-//    Call<ExampleResponse> example(@Header("Bearer") String token
-//    );
+    @FormUrlEncoded
+    @POST("pocresult")
+    Call<ResponseBody> ocr(
+            @Field("time") String time,
+            @Field("systolic") String systolic,
+            @Field("diastolic") String diastolic,
+            @Field("heartRate") String heartRate
+
+
+
+    );
 
 
 }

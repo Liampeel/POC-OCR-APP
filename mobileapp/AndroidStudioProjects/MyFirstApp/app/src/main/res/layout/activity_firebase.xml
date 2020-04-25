@@ -4,60 +4,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/gradient_start"
     tools:context=".activities.FireBaseOCRActivity">
 
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="401dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_below="@id/capture_image_btn"
+
         android:layout_height="319dp" />
 
-            <TextView
-                android:id="@+id/text_display"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/image_view"
-                android:layout_margin="10dp"
-                android:maxLines="10"
-                android:text=" text"
-                android:textSize="20dp" />
+    <TextView
+        android:id="@+id/text_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:maxLines="10"
+        android:text=""
+        android:gravity="center"
+        android:textSize="25dp" />
 
-            <Button
-                android:id="@+id/capture_image_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:maxLines="10"
+        android:text="Take a picture of the results on your Point of Care device\n \n Make sure it is a good quality picture, and can clearly see the numbers on the device"
+        android:layout_below="@id/capture_image_btn"
+        android:gravity="center"
+        android:textSize="25dp" />
 
-                android:layout_above="@+id/detect_text_image_btn"
-                android:layout_marginBottom="10dp"
-                android:background="@color/colorAccent"
-                android:text="Capture Image"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="17dp" />
+    <Button
+        android:id="@+id/capture_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_below="@id/text_display"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:text="Capture Image"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="24sp" />
 
-            <Button
-                android:id="@+id/greyscale"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
 
-                android:layout_above="@+id/capture_image_btn"
-                android:layout_marginBottom="10dp"
-                android:background="@color/colorPrimary"
-                android:text="Greyscale"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="17dp" />
 
-            <Button
-                android:id="@+id/detect_text_image_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="@color/colorPrimary"
-                android:text="Detect Text"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="17dp" />
+    <Button
+        android:id="@+id/detect_text_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="Confirm"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:visibility="invisible"
+        android:textSize="17dp" />
 
 
 

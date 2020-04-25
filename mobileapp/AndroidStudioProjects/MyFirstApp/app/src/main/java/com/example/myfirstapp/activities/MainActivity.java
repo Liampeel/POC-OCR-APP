@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.loginButton).setOnClickListener(this);
         findViewById(R.id.registerButton).setOnClickListener(this);
-        findViewById(R.id.firebasebtn).setOnClickListener(this);
-        findViewById(R.id.googlebtn).setOnClickListener(this);
+//        findViewById(R.id.firebasebtn).setOnClickListener(this);
+//        findViewById(R.id.googlebtn).setOnClickListener(this);
 
 
         //make translucent statusBar on kitkat devices
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     Toast.makeText(MainActivity.this, loginResponse.getToken(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    Intent intent = new Intent(MainActivity.this, FireBaseOCRActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.loginButton:
                 userLogin();
-//                startActivity(new Intent(this, FireBaseOCRActivity.class));
+
 //                startActivity(new Intent(this, OCR_Activity.class));
 
                 break;

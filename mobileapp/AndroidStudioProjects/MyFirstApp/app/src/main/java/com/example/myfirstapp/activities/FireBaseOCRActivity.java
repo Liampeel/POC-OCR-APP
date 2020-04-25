@@ -22,6 +22,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.myfirstapp.Model.User;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.Storage.SharedPrefManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.vision.Frame;
@@ -49,17 +52,20 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import static com.example.myfirstapp.activities.main.domActivity.EXTRA_MESSAGE;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
+import com.example.myfirstapp.activities.Pop;
 
 public class FireBaseOCRActivity extends AppCompatActivity {
 
     Button captureImageBtn, detectTextBtn, greyscalebtn;
     ImageView imageView;
-    TextView textView;
+    TextView textView, information;
+    EditText timeView, sysView, diaView, heartView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     Bitmap imageBitmap, greyBitmap, conBitmap, bmpBinary;
     int contrast = 2;
@@ -83,12 +89,17 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_firebase);
 
-
+        timeView = findViewById(R.id.Time);
+        sysView = findViewById(R.id.Systolic);
+        diaView = findViewById(R.id.Diastolic);
+        heartView = findViewById(R.id.HeartRate);
         captureImageBtn = findViewById(R.id.capture_image_btn);
         detectTextBtn = findViewById(R.id.detect_text_image_btn);
-        greyscalebtn = findViewById(R.id.greyscale);
+
+//        greyscalebtn = findViewById(R.id.greyscale);
         imageView = findViewById(R.id.image_view);
         textView = findViewById(R.id.text_display);
+        information = findViewById(R.id.textInfo);
 
         //camera permission
         cameraPermission = new String[]{Manifest.permission.CAMERA,
@@ -96,6 +107,11 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 
         //storage permission
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+        User user = SharedPrefManager.getInstance(this).getUser();
+
+        textView.setText("Welcome Back " + user.getEmail());
+
 
         captureImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,20 +124,21 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         detectTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setText("");
-                detectTextFromImage(greyBitmap);
-
-            }
-        });
-
-        greyscalebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setText("");
                 detectTextFromImage(bmpBinary);
 
+
+
             }
         });
+
+//        greyscalebtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                textView.setText("");
+//                detectTextFromImage(bmpBinary);
+//
+//            }
+//        });
 
     }
 
@@ -204,6 +221,9 @@ public class FireBaseOCRActivity extends AppCompatActivity {
                     toGrayscale(imageBitmap);
                     changeBitmapContrastBrightness(greyBitmap, contrast, brightness);
                     toBinary(greyBitmap);
+                    detectTextBtn.setVisibility(View.VISIBLE);
+                    textView.setVisibility(View.INVISIBLE);
+                    information.setVisibility(View.INVISIBLE);
 
 
 
@@ -251,24 +271,35 @@ public class FireBaseOCRActivity extends AppCompatActivity {
     private void displayTextFromImage(FirebaseVisionText firebaseVisionText) {
         List<FirebaseVisionText.Block> blocklist = firebaseVisionText.getBlocks();
         if (blocklist.size() == 0){
-
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
         }
         else {
-
             StringBuilder sb = new StringBuilder();
             for (FirebaseVisionText.Block block: firebaseVisionText.getBlocks()){
                 String text = block.getText();
                 sb.append(text);
                 sb.append(", ");
-
             }
 
             String string = sb.toString();
             String[] result = string.split(",|[\\r?\\n]");
-            System.out.println(result[1]);
-            Log.d("result", Arrays.toString(result));
-            textView.setText(sb);
+
+            ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+            byte[] byteArray = bStream.toByteArray();
+
+            if(result.length > 2) {
+                Intent intent = new Intent(this, Pop.class);
+                intent.putExtra("image", byteArray);
+                intent.putExtra("Time", result[0]);
+                intent.putExtra("Systolic", result[1]);
+                intent.putExtra("Diastolic", result[2]);
+                intent.putExtra("Heartrate", result[3]);
+                startActivity(intent);
+                finish();
+            }
+
+
 
 
         }

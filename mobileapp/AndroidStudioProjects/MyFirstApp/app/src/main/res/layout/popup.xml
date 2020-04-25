@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_start">
+
+    <TextView
+        android:id="@+id/popInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="If any of the results are incorrect - you can edit them here"
+        android:textSize="20dp"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/Time"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="bottom"
+        android:maxLines="1"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/Systolic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/TimeText"
+        app:layout_constraintTop_toBottomOf="@+id/popImage" />
+
+    <TextView
+        android:id="@+id/TimeText"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="16dp"
+        android:layout_toStartOf="@id/Time"
+        android:layout_toLeftOf="@id/Time"
+        android:text="Time"
+        android:textSize="20dp"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toTopOf="@+id/timeText3"
+        app:layout_constraintEnd_toStartOf="@+id/Time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popImage" />
+
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="64dp"
+        android:layout_toStartOf="@id/Time"
+        android:layout_toLeftOf="@id/Time"
+        android:gravity="center_vertical |bottom"
+        android:text="Heart Rate"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/confirmResult"
+        app:layout_constraintEnd_toStartOf="@+id/HeartRate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeText2" />
+
+    <TextView
+        android:id="@+id/timeText2"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="16dp"
+        android:layout_toStartOf="@id/Time"
+        android:layout_toLeftOf="@id/Time"
+        android:gravity="center_vertical |bottom"
+        android:text="Diastolic"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/timeText"
+        app:layout_constraintEnd_toStartOf="@+id/Diastolic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeText3" />
+
+    <TextView
+        android:id="@+id/timeText3"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+
+        android:layout_marginBottom="16dp"
+        android:layout_toStartOf="@id/Time"
+        android:layout_toLeftOf="@id/Time"
+        android:gravity="center_vertical"
+        android:text="Systolic"
+        android:maxLines="1"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/timeText2"
+        app:layout_constraintEnd_toStartOf="@+id/Systolic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TimeText" />
+
+    <EditText
+        android:id="@+id/Systolic"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/Time"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="16dp"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/Diastolic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/timeText3"
+        app:layout_constraintTop_toBottomOf="@+id/Time" />
+
+    <EditText
+        android:id="@+id/Diastolic"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/Systolic"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="16dp"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/HeartRate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/timeText2"
+        app:layout_constraintTop_toBottomOf="@+id/Systolic" />
+
+    <EditText
+        android:id="@+id/HeartRate"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/Diastolic"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="64dp"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/confirmResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/timeText"
+        app:layout_constraintTop_toBottomOf="@+id/Diastolic" />
+
+    <Button
+
+        android:id="@+id/confirmResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/HeartRate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="48dp"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancelBtn" />
+
+    <Button
+
+        android:id="@+id/cancelBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/HeartRate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="48dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/confirmResult"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/popImage"
+        android:layout_width="208dp"
+        android:layout_height="182dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="280dp"
+
+        android:layout_marginRight="280dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popInfo" />
+</androidx.constraintlayout.widget.ConstraintLayout>

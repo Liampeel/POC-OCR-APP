@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_start"
+    tools:context=".activities.successActivity">
+
+
+
+    <TextView
+        android:id="@+id/thankyou"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:text="The submission has been confirmed\n \n Thank you!"/>
+
+    <Button
+        android:id="@+id/returnToOCR"
+        android:layout_width="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/thankyou"
+        android:layout_marginTop="50dp"
+        android:text="Go Back"
+        />
+
+
+</RelativeLayout>

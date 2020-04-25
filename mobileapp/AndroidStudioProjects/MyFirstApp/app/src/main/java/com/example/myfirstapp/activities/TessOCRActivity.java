@@ -172,10 +172,10 @@ public class TessOCRActivity extends AppCompatActivity {
 
         captureImageBtn = findViewById(R.id.capture_image_btn);
         detectTextBtn = findViewById(R.id.detect_text_image_btn);
-        greyscaleBtn = findViewById(R.id.greyscale);
+//        greyscaleBtn = findViewById(R.id.greyscale);
 
         imageView = findViewById(R.id.image_view);
-        textView = findViewById(R.id.text_display);
+//        textView = findViewById(R.id.text_display);
 
         //camera permission
         cameraPermission = new String[]{Manifest.permission.CAMERA,
