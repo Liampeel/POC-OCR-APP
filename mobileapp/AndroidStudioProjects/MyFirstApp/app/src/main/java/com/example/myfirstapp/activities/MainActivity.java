@@ -6,14 +6,12 @@ import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.LoginResponse;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
-import com.example.myfirstapp.activities.main.domActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
@@ -40,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.loginButton).setOnClickListener(this);
         findViewById(R.id.registerButton).setOnClickListener(this);
-//        findViewById(R.id.firebasebtn).setOnClickListener(this);
-//        findViewById(R.id.googlebtn).setOnClickListener(this);
+
+        findViewById(R.id.forgottenPasswordButton).setOnClickListener(this);
 
 
         //make translucent statusBar on kitkat devices
@@ -60,18 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        if(SharedPrefManager.getInstance(this).isLoggedIn()){
-//            Intent intent = new Intent(this, ProfileActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(intent);
-//
-//        }
-//    }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
@@ -122,35 +108,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse loginResponse = response.body();
 
-
                 if(response.code() == 200){
-
                     if (loginResponse != null) {
-                        String token = loginResponse.getToken().toString();
-                        Log.d("token", token);
-                        System.out.println(response.body());
-                        Log.d("Login response", response.body().toString());
+                        String token = loginResponse.getToken();
                         SharedPrefManager.getInstance(MainActivity.this).saveUser(loginResponse.getUser());
                         SharedPrefManager.getInstance(MainActivity.this).saveToken(token);
                     }
 
+
                     Toast.makeText(MainActivity.this, loginResponse.getToken(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, FireBaseOCRActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-
-
+                    startActivity(intent);}
+                else if(response.code() == 401) {
+                    Toast.makeText(MainActivity.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
                 } else {
-
                     Toast.makeText(MainActivity.this, "Error Logging in", Toast.LENGTH_SHORT).show();
-
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Call Failure", Toast.LENGTH_SHORT).show();
-                Log.d("failure", t.getMessage());
             }
         });
     }
@@ -160,15 +139,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.loginButton:
                 userLogin();
-
-//                startActivity(new Intent(this, OCR_Activity.class));
-
                 break;
             case R.id.registerButton:
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
-
+            case R.id.forgottenPasswordButton:
+                startActivity(new Intent(this, ForgottenPasswordActivity.class));
+                break;
         }
     }
 }
-

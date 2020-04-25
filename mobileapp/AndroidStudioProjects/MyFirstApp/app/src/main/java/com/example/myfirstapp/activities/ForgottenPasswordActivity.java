@@ -13,18 +13,21 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.activities.main.domActivity;
 
-public class forgotPasswordActivity extends AppCompatActivity implements View.OnClickListener {
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class ForgottenPasswordActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-
-        editTextEmail = findViewById(R.id.emailText);
 
         //make translucent statusBar on kitkat devices
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21)
@@ -41,6 +44,8 @@ public class forgotPasswordActivity extends AppCompatActivity implements View.On
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
+        editTextEmail = findViewById(R.id.emailText);
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -59,11 +64,35 @@ public class forgotPasswordActivity extends AppCompatActivity implements View.On
         if(!email.matches("")){
             //Send the email to the api so that an email can be sent to the user
             //On response, start the passwordCodeActivity
-            startActivity(new Intent( this, passwordCodeActivity.class));
+            resetPassword(email);
         }
         else{
-            Toast.makeText(forgotPasswordActivity.this, "You haven't entered an email, please enter one and try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ForgottenPasswordActivity.this, "You haven't entered an email, please enter one and try again", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void resetPassword(String email) {
+        Call<ResponseBody> call = RetrofitClient
+                .getInstance()
+                .getApi()
+                .passwordReset(email);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(ForgottenPasswordActivity.this, "Email Sent", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(ForgottenPasswordActivity.this, PasswordCodeActivity.class));
+                } else {
+                    Toast.makeText(ForgottenPasswordActivity.this, "Please Enter a Valid Email", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ForgottenPasswordActivity.this, "Failed to Make the Request", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -77,7 +106,4 @@ public class forgotPasswordActivity extends AppCompatActivity implements View.On
                 break;
         }
     }
-
-
-
 }

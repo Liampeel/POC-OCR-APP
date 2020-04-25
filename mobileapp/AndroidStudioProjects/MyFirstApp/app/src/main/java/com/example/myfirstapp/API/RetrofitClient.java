@@ -1,13 +1,6 @@
 package com.example.myfirstapp.API;
 
-import android.util.Log;
-
-import java.io.IOException;
-
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -49,10 +42,6 @@ public class RetrofitClient {
                 .build();
     }
 
-
-
-
-
     // basic instance used for registration
     public static synchronized RetrofitClient getInstance() {
         if (mInstance == null) {
@@ -66,25 +55,18 @@ public class RetrofitClient {
     public static synchronized RetrofitClient getInstanceAuth(String email, String password) {
         if (mInstanceAuth == null) {
             mInstanceAuth = new RetrofitClient(email, password);
-
         }
         return mInstanceAuth;
-
     }
 
     public static synchronized RetrofitClient getInstanceToken(String bearer) {
         if (mInstanceToken == null) {
             mInstanceToken = new RetrofitClient(bearer);
-            Log.d("Bearer", bearer);
-
-
         }
         return mInstanceToken;
-
     }
 
     public Api getApi(){
         return retrofit.create(Api.class);
     }
-
 }

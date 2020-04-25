@@ -10,8 +10,8 @@ import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface Api {
     @FormUrlEncoded
@@ -21,8 +21,6 @@ public interface Api {
             @Field("password") String password,
             @Field("name") String name,
             @Field("date_of_birth") String dateOfBirth
-
-
     );
 
     @FormUrlEncoded
@@ -34,8 +32,10 @@ public interface Api {
     );
 
 
-    @GET("example/labels")
-    Call<ExampleResponse> example(
+    @FormUrlEncoded
+    @PUT("users/password-reset")
+    Call<ResponseBody> passwordReset(
+            @Field("email") String email
     );
 
     @FormUrlEncoded
@@ -46,9 +46,17 @@ public interface Api {
             @Field("diastolic") String diastolic,
             @Field("heartRate") String heartRate
 
-
-
     );
 
 
+    @PUT("users/password")
+    Call<ResponseBody> changePassword(
+            @Field("token") String token,
+            @Field("new_password") String newPassword
+    );
+
+
+    @GET("example/labels")
+    Call<ExampleResponse> example(
+    );
 }
