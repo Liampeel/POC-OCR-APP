@@ -15,15 +15,13 @@ import android.widget.Toast;
 
 import com.example.myfirstapp.R;
 
-public class passwordCodeActivity extends AppCompatActivity implements View.OnClickListener {
+public class PasswordCodeActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_code);
-
-        editTextCode = findViewById(R.id.codeText);
 
         //make translucent statusBar on kitkat devices
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21)
@@ -40,6 +38,8 @@ public class passwordCodeActivity extends AppCompatActivity implements View.OnCl
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
+        editTextCode = findViewById(R.id.codeText);
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -56,12 +56,12 @@ public class passwordCodeActivity extends AppCompatActivity implements View.OnCl
     private void sendCode(){
         String code = editTextCode.getText().toString();
         if(!code.matches("")){
-            //Send the code to the api so that the api can validate the user and the user can reset their password
-            //On response, start the resetPasswordActivity
-            startActivity(new Intent( this, resetPasswordActivity.class));
+            Intent intent = new Intent(this, ResetPasswordActivity.class);
+            intent.putExtra("code",code);
+            startActivity(intent);
         }
         else{
-            Toast.makeText(passwordCodeActivity.this, "You haven't entered a code, please enter one and try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PasswordCodeActivity.this, "You haven't entered a code, please enter one and try again", Toast.LENGTH_SHORT).show();
         }
     }
 
