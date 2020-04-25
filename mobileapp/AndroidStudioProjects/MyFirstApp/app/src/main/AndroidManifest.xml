@@ -68,6 +68,9 @@
         <activity android:name=".activities.resultbadActivity" />
         <activity android:name=".activities.aapdiagnosisActivity" />
         <activity android:name=".activities.question1Activity" />
+        <activity android:name=".activities.PasswordCodeActivity" />
+        <activity android:name=".activities.ForgottenPasswordActivity" />
+        <activity android:name=".activities.ResetPasswordActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

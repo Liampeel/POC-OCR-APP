@@ -4,12 +4,13 @@ import com.example.myfirstapp.Model.DefaultResponse;
 import com.example.myfirstapp.Model.ExampleResponse;
 import com.example.myfirstapp.Model.LoginResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface Api {
     @FormUrlEncoded
@@ -19,8 +20,6 @@ public interface Api {
             @Field("password") String password,
             @Field("name") String name,
             @Field("date_of_birth") String dateOfBirth
-
-
     );
 
     @FormUrlEncoded
@@ -32,14 +31,20 @@ public interface Api {
     );
 
 
+    @FormUrlEncoded
+    @PUT("users/password-reset")
+    Call<ResponseBody> passwordReset(
+            @Field("email") String email
+    );
+
+    @FormUrlEncoded
+    @PUT("users/password")
+    Call<ResponseBody> changePassword(
+            @Field("token") String token,
+            @Field("new_password") String newPassword
+    );
+
     @GET("example/labels")
     Call<ExampleResponse> example(
     );
-
-//    @GET("example/labels")
-//
-//    Call<ExampleResponse> example(@Header("Bearer") String token
-//    );
-
-
 }
