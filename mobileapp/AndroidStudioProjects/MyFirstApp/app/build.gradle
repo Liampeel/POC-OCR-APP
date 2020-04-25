@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.myfirstapp"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -31,6 +30,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
 
+
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "androidx.cardview:cardview:1.0.0"
 
@@ -41,14 +41,15 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
-    implementation 'com.quickbirdstudios:surveykit:1.1.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
     //OCR algorithm - Google Vision
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation 'com.google.firebase:firebase-ml-vision:15.0.0'
 
     implementation 'com.rmtheis:tess-two:9.0.0'
+
+
+//    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

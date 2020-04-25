@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myfirstapp">
 
+    <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -9,6 +10,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -18,29 +23,61 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activities.ProfileActivity"></activity>
 
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
 
-        <activity android:name=".activities.aap.AAPDetailActivity" />
-        <activity android:name=".activities.aap.AAPRecordsActivity" />
-        <activity android:name=".activities.users.RegisterActivity" />
-        <activity android:name=".activities.aap.AAPHomePageActivity" />
-        <activity android:name=".activities.users.LoginActivity">
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Theme.AppCompat.DayNight" />
+        <activity android:name=".activities.DetailActivity" />
+        <activity android:name=".activities.TessOCRActivity" />
+        <activity android:name=".activities.recordsActivity" />
+        <activity
+            android:name=".activities.OCR_Activity"
+            android:theme="@style/Theme.AppCompat.DayNight" />
+        <activity android:name=".activities.FireBaseOCRActivity">
+            <meta-data
+                android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+                android:value="ocr" />
+        </activity>
+        <activity android:name=".activities.LoadingActivity" />
+        <activity android:name=".activities.ImageActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.main.domActivity" />
+        <activity android:name=".activities.main.angusActivity" />
+        <activity android:name="activities.main.milesActivity" />
+        <activity android:name=".activities.main.liamActivity" />
+        <activity
+            android:name=".activities.DisplayMessageActivity"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.aap.AAPDiagnosisActivity" />
-        <activity android:name=".activities.users.ForgottenPasswordActivity" />
-        <activity android:name=".activities.users.PasswordCodeActivity" />
-        <activity android:name=".activities.users.ResetPasswordActivity" />
-        <activity android:name=".activities.aap.AAPGynRecordsActivity" />
-        <activity android:name=".activities.aap.AAPGynDiagnosisActivity" />
-        <activity android:name=".activities.aap.AAPGynDetailActivity" />
+        <activity android:name=".activities.goodresultActivity" />
+        <activity android:name=".activities.resultbadActivity" />
+        <activity android:name=".activities.aapdiagnosisActivity" />
+        <activity android:name=".activities.question1Activity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
