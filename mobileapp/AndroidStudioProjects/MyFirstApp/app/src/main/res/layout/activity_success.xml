@@ -20,7 +20,7 @@
         android:text="The submission has been confirmed\n \n Thank you!"/>
 
     <Button
-        android:id="@+id/returnToOCR"
+        android:id="@+id/returnOCR"
         android:layout_width="100dp"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"

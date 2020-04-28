@@ -64,7 +64,7 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 
     Button captureImageBtn, detectTextBtn, greyscalebtn;
     ImageView imageView;
-    TextView textView, information;
+    TextView textView, information, information2;
     EditText timeView, sysView, diaView, heartView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     Bitmap imageBitmap, greyBitmap, conBitmap, bmpBinary;
@@ -98,8 +98,8 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 
 //        greyscalebtn = findViewById(R.id.greyscale);
         imageView = findViewById(R.id.image_view);
-        textView = findViewById(R.id.text_display);
         information = findViewById(R.id.textInfo);
+        information2 = findViewById(R.id.textInfo2);
 
         //camera permission
         cameraPermission = new String[]{Manifest.permission.CAMERA,
@@ -108,9 +108,6 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         //storage permission
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-        User user = SharedPrefManager.getInstance(this).getUser();
-
-        textView.setText("Welcome Back " + user.getEmail());
 
 
         captureImageBtn.setOnClickListener(new View.OnClickListener() {
@@ -222,8 +219,8 @@ public class FireBaseOCRActivity extends AppCompatActivity {
                     changeBitmapContrastBrightness(greyBitmap, contrast, brightness);
                     toBinary(greyBitmap);
                     detectTextBtn.setVisibility(View.VISIBLE);
-                    textView.setVisibility(View.INVISIBLE);
                     information.setVisibility(View.INVISIBLE);
+                    information2.setVisibility(View.INVISIBLE);
 
 
 

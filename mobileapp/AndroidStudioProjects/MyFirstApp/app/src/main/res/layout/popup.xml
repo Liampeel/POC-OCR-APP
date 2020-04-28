@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="If any of the results are incorrect - you can edit them here"
+        android:text="@string/popupInfo"
         android:textSize="20dp"
 
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,17 +50,17 @@
         android:layout_marginBottom="16dp"
         android:layout_toStartOf="@id/Time"
         android:layout_toLeftOf="@id/Time"
-        android:text="Time"
+        android:text="@string/time"
         android:textSize="20dp"
         android:gravity="bottom"
-        app:layout_constraintBottom_toTopOf="@+id/timeText3"
+        app:layout_constraintBottom_toTopOf="@+id/systolicText"
         app:layout_constraintEnd_toStartOf="@+id/Time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popImage" />
 
 
     <TextView
-        android:id="@+id/timeText"
+        android:id="@+id/heartText"
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
@@ -73,15 +73,15 @@
         android:layout_toStartOf="@id/Time"
         android:layout_toLeftOf="@id/Time"
         android:gravity="center_vertical |bottom"
-        android:text="Heart Rate"
+        android:text="@string/heart_rate"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/confirmResult"
         app:layout_constraintEnd_toStartOf="@+id/HeartRate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeText2" />
+        app:layout_constraintTop_toBottomOf="@+id/diastolicText" />
 
     <TextView
-        android:id="@+id/timeText2"
+        android:id="@+id/diastolicText"
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
@@ -94,15 +94,15 @@
         android:layout_toStartOf="@id/Time"
         android:layout_toLeftOf="@id/Time"
         android:gravity="center_vertical |bottom"
-        android:text="Diastolic"
+        android:text="@string/diastolic"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/timeText"
+        app:layout_constraintBottom_toTopOf="@+id/heartText"
         app:layout_constraintEnd_toStartOf="@+id/Diastolic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeText3" />
+        app:layout_constraintTop_toBottomOf="@+id/systolicText" />
 
     <TextView
-        android:id="@+id/timeText3"
+        android:id="@+id/systolicText"
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
@@ -116,10 +116,10 @@
         android:layout_toStartOf="@id/Time"
         android:layout_toLeftOf="@id/Time"
         android:gravity="center_vertical"
-        android:text="Systolic"
+        android:text="@string/systolic"
         android:maxLines="1"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/timeText2"
+        app:layout_constraintBottom_toTopOf="@+id/diastolicText"
         app:layout_constraintEnd_toStartOf="@+id/Systolic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TimeText" />
@@ -139,7 +139,7 @@
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/Diastolic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/timeText3"
+        app:layout_constraintStart_toEndOf="@+id/systolicText"
         app:layout_constraintTop_toBottomOf="@+id/Time" />
 
     <EditText
@@ -155,7 +155,7 @@
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/HeartRate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/timeText2"
+        app:layout_constraintStart_toEndOf="@+id/diastolicText"
         app:layout_constraintTop_toBottomOf="@+id/Systolic" />
 
     <EditText
@@ -171,7 +171,7 @@
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/confirmResult"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/timeText"
+        app:layout_constraintStart_toEndOf="@+id/heartText"
         app:layout_constraintTop_toBottomOf="@+id/Diastolic" />
 
     <Button
@@ -184,7 +184,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="48dp"
-        android:text="Submit"
+        android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cancelBtn" />
@@ -199,7 +199,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="48dp"
-        android:text="Cancel"
+        android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/confirmResult"
         app:layout_constraintStart_toStartOf="parent" />

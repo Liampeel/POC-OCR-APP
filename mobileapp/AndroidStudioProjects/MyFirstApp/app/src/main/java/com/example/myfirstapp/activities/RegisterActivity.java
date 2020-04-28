@@ -16,7 +16,6 @@ import android.os.Bundle;
 import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.DefaultResponse;
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.Storage.SharedPrefManager;
 
 import android.util.Log;
 import android.util.Patterns;
@@ -49,8 +48,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextName = findViewById(R.id.editTextName);
 
-        findViewById(R.id.registerButton).setOnClickListener(this);
-        findViewById(R.id.loginButton).setOnClickListener(this);
+        findViewById(R.id.registerBtn).setOnClickListener(this);
+        findViewById(R.id.logintext4).setOnClickListener(this);
 
 
         //make translucent statusBar on kitkat devices
@@ -225,10 +224,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.registerButton:
+            case R.id.registerBtn:
                 register();
                 break;
-            case R.id.loginButton:
+            case R.id.logintext4:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
         }

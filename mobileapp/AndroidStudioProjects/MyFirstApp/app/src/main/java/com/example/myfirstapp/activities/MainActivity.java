@@ -6,6 +6,7 @@ import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.LoginResponse;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
+import com.example.myfirstapp.activities.main.*;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,9 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
 
-        findViewById(R.id.loginButton).setOnClickListener(this);
-        findViewById(R.id.registerButton).setOnClickListener(this);
-
+//        findViewById(R.id.loginButton).setOnClickListener(this);
+        findViewById(R.id.registerText).setOnClickListener(this);
+        findViewById(R.id.loginBtn).setOnClickListener(this);
         findViewById(R.id.forgottenPasswordButton).setOnClickListener(this);
 
 
@@ -137,10 +138,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.loginButton:
+            case R.id.loginBtn:
                 userLogin();
                 break;
-            case R.id.registerButton:
+            case R.id.registerText:
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
             case R.id.forgottenPasswordButton:

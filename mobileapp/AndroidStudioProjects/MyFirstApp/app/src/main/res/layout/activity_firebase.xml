@@ -8,6 +8,13 @@
     tools:context=".activities.FireBaseOCRActivity">
 
 
+    <ImageButton
+        android:id="@+id/homeButton2"
+        android:layout_width="58dp"
+        android:layout_height="55dp"
+        android:background="?android:attr/panelBackground"
+        app:srcCompat="@drawable/homeicon" />
+
     <ImageView
         android:id="@+id/image_view"
         android:layout_centerHorizontal="true"
@@ -17,36 +24,42 @@
         android:layout_height="319dp" />
 
     <TextView
-        android:id="@+id/text_display"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:maxLines="10"
-        android:text=""
-        android:gravity="center"
-        android:textSize="25dp" />
-
-    <TextView
         android:id="@+id/textInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:maxLines="10"
-        android:text="Take a picture of the results on your Point of Care device\n \n Make sure it is a good quality picture, and can clearly see the numbers on the device"
+        android:text="@string/firebaseInfo"
         android:layout_below="@id/capture_image_btn"
         android:gravity="center"
-        android:textSize="25dp" />
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textInfo2"
+        android:layout_width="wrap_content"
+        android:layout_height="127dp"
+        android:layout_below="@id/textInfo"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:maxLines="10"
+        android:text="@string/firebaseInfo2"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/capture_image_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:layout_below="@id/text_display"
+        android:layout_below="@id/homeButton2"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:background="@color/common_google_signin_btn_text_dark_focused"
-        android:text="Capture Image"
+        android:text="@string/capture_image"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="24sp" />
@@ -59,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"

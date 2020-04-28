@@ -17,7 +17,7 @@ public class successActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
-        findViewById(R.id.returnToOCR);
+        findViewById(R.id.returnOCR);
     }
 
     public void Cancel(){
@@ -30,7 +30,7 @@ public class successActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.returnToOCR:
+            case R.id.returnOCR:
                 Cancel();
                 break;
 
