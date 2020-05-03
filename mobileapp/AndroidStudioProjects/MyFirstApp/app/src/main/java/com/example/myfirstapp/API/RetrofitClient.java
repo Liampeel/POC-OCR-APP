@@ -53,9 +53,8 @@ public class RetrofitClient {
 
     // calls authentication instance used for other API services
     public static synchronized RetrofitClient getInstanceAuth(String email, String password) {
-        if (mInstanceAuth == null) {
-            mInstanceAuth = new RetrofitClient(email, password);
-        }
+        mInstanceAuth = new RetrofitClient(email, password);
+        mInstanceToken = null;
         return mInstanceAuth;
     }
 
