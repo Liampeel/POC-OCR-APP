@@ -1,4 +1,5 @@
 package com.example.myfirstapp.activities;
+import com.example.myfirstapp.activities.main.*;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myfirstapp.API.RetrofitClient;
+import com.example.myfirstapp.Model.PocResponse;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
 
@@ -77,24 +79,24 @@ public class Pop extends AppCompatActivity implements View.OnClickListener{
     public void submit(){
 
         String time = timeView.getText().toString().trim();
-        String systolic = timeView.getText().toString().trim();
-        String diastolic = timeView.getText().toString().trim();
-        String heartRate = timeView.getText().toString().trim();
+        String systolic = sysView.getText().toString().trim();
+        String diastolic = diaView.getText().toString().trim();
+        String heartRate = heartView.getText().toString().trim();
 
 
-        Call<ResponseBody> call = RetrofitClient
+        Call<PocResponse> call = RetrofitClient
                 .getInstanceToken(bearer)
                 .getApi()
                 .ocr(time, systolic, diastolic, heartRate);
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<PocResponse>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<PocResponse> call, Response<PocResponse> response) {
                 Log.d("token", bearer);
 
                 if(response.code() == 201){
                     Toast.makeText(Pop.this, "Successfully submitted", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Pop.this, successActivity.class);
+                    Intent intent = new Intent(Pop.this, liamActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else {
@@ -103,15 +105,18 @@ public class Pop extends AppCompatActivity implements View.OnClickListener{
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<PocResponse> call, Throwable t) {
                 Toast.makeText(Pop.this, "Failure", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void Cancel(){
+
         Intent intent = new Intent(this, FireBaseOCRActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+
     }
 
     @Override
@@ -123,6 +128,18 @@ public class Pop extends AppCompatActivity implements View.OnClickListener{
             case R.id.cancelBtn:
                 Cancel();
                 break;
+
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
 
         }
     }

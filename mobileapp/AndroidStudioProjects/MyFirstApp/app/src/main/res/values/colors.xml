@@ -11,6 +11,6 @@
     <color name="colorGradientCentergood">#28d42d</color>
     <color name="colorGradientEndgood">#6cff8b</color>
     <color name="colorGradientStartbad">#9a0000</color>
-    <color name="colorGradientCenterbad">#de270f</color>
+    <color name="colorGradientCenterbad">#DE270F</color>
     <color name="colorGradientEndbad">#dd5353</color>
 </resources>

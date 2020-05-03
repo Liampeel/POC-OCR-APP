@@ -175,7 +175,7 @@ public class TessOCRActivity extends AppCompatActivity {
 //        greyscaleBtn = findViewById(R.id.greyscale);
 
         imageView = findViewById(R.id.image_view);
-//        textView = findViewById(R.id.text_display);
+        textView = findViewById(R.id.resultView);
 
         //camera permission
         cameraPermission = new String[]{Manifest.permission.CAMERA,
@@ -196,24 +196,24 @@ public class TessOCRActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textView.setText("");
-                imageView.setImageBitmap(bmpBinary);
-                getText(bmpBinary);
-
-
-            }
-        });
-
-        greyscaleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setText("");
                 imageView.setImageBitmap(imageBitmap);
                 getText(imageBitmap);
 
 
-
             }
         });
+
+//        greyscaleBtn.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                textView.setText("");
+////                imageView.setImageBitmap(imageBitmap);
+////                getText(imageBitmap);
+////
+////
+////
+////            }
+////        });
 
     }
 
@@ -301,6 +301,8 @@ public class TessOCRActivity extends AppCompatActivity {
                     prepareTessData();
                     changeBitmapContrastBrightness(greyBitmap, contrast, brightness);
                     toBinary(greyBitmap);
+                    detectTextBtn.setVisibility(View.VISIBLE);
+
 
 
                 } catch (IOException e) {
@@ -450,15 +452,12 @@ public class TessOCRActivity extends AppCompatActivity {
             String dataPath = getExternalFilesDir("/").getPath() + "/";
             tessBaseAPI.init(dataPath, "seg008sc");
 
-            tessBaseAPI.setPageSegMode(TessBaseAPI.PageSegMode.PSM_SINGLE_BLOCK_VERT_TEXT);
+//            tessBaseAPI.setPageSegMode(TessBaseAPI.PageSegMode.PSM_SINGLE_BLOCK_VERT_TEXT);
 
             tessBaseAPI.setImage(bitmap);
             tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "0123456789:");
-//            Bitmap writeBitmap = WriteFile.writeBitmap(tessBaseAPI.getThresholdedImage());
             String retStr = "No result";
 
-
-//            imageView.setImageBitmap(writeBitmap);
             try {
                 retStr = tessBaseAPI.getUTF8Text();
             } catch (Exception e) {

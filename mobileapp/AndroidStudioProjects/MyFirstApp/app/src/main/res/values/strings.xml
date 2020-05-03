@@ -80,11 +80,13 @@
     <string name="submit">Submit</string>
     <string name="popupInfo">If any of the results are incorrect - you can edit them here</string>
     <string name="firebaseInfo">Take a picture of the results on your Point of Care device</string>
-    <string name="firebaseInfo2">Make sure it is a good quality picture, and crop the image so only the numbers are in the picture</string>
+    <string name="firebaseInfo2">Make sure it is a good quality picture, ensure that the lighting on the device is good. If the image is poor lighting, the application will not be able to recognise the text</string>
 
     <string name="capture_image">Capture Image</string>
     <string name="confirm">Confirm</string>
     <string name="new_diagnosis">New Diagnosis</string>
+    <string name="logout">logout</string>
+    <string name="firebaseinfo3">Crop the image so only the screen displaying the numbers are in the image</string>
     <string-array name="answers">
         <item>Yes</item>
         <item>No</item>

@@ -42,6 +42,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
     //OCR algorithm - Google Vision
+    implementation 'com.google.android.gms:play-services-vision:20.0.0'
+    implementation 'com.google.android.gms:play-services-vision-common:19.0.2'
+    implementation 'com.google.android.gms:play-services-vision-image-label:18.0.3'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation 'com.google.firebase:firebase-ml-vision:15.0.0'
 

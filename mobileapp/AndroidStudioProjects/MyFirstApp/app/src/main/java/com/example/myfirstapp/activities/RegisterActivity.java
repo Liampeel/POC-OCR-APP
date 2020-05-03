@@ -16,6 +16,7 @@ import android.os.Bundle;
 import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.DefaultResponse;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.Storage.SharedPrefManager;
 
 import android.util.Log;
 import android.util.Patterns;
@@ -113,11 +114,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String password = editTextPassword.getText().toString().trim();
         String name = editTextName.getText().toString().trim();
 
-        System.out.println(dateOfBirth);
-        Log.d("date of birth", "Hello hello hello");
-        Log.d("date of birth", dateOfBirth);
 
-        System.out.println("Made it to the user sign up method");
 
         if (email.isEmpty()) {
             editTextEmail.setError("Email is required");
@@ -139,8 +136,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             editTextName.requestFocus();
             return;
         }
-        else if (password.length() < 2) {
-            editTextPassword.setError("Password must be at least 2 characters");
+        else if (password.length() < 7) {
+            editTextPassword.setError("Password must be at least 7 characters");
             editTextPassword.requestFocus();
             return;
         }
@@ -230,6 +227,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.logintext4:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+
         }
     }
 

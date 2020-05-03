@@ -17,27 +17,47 @@
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_centerHorizontal="true"
-        android:layout_width="300dp"
-        android:layout_below="@id/capture_image_btn"
+        android:layout_width="298dp"
+        android:layout_height="258dp"
+        android:layout_below="@id/textInfo"
 
-        android:layout_height="319dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
         android:maxLines="10"
         android:text="@string/firebaseInfo"
-        android:layout_below="@id/capture_image_btn"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/resultView"
+        android:layout_width="395dp"
+        android:layout_height="99dp"
+        android:layout_below="@id/image_view"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
+        android:maxLines="10"
+        android:text=""
         android:textSize="25sp" />
 
     <TextView
         android:id="@+id/textInfo2"
         android:layout_width="wrap_content"
-        android:layout_height="127dp"
+        android:layout_height="216dp"
         android:layout_below="@id/textInfo"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
@@ -50,21 +70,38 @@
         android:text="@string/firebaseInfo2"
         android:textSize="25sp" />
 
+    <TextView
+        android:id="@+id/textInfo3"
+        android:layout_width="wrap_content"
+        android:layout_height="191dp"
+        android:layout_below="@id/textInfo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="199dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:maxLines="10"
+        android:text="@string/firebaseinfo3"
+        android:textSize="25sp" />
+
+
     <Button
         android:id="@+id/capture_image_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="40dp"
-        android:layout_below="@id/homeButton2"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="526dp"
         android:layout_marginBottom="20dp"
         android:background="@color/common_google_signin_btn_text_dark_focused"
         android:text="@string/capture_image"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="24sp" />
-
-
 
     <Button
         android:id="@+id/detect_text_image_btn"

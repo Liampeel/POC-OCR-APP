@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.registerText).setOnClickListener(this);
         findViewById(R.id.loginBtn).setOnClickListener(this);
         findViewById(R.id.forgottenPasswordButton).setOnClickListener(this);
+//        findViewById(R.id.tessbtn).setOnClickListener(this);
+//        findViewById(R.id.google).setOnClickListener(this);
 
 
         //make translucent statusBar on kitkat devices
@@ -118,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                     Toast.makeText(MainActivity.this, loginResponse.getToken(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, FireBaseOCRActivity.class);
+                    Intent intent = new Intent(MainActivity.this, liamActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);}
                 else if(response.code() == 401) {
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.loginBtn:
                 userLogin();
+//                startActivity(new Intent(this, FireBaseOCRActivity.class));
                 break;
             case R.id.registerText:
                 startActivity(new Intent(this, RegisterActivity.class));
@@ -147,6 +150,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.forgottenPasswordButton:
                 startActivity(new Intent(this, ForgottenPasswordActivity.class));
                 break;
+//            case R.id.tessbtn:
+//                startActivity(new Intent(this, TessOCRActivity.class));
+//                break;
+//            case R.id.google:
+//                startActivity(new Intent(this, OCR_Activity.class));
+//                break;
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, liamActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+
         }
     }
 }

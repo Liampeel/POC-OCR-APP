@@ -33,6 +33,7 @@ import com.example.myfirstapp.Storage.SharedPrefManager;
 import com.example.myfirstapp.activities.FireBaseOCRActivity;
 import com.example.myfirstapp.activities.ImageActivity;
 import com.example.myfirstapp.activities.MainActivity;
+import com.example.myfirstapp.activities.POCRecordsActivity;
 import com.example.myfirstapp.activities.aapdiagnosisActivity;
 import com.example.myfirstapp.activities.recordsActivity;
 
@@ -51,6 +52,8 @@ public class liamActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_liam);
         findViewById(R.id.newSub).setOnClickListener(this);
         findViewById(R.id.homeButton).setOnClickListener(this);
+        findViewById(R.id.recordsButton).setOnClickListener(this);
+        findViewById(R.id.logoutLiam).setOnClickListener(this);
 
         User user = SharedPrefManager.getInstance(this).getUser();
 
@@ -79,7 +82,20 @@ public class liamActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+    public void goToRecords(){
+        Intent intent = new Intent(this, POCRecordsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
     public void goToHome(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    private void logout(){
+        SharedPrefManager.getInstance(this).clear();
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -97,7 +113,13 @@ public class liamActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.homeButton:
                     goToHome();
                     break;
-    }
+                case R.id.recordsButton:
+                    goToRecords();
+                    break;
+                case R.id.logoutLiam:
+                    logout();
+                    break;
+        }
 
 
 

@@ -8,6 +8,18 @@
     android:fitsSystemWindows="true"
     tools:context=".activities.MainActivity">
 
+<!--    <Button-->
+<!--        android:id="@+id/tessbtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:layout_marginBottom="29dp"-->
+<!--        android:text="tessbtn-->
+<!--"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/google"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="0dp"
@@ -34,7 +46,9 @@
         android:layout_marginTop="340dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:layout_marginBottom="50dp"
         android:text="@string/button_send"
+        app:layout_constraintBottom_toTopOf="@+id/forgottenPasswordButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,5 +119,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.908" />
+
+<!--    <Button-->
+<!--        android:id="@+id/google"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:layout_marginBottom="42dp"-->
+<!--        android:text="google"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/loginBtn"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

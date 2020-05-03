@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.successActivity"></activity>
+        <activity android:name=".activities.PocDetailActivity"></activity>
+        <activity android:name=".activities.successActivity" />
         <activity android:name=".activities.ProfileActivity" />
 
         <meta-data
@@ -36,6 +37,7 @@
         <activity android:name=".activities.DetailActivity" />
         <activity android:name=".activities.TessOCRActivity" />
         <activity android:name=".activities.recordsActivity" />
+        <activity android:name=".activities.POCRecordsActivity" />
         <activity
             android:name=".activities.OCR_Activity"
             android:theme="@style/Theme.AppCompat.DayNight" />
@@ -46,7 +48,7 @@
         </activity>
         <activity
             android:name=".activities.Pop"
-            android:theme="@style/AppTheme.CustomTheme"></activity>
+            android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".activities.LoadingActivity" />
         <activity android:name=".activities.ImageActivity" />
         <activity android:name=".activities.RegisterActivity" />

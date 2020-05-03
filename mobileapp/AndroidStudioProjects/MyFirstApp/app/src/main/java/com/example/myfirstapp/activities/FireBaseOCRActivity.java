@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -23,7 +24,9 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +40,7 @@ import androidx.core.content.ContextCompat;
 import com.example.myfirstapp.Model.User;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
+import com.example.myfirstapp.activities.main.liamActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.vision.Frame;
@@ -56,6 +60,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import com.example.myfirstapp.activities.Pop;
@@ -63,14 +68,16 @@ import com.example.myfirstapp.activities.Pop;
 public class FireBaseOCRActivity extends AppCompatActivity {
 
     Button captureImageBtn, detectTextBtn, greyscalebtn;
+    ImageButton homeButton;
     ImageView imageView;
-    TextView textView, information, information2;
+    TextView resultView, information, information2;
     EditText timeView, sysView, diaView, heartView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    Bitmap imageBitmap, greyBitmap, conBitmap, bmpBinary;
+    Bitmap imageBitmap, greyBitmap, bmpBinary;
     int contrast = 2;
     int brightness = -50;
-
+    float white = 0;
+    float black = 0;
 
 
 
@@ -95,6 +102,8 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         heartView = findViewById(R.id.HeartRate);
         captureImageBtn = findViewById(R.id.capture_image_btn);
         detectTextBtn = findViewById(R.id.detect_text_image_btn);
+        homeButton = findViewById(R.id.homeButton2);
+        resultView = findViewById(R.id.resultView);
 
 //        greyscalebtn = findViewById(R.id.greyscale);
         imageView = findViewById(R.id.image_view);
@@ -113,7 +122,7 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         captureImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showImageImportDialog();
+                confirm();
             }
         });
 
@@ -123,21 +132,41 @@ public class FireBaseOCRActivity extends AppCompatActivity {
             public void onClick(View v) {
                 detectTextFromImage(bmpBinary);
 
+            }
+        });
 
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                home();
+            }
+        });
+
+    }
+
+
+    public void confirm()
+    {
+
+
+        android.app.AlertDialog.Builder termsDialogBuilder = new android.app.AlertDialog.Builder(this);
+        termsDialogBuilder.setTitle("Tutorial");
+        termsDialogBuilder.setMessage("Please ensure that you have read the information on how to correctly submit an image");
+        termsDialogBuilder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+
+                showImageImportDialog();
 
             }
         });
 
-//        greyscalebtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                textView.setText("");
-//                detectTextFromImage(bmpBinary);
-//
-//            }
-//        });
+
+        android.app.AlertDialog alertDialog = termsDialogBuilder.create();
+        alertDialog.show();
 
     }
+
 
     private void showImageImportDialog() {
         String[] items = {" Camera", " Gallery"};
@@ -197,6 +226,7 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 
             if (requestCode == IMAGE_PICK_CAMERA_CODE) {
                 //got image form camera now crop it
+                assert data != null;
                 CropImage.activity(image_uri)
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .start(this);
@@ -208,15 +238,11 @@ public class FireBaseOCRActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 assert result != null;
                 Uri resultUri = result.getUri(); //get image uri
-                //set image to image view
-//                imageView.setImageURI(resultUri);
-
-//                Uri uri = data.getData();
 
                 try {
                     imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), resultUri);
                     toGrayscale(imageBitmap);
-                    changeBitmapContrastBrightness(greyBitmap, contrast, brightness);
+
                     toBinary(greyBitmap);
                     detectTextBtn.setVisibility(View.VISIBLE);
                     information.setVisibility(View.INVISIBLE);
@@ -266,40 +292,45 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 
 
     private void displayTextFromImage(FirebaseVisionText firebaseVisionText) {
-        List<FirebaseVisionText.Block> blocklist = firebaseVisionText.getBlocks();
-        if (blocklist.size() == 0){
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            StringBuilder sb = new StringBuilder();
-            for (FirebaseVisionText.Block block: firebaseVisionText.getBlocks()){
-                String text = block.getText();
-                sb.append(text);
-                sb.append(", ");
+
+        if (black/white > 0.7) {
+            Toast.makeText(this, "Error with image, Please try adjusting the distance and/or lighting", Toast.LENGTH_SHORT).show();
+        } else {
+            List<FirebaseVisionText.Block> blocklist = firebaseVisionText.getBlocks();
+            if (blocklist.size() == 0) {
+                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+            } else {
+                StringBuilder sb = new StringBuilder();
+                for (FirebaseVisionText.Block block : firebaseVisionText.getBlocks()) {
+                    String text = block.getText();
+                    sb.append(text);
+                    sb.append(", ");
+                }
+
+                String string = sb.toString();
+                String[] result = string.split(",|[\\r?\\n]");
+
+                ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+                imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+                byte[] byteArray = bStream.toByteArray();
+
+                if (result.length > 2) {
+                    Intent intent = new Intent(this, Pop.class);
+                    intent.putExtra("image", byteArray);
+                    intent.putExtra("Time", result[0]);
+                    intent.putExtra("Systolic", result[1]);
+                    intent.putExtra("Diastolic", result[2]);
+                    intent.putExtra("Heartrate", result[3]);
+                    startActivity(intent);
+                    finish();
+                }
+
+
             }
-
-            String string = sb.toString();
-            String[] result = string.split(",|[\\r?\\n]");
-
-            ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
-            byte[] byteArray = bStream.toByteArray();
-
-            if(result.length > 2) {
-                Intent intent = new Intent(this, Pop.class);
-                intent.putExtra("image", byteArray);
-                intent.putExtra("Time", result[0]);
-                intent.putExtra("Systolic", result[1]);
-                intent.putExtra("Diastolic", result[2]);
-                intent.putExtra("Heartrate", result[3]);
-                startActivity(intent);
-                finish();
-            }
-
-
-
-
         }
+
+
+
 
     }
 
@@ -322,27 +353,7 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         return greyBitmap;
     }
 
-    public Bitmap changeBitmapContrastBrightness(Bitmap bmp, float contrast, float brightness)
-    {
-        ColorMatrix cm = new ColorMatrix(new float[]
-                 {
-                        contrast, 0, 0, 0, brightness,
-                        0, contrast, 0, 0, brightness,
-                        0, 0, contrast, 0, brightness,
-                        0, 0, 0, 1, 0
-                });
 
-        conBitmap = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), bmp.getConfig());
-
-        Canvas canvas = new Canvas(conBitmap);
-
-        Paint paint = new Paint();
-        paint.setColorFilter(new ColorMatrixColorFilter(cm));
-        canvas.drawBitmap(bmp, 0, 0, paint);
-        imageView.setImageBitmap(conBitmap);
-
-        return conBitmap;
-    }
 
     public Bitmap toBinary(Bitmap bmpOriginal) {
         int width, height, threshold;
@@ -351,21 +362,32 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         threshold = 127;
         bmpBinary = Bitmap.createBitmap(bmpOriginal);
 
+
+
         for(int x = 0; x < width; ++x) {
             for(int y = 0; y < height; ++y) {
                 // get one pixel color
                 int pixel = bmpOriginal.getPixel(x, y);
                 int red = Color.red(pixel);
 
+
                 //get binary value
                 if(red < threshold){
+                    black = black + 1;
                     bmpBinary.setPixel(x, y, 0xFF000000);
                 } else{
+                    white = white + 1;
                     bmpBinary.setPixel(x, y, 0xFFFFFFFF);
                 }
 
             }
-        }imageView.setImageBitmap(bmpBinary);
+        }
+        imageView.setImageBitmap(bmpBinary);
+        System.out.println(white);
+        System.out.println(black);
+        DecimalFormat decimal = new DecimalFormat("0.00");
+        System.out.println(decimal.format(black/white));
+
         return bmpBinary;
     }
 
@@ -457,5 +479,24 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         }
     }
 
+
+    public void home() {
+
+        Intent intent = new Intent(this, liamActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+
+        }
+    }
 }
 
