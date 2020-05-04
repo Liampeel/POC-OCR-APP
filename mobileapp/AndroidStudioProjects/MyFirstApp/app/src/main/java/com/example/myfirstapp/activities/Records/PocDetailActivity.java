@@ -52,14 +52,16 @@ public class PocDetailActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.homeButton);
 
 
-        dateSubmittedText.setText(response.getDate_submitted());
+        String date = response.getDate_submitted();
+        String[] result = date.split(",");
+        String format = (result[0] + "/" + result[1] + "/" + result[2] + " " + result[3] + ":" + result[4]);
+        dateSubmittedText.setText(format);
         diastolic.setText(response.getDiastolic());
         systolic.setText(response.getSystolic());
         heartrate.setText(response.getHeartRate());
 
 
         ImageButton homeButton = findViewById(R.id.homeButton);
-//        Button saveButton = findViewById(R.id.saveButton);
 
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,31 +85,6 @@ public class PocDetailActivity extends AppCompatActivity implements View.OnClick
         win.setAttributes(winParams);
     }
 
-
-//    private void updateRecord(String actualDiagnosis) {
-//        String token = SharedPrefManager.getInstance(this).getToken();
-//        Call<AAPDiagnosisResponse> call = RetrofitClient
-//                .getInstanceToken(token)
-//                .getApi()
-//                .aapConfirmDiagnosis(response.getId().getObjectID(), actualDiagnosis);
-//
-//        call.enqueue(new Callback<AAPDiagnosisResponse>() {
-//            @Override
-//            public void onResponse(Call<AAPDiagnosisResponse> call, Response<AAPDiagnosisResponse> response) {
-//                if (response.isSuccessful()) {
-//                    startActivity(new Intent(PocDetailActivity.this, AAPRecordsActivity.class));
-//                    Toast.makeText(PocDetailActivity.this, "The record has been successfully updated", Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(PocDetailActivity.this, "Failed to update the confirmed response", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<AAPDiagnosisResponse> call, Throwable t) {
-//                Toast.makeText(PocDetailActivity.this, "Failed to update the record", Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }
 
     private void deleteRecord() {
         Call<ResponseBody> call = RetrofitClient

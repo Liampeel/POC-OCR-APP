@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.util.ArrayList;
 
 import com.example.myfirstapp.Model.PocResponse;
 import com.example.myfirstapp.R;
@@ -30,7 +31,12 @@ public class POCListAdapter extends ArrayAdapter {
         View rowView=inflater.inflate(R.layout.listview_poc_row, null,true);
 
         TextView nameTextField = (TextView) rowView.findViewById(R.id.nameView);
-        nameTextField.setText("Created: " + pocList.get(position).getDate_submitted());
+
+        String date = pocList.get(position).getDate_submitted();
+        String[] result = date.split(",");
+        String format = (result[0] + "/" + result[1] + "/" + result[2] + " " + result[3] + ":" + result[4]);
+        nameTextField.setText("Created: " + format);
+
 
         return rowView;
     }

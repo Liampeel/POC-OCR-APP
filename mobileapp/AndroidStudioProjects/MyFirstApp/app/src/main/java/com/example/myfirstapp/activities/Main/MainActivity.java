@@ -122,7 +122,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(MainActivity.this, loginResponse.getToken(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, POCHomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);}
+                    startActivity(intent);
+                }
                 else if(response.code() == 401) {
                     Toast.makeText(MainActivity.this, "Incorrect Email or Password", Toast.LENGTH_SHORT).show();
                 } else {
@@ -142,32 +143,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.loginBtn:
                 userLogin();
-//                startActivity(new Intent(this, FireBaseOCRActivity.class));
                 break;
             case R.id.registerText:
-                startActivity(new Intent(this, RegisterActivity.class));
+                Intent intent = new Intent(this, RegisterActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
             case R.id.forgottenPasswordButton:
-                startActivity(new Intent(this, ForgottenPasswordActivity.class));
+                Intent intent2 = new Intent(this, ForgottenPasswordActivity.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent2);
                 break;
-//            case R.id.tessbtn:
-//                startActivity(new Intent(this, TessOCRActivity.class));
-//                break;
-//            case R.id.google:
-//                startActivity(new Intent(this, OCR_Activity.class));
-//                break;
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if(SharedPrefManager.getInstance(this).isLoggedIn()){
-            Intent intent = new Intent(this, POCHomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
 
         }
     }
+
+
 }
