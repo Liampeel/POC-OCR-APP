@@ -1,7 +1,6 @@
 package com.example.myfirstapp.activities;
 import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Storage.SharedPrefManager;
-import com.example.myfirstapp.activities.main.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -64,7 +63,7 @@ public class PocDetailActivity extends AppCompatActivity implements View.OnClick
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PocDetailActivity.this, liamActivity.class));
+                startActivity(new Intent(PocDetailActivity.this, POCHomeActivity.class));
             }
         });
 
@@ -135,7 +134,7 @@ public class PocDetailActivity extends AppCompatActivity implements View.OnClick
 
     public void home() {
 
-        Intent intent = new Intent(this, liamActivity.class);
+        Intent intent = new Intent(this, POCHomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

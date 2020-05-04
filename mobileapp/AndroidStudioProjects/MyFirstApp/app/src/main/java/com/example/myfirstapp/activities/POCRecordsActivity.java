@@ -11,16 +11,13 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.Storage.SharedPrefManager;
-import com.example.myfirstapp.activities.main.liamActivity;
 
-import java.io.Serializable;
 import java.util.List;
 
 import retrofit2.Call;
@@ -91,7 +88,7 @@ public class POCRecordsActivity extends AppCompatActivity implements View.OnClic
 
     public void home() {
 
-        Intent intent = new Intent(this, liamActivity.class);
+        Intent intent = new Intent(this, POCHomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

@@ -6,7 +6,6 @@ import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.LoginResponse;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
-import com.example.myfirstapp.activities.main.*;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                     Toast.makeText(MainActivity.this, loginResponse.getToken(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, liamActivity.class);
+                    Intent intent = new Intent(MainActivity.this, POCHomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);}
                 else if(response.code() == 401) {
@@ -164,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
 
         if(SharedPrefManager.getInstance(this).isLoggedIn()){
-            Intent intent = new Intent(this, liamActivity.class);
+            Intent intent = new Intent(this, POCHomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
 
