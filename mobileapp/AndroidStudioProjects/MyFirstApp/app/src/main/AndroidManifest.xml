@@ -55,7 +55,7 @@
         <activity android:name=".activities.main.domActivity" />
         <activity android:name=".activities.main.angusActivity" />
         <activity android:name="activities.main.milesActivity" />
-        <activity android:name=".activities.main.liamActivity" />
+        <activity android:name=".activities.POCHomeActivity" />
         <activity
             android:name=".activities.DisplayMessageActivity"
             android:parentActivityName=".activities.MainActivity">

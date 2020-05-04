@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities.main;
+package com.example.myfirstapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -31,18 +31,15 @@ import com.example.myfirstapp.Model.User;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
 import com.example.myfirstapp.activities.FireBaseOCRActivity;
-import com.example.myfirstapp.activities.ImageActivity;
 import com.example.myfirstapp.activities.MainActivity;
 import com.example.myfirstapp.activities.POCRecordsActivity;
-import com.example.myfirstapp.activities.aapdiagnosisActivity;
-import com.example.myfirstapp.activities.recordsActivity;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class liamActivity extends AppCompatActivity implements View.OnClickListener{
+public class POCHomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView textView;
 

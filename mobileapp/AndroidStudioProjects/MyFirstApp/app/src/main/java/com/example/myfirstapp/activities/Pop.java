@@ -1,12 +1,9 @@
 package com.example.myfirstapp.activities;
-import com.example.myfirstapp.activities.main.*;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +19,6 @@ import com.example.myfirstapp.Model.PocResponse;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -96,7 +92,7 @@ public class Pop extends AppCompatActivity implements View.OnClickListener{
 
                 if(response.code() == 201){
                     Toast.makeText(Pop.this, "Successfully submitted", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Pop.this, liamActivity.class);
+                    Intent intent = new Intent(Pop.this, POCHomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else {
