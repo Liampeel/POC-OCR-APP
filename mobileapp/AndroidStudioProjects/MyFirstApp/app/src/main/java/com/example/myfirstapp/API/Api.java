@@ -1,7 +1,6 @@
 package com.example.myfirstapp.API;
 
 import com.example.myfirstapp.Model.DefaultResponse;
-import com.example.myfirstapp.Model.ExampleResponse;
 import com.example.myfirstapp.Model.LoginResponse;
 import com.example.myfirstapp.Model.PocResponse;
 
@@ -9,7 +8,6 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -63,15 +61,10 @@ public interface Api {
     );
 
 
-
     @PUT("users/password")
     Call<ResponseBody> changePassword(
             @Field("token") String token,
             @Field("new_password") String newPassword
     );
 
-
-    @GET("example/labels")
-    Call<ExampleResponse> example(
-    );
 }

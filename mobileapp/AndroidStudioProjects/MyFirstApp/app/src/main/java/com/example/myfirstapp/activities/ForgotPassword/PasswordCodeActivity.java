@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities;
+package com.example.myfirstapp.activities.ForgotPassword;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.activities.Main.RegisterActivity;
 
 public class PasswordCodeActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextCode;

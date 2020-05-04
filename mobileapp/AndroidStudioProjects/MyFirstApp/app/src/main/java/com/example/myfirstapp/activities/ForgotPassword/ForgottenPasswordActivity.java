@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities;
+package com.example.myfirstapp.activities.ForgotPassword;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.activities.Main.RegisterActivity;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

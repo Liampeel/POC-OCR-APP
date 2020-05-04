@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_start"
     android:fitsSystemWindows="true"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.Main.MainActivity">
 
 <!--    <Button-->
 <!--        android:id="@+id/tessbtn"-->

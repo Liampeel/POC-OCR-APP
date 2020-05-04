@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities;
+package com.example.myfirstapp.activities.Main;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,12 +18,13 @@ import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.PocResponse;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
+import com.example.myfirstapp.activities.OCR.FireBaseOCRActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Pop extends AppCompatActivity implements View.OnClickListener{
+public class POCSubmit extends AppCompatActivity implements View.OnClickListener{
 
     EditText timeView, sysView, diaView, heartView;
     Button confirmBtn, cancelButton;
@@ -91,18 +92,18 @@ public class Pop extends AppCompatActivity implements View.OnClickListener{
                 Log.d("token", bearer);
 
                 if(response.code() == 201){
-                    Toast.makeText(Pop.this, "Successfully submitted", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Pop.this, POCHomeActivity.class);
+                    Toast.makeText(POCSubmit.this, "Successfully submitted", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(POCSubmit.this, POCHomeActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(Pop.this, "Bad request", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(POCSubmit.this, "Bad request", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<PocResponse> call, Throwable t) {
-                Toast.makeText(Pop.this, "Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(POCSubmit.this, "Failure", Toast.LENGTH_SHORT).show();
             }
         });
     }

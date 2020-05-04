@@ -1,10 +1,9 @@
-package com.example.myfirstapp.activities;
+package com.example.myfirstapp.activities.Records;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.PocResponse;
-import com.example.myfirstapp.POCListAdapter;
 import com.example.myfirstapp.R;
 
 import android.content.Intent;
@@ -17,6 +16,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.Storage.SharedPrefManager;
+import com.example.myfirstapp.activities.Main.MainActivity;
+import com.example.myfirstapp.activities.Main.POCHomeActivity;
 
 import java.util.List;
 

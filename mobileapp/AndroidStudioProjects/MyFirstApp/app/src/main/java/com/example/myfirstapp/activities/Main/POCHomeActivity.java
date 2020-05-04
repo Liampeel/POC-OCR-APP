@@ -1,43 +1,17 @@
-package com.example.myfirstapp.activities;
+package com.example.myfirstapp.activities.Main;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myfirstapp.Model.User;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
-import com.example.myfirstapp.activities.FireBaseOCRActivity;
-import com.example.myfirstapp.activities.MainActivity;
-import com.example.myfirstapp.activities.POCRecordsActivity;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.example.myfirstapp.activities.OCR.FireBaseOCRActivity;
+import com.example.myfirstapp.activities.Records.POCRecordsActivity;
 
 public class POCHomeActivity extends AppCompatActivity implements View.OnClickListener{
 

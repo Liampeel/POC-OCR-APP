@@ -22,8 +22,4 @@ public class User {
     }
 
 
-
-//    public int getToken() {
-//        return token;
-//    }
 }

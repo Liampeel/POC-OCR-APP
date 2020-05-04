@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities;
+package com.example.myfirstapp.activities.OCR;
 
 import android.Manifest;
 import android.content.ContentValues;
@@ -13,16 +13,16 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -31,39 +31,113 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.Storage.SharedPrefManager;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.ml.vision.FirebaseVision;
-import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.text.FirebaseVisionText;
-import com.google.firebase.ml.vision.text.FirebaseVisionTextDetector;
+import com.example.myfirstapp.activities.Main.MainActivity;
+import com.googlecode.leptonica.android.Pix;
+import com.googlecode.leptonica.android.ReadFile;
+import com.googlecode.tesseract.android.TessBaseAPI;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-
-import static com.example.myfirstapp.activities.main.domActivity.EXTRA_MESSAGE;
-
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.List;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.annotation.Retention;
 
-public class FireBaseOCRActivity extends AppCompatActivity {
+import static java.lang.annotation.RetentionPolicy.SOURCE;
 
-    Button captureImageBtn, detectTextBtn, greyscalebtn;
-    ImageButton homeButton;
+public class TessOCRActivity extends AppCompatActivity {
+
+    public static final class PageSegMode {
+        @Retention(SOURCE)
+        @IntDef({PSM_OSD_ONLY, PSM_AUTO_OSD, PSM_AUTO_ONLY, PSM_AUTO, PSM_SINGLE_COLUMN,
+                PSM_SINGLE_BLOCK_VERT_TEXT, PSM_SINGLE_BLOCK, PSM_SINGLE_LINE, PSM_SINGLE_WORD,
+                PSM_CIRCLE_WORD, PSM_SINGLE_CHAR, PSM_SPARSE_TEXT, PSM_SPARSE_TEXT_OSD, PSM_RAW_LINE})
+        public @interface Mode {}
+
+        /** Orientation and script detection only. */
+        public static final int PSM_OSD_ONLY = 0;
+
+        /** Automatic page segmentation with orientation and script detection. (OSD) */
+        public static final int PSM_AUTO_OSD = 1;
+
+        /** Fully automatic page segmentation, but no OSD, or OCR. */
+        public static final int PSM_AUTO_ONLY = 2;
+
+        /** Fully automatic page segmentation, but no OSD. */
+        public static final int PSM_AUTO = 3;
+
+        /** Assume a single column of text of variable sizes. */
+        public static final int PSM_SINGLE_COLUMN = 4;
+
+        /** Assume a single uniform block of vertically aligned text. */
+        public static final int PSM_SINGLE_BLOCK_VERT_TEXT = 5;
+
+        /** Assume a single uniform block of text. (Default.) */
+        public static final int PSM_SINGLE_BLOCK = 6;
+
+        /** Treat the image as a single text line. */
+        public static final int PSM_SINGLE_LINE = 7;
+
+        /** Treat the image as a single word. */
+        public static final int PSM_SINGLE_WORD = 8;
+
+        /** Treat the image as a single word in a circle. */
+        public static final int PSM_CIRCLE_WORD = 9;
+
+        /** Treat the image as a single character. */
+        public static final int PSM_SINGLE_CHAR = 10;
+
+        /** Find as much text as possible in no particular order. */
+        public static final int PSM_SPARSE_TEXT = 11;
+
+        /** Sparse text with orientation and script detection. */
+        public static final int PSM_SPARSE_TEXT_OSD = 12;
+
+        /** Treat the image as a single text line, bypassing hacks that are Tesseract-specific. */
+        public static final int PSM_RAW_LINE = 13;
+    }
+
+    /** Whitelist of characters to recognize. */
+    public static final String VAR_CHAR_WHITELIST = "tessedit_char_whitelist";
+
+    /** Blacklist of characters to not recognize. */
+    public static final String VAR_CHAR_BLACKLIST = "tessedit_char_blacklist";
+
+    /** Save blob choices allowing us to get alternative results. */
+    public static final String VAR_SAVE_BLOB_CHOICES = "save_blob_choices";
+
+    /** String value used to assign a boolean variable to true. */
+    public static final String VAR_TRUE = "T";
+
+    /** String value used to assign a boolean variable to false. */
+    public static final String VAR_FALSE = "F";
+
+    @Retention(SOURCE)
+    @IntDef({OEM_TESSERACT_ONLY, OEM_CUBE_ONLY, OEM_TESSERACT_CUBE_COMBINED, OEM_DEFAULT})
+    public @interface OcrEngineMode {}
+
+    /** Run Tesseract only - fastest */
+    public static final int OEM_TESSERACT_ONLY = 0;
+
+    /** Run Cube only - better accuracy, but slower */
+    @Deprecated
+    public static final int OEM_CUBE_ONLY = 1;
+
+    /** Run both and combine results - best accuracy */
+    @Deprecated
+    public static final int OEM_TESSERACT_CUBE_COMBINED = 2;
+
+    /** Default OCR engine mode. */
+    public static final int OEM_DEFAULT = 3;
+
+    Button captureImageBtn, detectTextBtn, greyscaleBtn;
     ImageView imageView;
-    TextView resultView, information, information2;
-    EditText timeView, sysView, diaView, heartView;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    Bitmap imageBitmap, greyBitmap, bmpBinary;
-    int contrast = 2;
+    TextView textView;
+    Bitmap imageBitmap, greyBitmap, conBitmap, bmpBinary;
+    int contrast = 1;
     int brightness = -50;
-    float white = 0;
-    float black = 0;
-
-
 
     private static final int CAMERA_REQUEST_CODE = 200;
     private static final int STORAGE_REQUEST_CODE = 400;
@@ -76,23 +150,28 @@ public class FireBaseOCRActivity extends AppCompatActivity {
     Uri image_uri;
 
 
+    public static final String TESS_DATA = "/tessdata";
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "/Tess";
+
+    TessBaseAPI tessBaseAPI;
+    Uri outputFileDir;
+
+    String mCurrentPhotoPath;
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_firebase);
 
-        timeView = findViewById(R.id.Time);
-        sysView = findViewById(R.id.Systolic);
-        diaView = findViewById(R.id.Diastolic);
-        heartView = findViewById(R.id.HeartRate);
+
         captureImageBtn = findViewById(R.id.capture_image_btn);
         detectTextBtn = findViewById(R.id.detect_text_image_btn);
-        homeButton = findViewById(R.id.homeButton2);
-        resultView = findViewById(R.id.resultView);
+//        greyscaleBtn = findViewById(R.id.greyscale);
 
-//        greyscalebtn = findViewById(R.id.greyscale);
         imageView = findViewById(R.id.image_view);
-        information = findViewById(R.id.textInfo);
-        information2 = findViewById(R.id.textInfo2);
+        textView = findViewById(R.id.resultView);
 
         //camera permission
         cameraPermission = new String[]{Manifest.permission.CAMERA,
@@ -101,12 +180,10 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         //storage permission
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-
-
         captureImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                confirm();
+                showImageImportDialog();
             }
         });
 
@@ -114,42 +191,28 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         detectTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                detectTextFromImage(bmpBinary);
+                textView.setText("");
+                imageView.setImageBitmap(imageBitmap);
+                getText(imageBitmap);
+
 
             }
         });
 
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                home();
-            }
-        });
+//        greyscaleBtn.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                textView.setText("");
+////                imageView.setImageBitmap(imageBitmap);
+////                getText(imageBitmap);
+////
+////
+////
+////            }
+////        });
 
     }
 
-
-    public void confirm()
-    {
-
-
-        android.app.AlertDialog.Builder termsDialogBuilder = new android.app.AlertDialog.Builder(this);
-        termsDialogBuilder.setTitle("Tutorial");
-        termsDialogBuilder.setMessage("Please ensure that you have read the information on how to correctly submit an image");
-        termsDialogBuilder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-
-                showImageImportDialog();
-
-            }
-        });
-
-
-        android.app.AlertDialog alertDialog = termsDialogBuilder.create();
-        alertDialog.show();
-
-    }
 
 
     private void showImageImportDialog() {
@@ -194,6 +257,8 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 //        }
 //    }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //got image from camera
@@ -210,7 +275,6 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 
             if (requestCode == IMAGE_PICK_CAMERA_CODE) {
                 //got image form camera now crop it
-                assert data != null;
                 CropImage.activity(image_uri)
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .start(this);
@@ -222,22 +286,26 @@ public class FireBaseOCRActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 assert result != null;
                 Uri resultUri = result.getUri(); //get image uri
+                //set image to image view
+//                imageView.setImageURI(resultUri);
 
+//                Uri uri = data.getData();
+//
                 try {
                     imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), resultUri);
                     toGrayscale(imageBitmap);
-
+                    prepareTessData();
+                    changeBitmapContrastBrightness(greyBitmap, contrast, brightness);
                     toBinary(greyBitmap);
                     detectTextBtn.setVisibility(View.VISIBLE);
-                    information.setVisibility(View.INVISIBLE);
-                    information2.setVisibility(View.INVISIBLE);
-
 
 
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 //if there is an error show it
@@ -248,75 +316,7 @@ public class FireBaseOCRActivity extends AppCompatActivity {
             }
         }
     }
-    public void pick_image(View v){
-        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(i,1);
-    }
 
-
-    private void detectTextFromImage(Bitmap bitmap) {
-        if (bitmap != null){
-            FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap);
-            FirebaseVisionTextDetector firebaseVisionTextRecognizer = FirebaseVision.getInstance().getVisionTextDetector();
-            firebaseVisionTextRecognizer.detectInImage(firebaseVisionImage).addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
-                @Override
-                public void onSuccess(FirebaseVisionText firebaseVisionText) {
-                    displayTextFromImage(firebaseVisionText);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(FireBaseOCRActivity.this, "Error: " + e, Toast.LENGTH_SHORT).show();
-                    Log.d("Error ", e.getMessage());
-                }
-            });
-         }
-    }
-
-
-
-    private void displayTextFromImage(FirebaseVisionText firebaseVisionText) {
-
-        if (black/white > 0.7) {
-            Toast.makeText(this, "Error with image, Please try adjusting the distance and/or lighting", Toast.LENGTH_SHORT).show();
-        } else {
-            List<FirebaseVisionText.Block> blocklist = firebaseVisionText.getBlocks();
-            if (blocklist.size() == 0) {
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-            } else {
-                StringBuilder sb = new StringBuilder();
-                for (FirebaseVisionText.Block block : firebaseVisionText.getBlocks()) {
-                    String text = block.getText();
-                    sb.append(text);
-                    sb.append(", ");
-                }
-
-                String string = sb.toString();
-                String[] result = string.split(",|[\\r?\\n]");
-
-                ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-                imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
-                byte[] byteArray = bStream.toByteArray();
-
-                if (result.length > 2) {
-                    Intent intent = new Intent(this, Pop.class);
-                    intent.putExtra("image", byteArray);
-                    intent.putExtra("Time", result[0]);
-                    intent.putExtra("Systolic", result[1]);
-                    intent.putExtra("Diastolic", result[2]);
-                    intent.putExtra("Heartrate", result[3]);
-                    startActivity(intent);
-                    finish();
-                }
-
-
-            }
-        }
-
-
-
-
-    }
 
     public Bitmap toGrayscale(Bitmap bmpOriginal)
     {
@@ -324,7 +324,7 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         height = bmpOriginal.getHeight();
         width = bmpOriginal.getWidth();
 
-        greyBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        greyBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(greyBitmap);
         Paint paint = new Paint();
         ColorMatrix cm = new ColorMatrix();
@@ -334,10 +334,10 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         c.drawBitmap(bmpOriginal, 0, 0, paint);
         imageView.setImageBitmap(greyBitmap);
 
+
+
         return greyBitmap;
     }
-
-
 
     public Bitmap toBinary(Bitmap bmpOriginal) {
         int width, height, threshold;
@@ -346,34 +346,127 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         threshold = 127;
         bmpBinary = Bitmap.createBitmap(bmpOriginal);
 
-
-
         for(int x = 0; x < width; ++x) {
             for(int y = 0; y < height; ++y) {
                 // get one pixel color
                 int pixel = bmpOriginal.getPixel(x, y);
                 int red = Color.red(pixel);
 
-
                 //get binary value
                 if(red < threshold){
-                    black = black + 1;
                     bmpBinary.setPixel(x, y, 0xFF000000);
                 } else{
-                    white = white + 1;
                     bmpBinary.setPixel(x, y, 0xFFFFFFFF);
                 }
 
             }
-        }
-        imageView.setImageBitmap(bmpBinary);
-        System.out.println(white);
-        System.out.println(black);
-        DecimalFormat decimal = new DecimalFormat("0.00");
-        System.out.println(decimal.format(black/white));
-
+        }imageView.setImageBitmap(bmpBinary);
         return bmpBinary;
     }
+
+    public Bitmap changeBitmapContrastBrightness(Bitmap bmp, float contrast, float brightness)
+    {
+        ColorMatrix cm = new ColorMatrix(new float[]
+                {
+                        contrast, 0, 0, 0, brightness,
+                        0, contrast, 0, 0, brightness,
+                        0, 0, contrast, 0, brightness,
+                        0, 0, 0, 1, 0
+                });
+
+        conBitmap = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(conBitmap);
+
+        Paint paint = new Paint();
+        paint.setColorFilter(new ColorMatrixColorFilter(cm));
+        canvas.drawBitmap(bmp, 0, 0, paint);
+        imageView.setImageBitmap(conBitmap);
+
+        return conBitmap;
+    }
+
+    public void pick_image(View v){
+        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(i,1);
+    }
+
+
+    private void prepareTessData(){
+        try{
+            File dir = getExternalFilesDir(TESS_DATA);
+            if(!dir.exists()){
+                if (!dir.mkdir()) {
+                    Toast.makeText(getApplicationContext(), "The folder " + dir.getPath() + "was not created", Toast.LENGTH_SHORT).show();
+                }
+            }
+            String fileList[] = getAssets().list("");
+            for(String fileName : fileList){
+                String pathToDataFile = dir + "/" + fileName;
+                if(!(new File(pathToDataFile)).exists()){
+                    InputStream in = getAssets().open(fileName);
+                    OutputStream out = new FileOutputStream(pathToDataFile);
+                    byte [] buff = new byte[1024];
+                    int len ;
+                    while(( len = in.read(buff)) > 0){
+                        out.write(buff,0,len);
+                    }
+                    in.close();
+                    out.close();
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
+
+//    private void startOCR(Uri imageUri){
+//        try{
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            options.inJustDecodeBounds = false;
+//            options.inSampleSize = 6;
+//            Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, options);
+//            String result = this.getText(bitmap);
+//            textView.setText(result);
+//        }catch (Exception e){
+//            Log.e(TAG, e.getMessage());
+//        }
+//    }
+
+    private void getText(Bitmap bitmap){
+        try{
+            tessBaseAPI = new TessBaseAPI();
+        }catch (Exception e){
+            Log.e(TAG, e.getMessage());
+        }
+
+        Pix image = ReadFile.readBitmap(bitmap);
+
+        if (image == null) {
+            throw new RuntimeException("Failed to read bitmap");
+        } else {
+            String dataPath = getExternalFilesDir("/").getPath() + "/";
+            tessBaseAPI.init(dataPath, "seg008sc");
+
+//            tessBaseAPI.setPageSegMode(TessBaseAPI.PageSegMode.PSM_SINGLE_BLOCK_VERT_TEXT);
+
+            tessBaseAPI.setImage(bitmap);
+            tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "0123456789:");
+            String retStr = "No result";
+
+            try {
+                retStr = tessBaseAPI.getUTF8Text();
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage());
+            }
+
+            System.out.println(retStr);
+            tessBaseAPI.end();
+            textView.setText(retStr);
+        }
+    }
+
+
 
     private void pickGallery() {
         //inent to pick image from gallery
@@ -463,24 +556,5 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         }
     }
 
-
-    public void home() {
-
-        Intent intent = new Intent(this, POCHomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if(!SharedPrefManager.getInstance(this).isLoggedIn()){
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-
-        }
-    }
 }
 

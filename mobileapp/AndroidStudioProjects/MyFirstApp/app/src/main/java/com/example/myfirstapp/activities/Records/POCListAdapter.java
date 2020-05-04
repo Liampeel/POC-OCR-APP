@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.activities.Records;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myfirstapp.Model.PocResponse;
+import com.example.myfirstapp.R;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class POCListAdapter extends ArrayAdapter {
     private final List<PocResponse> pocList;
 
     public POCListAdapter(Activity context, List<PocResponse> pocList){
-        super(context,R.layout.listview_poc_row , pocList);
+        super(context, R.layout.listview_poc_row , pocList);
 
         this.context = context;
         this.pocList = pocList;

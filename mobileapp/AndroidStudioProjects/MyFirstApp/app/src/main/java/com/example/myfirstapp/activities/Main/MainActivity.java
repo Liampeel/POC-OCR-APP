@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities;
+package com.example.myfirstapp.activities.Main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Model.LoginResponse;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.Storage.SharedPrefManager;
+import com.example.myfirstapp.activities.ForgotPassword.ForgottenPasswordActivity;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities;
+package com.example.myfirstapp.activities.Records;
 import com.example.myfirstapp.API.RetrofitClient;
 import com.example.myfirstapp.Storage.SharedPrefManager;
 
@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.myfirstapp.Model.PocResponse;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.activities.Main.POCHomeActivity;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
