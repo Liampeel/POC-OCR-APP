@@ -8,6 +8,18 @@
     android:fitsSystemWindows="true"
     tools:context=".activities.MainActivity">
 
+<!--    <Button-->
+<!--        android:id="@+id/tessbtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:layout_marginBottom="29dp"-->
+<!--        android:text="tessbtn-->
+<!--"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/google"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="0dp"
@@ -21,28 +33,29 @@
         android:hint="@string/enter_email"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toStartOf="@+id/loginButton"
+        app:layout_constraintEnd_toStartOf="@+id/loginBtn"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:targetApi="o" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="340dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:onClick="onClick"
+        android:layout_marginBottom="50dp"
         android:text="@string/button_send"
+        app:layout_constraintBottom_toTopOf="@+id/forgottenPasswordButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/loginText"
+        android:id="@+id/textViewLogin"
         android:layout_width="209dp"
         android:layout_height="60dp"
         android:layout_marginStart="12dp"
@@ -70,7 +83,7 @@
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toStartOf="@+id/loginButton"
+        app:layout_constraintEnd_toStartOf="@+id/loginBtn"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -92,7 +105,7 @@
         app:layout_constraintVertical_bias="0.737" />
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/registerText"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="319dp"
         android:layout_height="48dp"
@@ -106,5 +119,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.908" />
+
+<!--    <Button-->
+<!--        android:id="@+id/google"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:layout_marginBottom="42dp"-->
+<!--        android:text="google"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/loginBtn"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,7 @@ public class angusActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        Button cambtn = (Button) findViewById(R.id.button);
+        Button cambtn = (Button) findViewById(R.id.newSub);
         ImageButton btn = (ImageButton) findViewById(R.id.homeButton);
 
         btn.setOnClickListener(new View.OnClickListener() {

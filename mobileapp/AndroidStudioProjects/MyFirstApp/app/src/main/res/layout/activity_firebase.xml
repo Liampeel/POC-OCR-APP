@@ -4,60 +4,119 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/gradient_start"
     tools:context=".activities.FireBaseOCRActivity">
 
 
+    <ImageButton
+        android:id="@+id/homeButton2"
+        android:layout_width="58dp"
+        android:layout_height="55dp"
+        android:background="?android:attr/panelBackground"
+        app:srcCompat="@drawable/homeicon" />
+
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="401dp"
-        android:layout_height="319dp" />
+        android:layout_width="298dp"
+        android:layout_height="258dp"
+        android:layout_below="@id/textInfo"
 
-            <TextView
-                android:id="@+id/text_display"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/image_view"
-                android:layout_margin="10dp"
-                android:maxLines="10"
-                android:text=" text"
-                android:textSize="20dp" />
+        android:layout_centerHorizontal="true" />
 
-            <Button
-                android:id="@+id/capture_image_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:maxLines="10"
+        android:text="@string/firebaseInfo"
+        android:textSize="25sp" />
 
-                android:layout_above="@+id/detect_text_image_btn"
-                android:layout_marginBottom="10dp"
-                android:background="@color/colorAccent"
-                android:text="Capture Image"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="17dp" />
+    <TextView
+        android:id="@+id/resultView"
+        android:layout_width="395dp"
+        android:layout_height="99dp"
+        android:layout_below="@id/image_view"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:maxLines="10"
+        android:text=""
+        android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/greyscale"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/textInfo2"
+        android:layout_width="wrap_content"
+        android:layout_height="216dp"
+        android:layout_below="@id/textInfo"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:maxLines="10"
+        android:text="@string/firebaseInfo2"
+        android:textSize="25sp" />
 
-                android:layout_above="@+id/capture_image_btn"
-                android:layout_marginBottom="10dp"
-                android:background="@color/colorPrimary"
-                android:text="Greyscale"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="17dp" />
+    <TextView
+        android:id="@+id/textInfo3"
+        android:layout_width="wrap_content"
+        android:layout_height="191dp"
+        android:layout_below="@id/textInfo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="199dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:maxLines="10"
+        android:text="@string/firebaseinfo3"
+        android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/detect_text_image_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="@color/colorPrimary"
-                android:text="Detect Text"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="17dp" />
+
+    <Button
+        android:id="@+id/capture_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="526dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:text="@string/capture_image"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/detect_text_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="@string/confirm"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:visibility="invisible"
+        android:textSize="17dp" />
 
 
 

@@ -49,8 +49,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextName = findViewById(R.id.editTextName);
 
-        findViewById(R.id.registerButton).setOnClickListener(this);
-        findViewById(R.id.loginButton).setOnClickListener(this);
+        findViewById(R.id.registerBtn).setOnClickListener(this);
+        findViewById(R.id.logintext4).setOnClickListener(this);
 
 
         //make translucent statusBar on kitkat devices
@@ -95,17 +95,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         spinmonth.setAdapter(adapterMonth);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        if(SharedPrefManager.getInstance(this).isLoggedIn()){
-            Intent intent = new Intent(this, ProfileActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-
-        }
-    }
 
     public void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
@@ -124,11 +114,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String password = editTextPassword.getText().toString().trim();
         String name = editTextName.getText().toString().trim();
 
-        System.out.println(dateOfBirth);
-        Log.d("date of birth", "Hello hello hello");
-        Log.d("date of birth", dateOfBirth);
 
-        System.out.println("Made it to the user sign up method");
 
         if (email.isEmpty()) {
             editTextEmail.setError("Email is required");
@@ -150,8 +136,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             editTextName.requestFocus();
             return;
         }
-        else if (password.length() < 2) {
-            editTextPassword.setError("Password must be at least 2 characters");
+        else if (password.length() < 7) {
+            editTextPassword.setError("Password must be at least 7 characters");
             editTextPassword.requestFocus();
             return;
         }
@@ -235,12 +221,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.registerButton:
+            case R.id.registerBtn:
                 register();
                 break;
-            case R.id.loginButton:
+            case R.id.logintext4:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+
         }
     }
 

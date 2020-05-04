@@ -65,16 +65,16 @@ public class OCR_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ocr);
+        setContentView(R.layout.activity_firebase);
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setSubtitle("Click + button to insert Image");
         }
 
-        mResultEt = findViewById(R.id.resultEt);
-        mPreviewIv = findViewById(R.id.imageIv);
+        mResultEt = findViewById(R.id.resultView);
+        mPreviewIv = findViewById(R.id.image_view);
         captureImageBtn = findViewById(R.id.capture_image_btn);
-        detectTextBtn = findViewById(R.id.detect);
+        detectTextBtn = findViewById(R.id.detect_text_image_btn);
 
 
         //camera permission
@@ -94,7 +94,8 @@ public class OCR_Activity extends AppCompatActivity {
         detectTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showImageImportDialog();
+                Recognizer(imageBitmap);
+                mPreviewIv.setImageBitmap(imageBitmap);
             }
         });
 
@@ -278,10 +279,12 @@ public class OCR_Activity extends AppCompatActivity {
 
                 //get drawable bitmap for text recognition
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) mPreviewIv.getDrawable();
-                Bitmap bitmap = bitmapDrawable.getBitmap();
-                toGrayscale(bitmap);
+                imageBitmap = bitmapDrawable.getBitmap();
+                toGrayscale(imageBitmap);
                 changeBitmapContrastBrightness(greyBitmap, contrast, brightness);
                 toBinary(greyBitmap);
+                detectTextBtn.setVisibility(View.VISIBLE);
+
 
 
 
