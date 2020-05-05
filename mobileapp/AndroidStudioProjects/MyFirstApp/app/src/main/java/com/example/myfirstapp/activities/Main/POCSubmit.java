@@ -38,7 +38,7 @@ public class POCSubmit extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.popup);
+        setContentView(R.layout.submit);
 
         timeView = findViewById(R.id.Time);
         confirmBtn = findViewById(R.id.confirmResult);
@@ -52,13 +52,7 @@ public class POCSubmit extends AppCompatActivity implements View.OnClickListener
         findViewById(R.id.cancelBtn).setOnClickListener(this);
         findViewById(R.id.confirmResult).setOnClickListener(this);
 
-//        DisplayMetrics dm = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(dm);
-//
-//        int width = dm.widthPixels;
-//        int height = dm.heightPixels;
-//
-//        getWindow().setLayout((int)(width*.8), (int)(height*.8));
+
         byte[] byteArray = getIntent().getByteArrayExtra("image");
         bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
@@ -67,7 +61,6 @@ public class POCSubmit extends AppCompatActivity implements View.OnClickListener
         diaView.setText(getIntent().getStringExtra("Diastolic"));
         heartView.setText(getIntent().getStringExtra("Heartrate"));
         thumbnail.setImageBitmap(bmp);
-
 
 
     }

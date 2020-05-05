@@ -20,7 +20,7 @@ public class POCHomeActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_liam);
+        setContentView(R.layout.activity_home);
         findViewById(R.id.newSub).setOnClickListener(this);
         findViewById(R.id.homeButton).setOnClickListener(this);
         findViewById(R.id.recordsButton).setOnClickListener(this);

@@ -48,6 +48,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.List;
 
 public class FireBaseOCRActivity extends AppCompatActivity {
@@ -55,7 +56,7 @@ public class FireBaseOCRActivity extends AppCompatActivity {
     Button captureImageBtn, detectTextBtn, greyscalebtn;
     ImageButton homeButton;
     ImageView imageView;
-    TextView resultView, information, information2;
+    TextView resultView, information, information2, information3;
     EditText timeView, sysView, diaView, heartView;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     Bitmap imageBitmap, greyBitmap, bmpBinary;
@@ -94,6 +95,7 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         imageView = findViewById(R.id.image_view);
         information = findViewById(R.id.textInfo);
         information2 = findViewById(R.id.textInfo2);
+        information3 = findViewById(R.id.textInfo3);
 
         //camera permission
         cameraPermission = new String[]{Manifest.permission.CAMERA,
@@ -188,12 +190,6 @@ public class FireBaseOCRActivity extends AppCompatActivity {
     }
 
 
-//    private void dispatchTakePictureIntent() {
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//        }
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -232,9 +228,7 @@ public class FireBaseOCRActivity extends AppCompatActivity {
                     detectTextBtn.setVisibility(View.VISIBLE);
                     information.setVisibility(View.INVISIBLE);
                     information2.setVisibility(View.INVISIBLE);
-
-
-
+                    information3.setVisibility(View.INVISIBLE);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -248,10 +242,6 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 
             }
         }
-    }
-    public void pick_image(View v){
-        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(i,1);
     }
 
 
@@ -294,12 +284,18 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 
                 String string = sb.toString();
                 String[] result = string.split(",|[\\r?\\n]");
+                System.out.println(Arrays.toString(result));
 
                 ByteArrayOutputStream bStream = new ByteArrayOutputStream();
                 imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
                 byte[] byteArray = bStream.toByteArray();
 
-                if (result.length > 2) {
+                System.out.println(result.length);
+                if (result.length <= 3){
+                    Toast.makeText(this, "Unable to detect sufficient data", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
                     Intent intent = new Intent(this, POCSubmit.class);
                     intent.putExtra("image", byteArray);
                     intent.putExtra("Time", result[0]);
