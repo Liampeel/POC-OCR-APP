@@ -36,6 +36,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class for registering an account
+ */
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText editTextEmail, editTextPassword, editTextName;
@@ -109,6 +113,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    /**
+     * Validators on the email and password
+     * Make the request to register user
+     * @param dateOfBirth
+     */
+
     private void userSignUp(String dateOfBirth) {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -173,7 +183,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         }
 
-
+    /**
+     * Show terms and conditions if not already accepted
+     * Get the dateofbirth and convert to a string
+     */
     public void register()
     {
         Resources res = getResources();

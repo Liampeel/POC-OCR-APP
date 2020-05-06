@@ -16,6 +16,10 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
+/**
+ * API interface for sending a JSON response to the endpoints
+ */
+
 public interface Api {
     @FormUrlEncoded
     @POST("users")

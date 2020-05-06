@@ -1,5 +1,9 @@
 package com.example.myfirstapp.Model;
 
+/**
+ * class to get the User from the API login response
+ */
+
 public class User {
 
     private int id;

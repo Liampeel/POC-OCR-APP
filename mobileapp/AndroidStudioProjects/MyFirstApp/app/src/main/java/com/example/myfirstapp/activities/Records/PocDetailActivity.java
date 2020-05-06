@@ -26,6 +26,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * When a user clicks on a record, show the details for that record
+ */
+
 public class PocDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private PocResponse response;
     private String token = SharedPrefManager.getInstance(this).getToken();

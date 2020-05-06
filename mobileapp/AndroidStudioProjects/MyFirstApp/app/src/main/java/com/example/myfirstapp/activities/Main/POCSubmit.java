@@ -24,6 +24,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Edit and submit the results from the OCR to the database
+ */
+
 public class POCSubmit extends AppCompatActivity implements View.OnClickListener{
 
     EditText timeView, sysView, diaView, heartView;

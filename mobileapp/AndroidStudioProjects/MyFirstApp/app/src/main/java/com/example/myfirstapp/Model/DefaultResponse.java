@@ -2,6 +2,10 @@ package com.example.myfirstapp.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Class to get serialized response after registering a user
+ */
+
 public class DefaultResponse {
 
     @SerializedName("error")

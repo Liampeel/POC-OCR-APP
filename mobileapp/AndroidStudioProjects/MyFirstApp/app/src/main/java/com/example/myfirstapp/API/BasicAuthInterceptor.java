@@ -7,6 +7,10 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * class for adding the token to authorization header by converting the email and password to binary
+ */
+
 public class BasicAuthInterceptor implements Interceptor {
 
 

@@ -13,6 +13,10 @@ import com.example.myfirstapp.Storage.SharedPrefManager;
 import com.example.myfirstapp.activities.OCR.FireBaseOCRActivity;
 import com.example.myfirstapp.activities.Records.POCRecordsActivity;
 
+/**
+ * Class for the home page of the application
+ */
+
 public class POCHomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView textView;
@@ -22,7 +26,6 @@ public class POCHomeActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         findViewById(R.id.newSub).setOnClickListener(this);
-        findViewById(R.id.homeButton).setOnClickListener(this);
         findViewById(R.id.recordsButton).setOnClickListener(this);
         findViewById(R.id.logoutLiam).setOnClickListener(this);
 
@@ -46,25 +49,27 @@ public class POCHomeActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
+    /**
+     * Go to page to upload image
+     */
     public void goToPOC(){
         Intent intent = new Intent(this, FireBaseOCRActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
+    /**
+     * go to records page to view previous submissions
+     */
     public void goToRecords(){
         Intent intent = new Intent(this, POCRecordsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
-    public void goToHome(){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
+    /**
+     * log out the user
+     */
     private void logout(){
         SharedPrefManager.getInstance(this).clear();
         Intent intent = new Intent(this, MainActivity.class);
@@ -80,9 +85,6 @@ public class POCHomeActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
                 case R.id.newSub:
                     goToPOC();
-                    break;
-                case R.id.homeButton:
-                    goToHome();
                     break;
                 case R.id.recordsButton:
                     goToRecords();

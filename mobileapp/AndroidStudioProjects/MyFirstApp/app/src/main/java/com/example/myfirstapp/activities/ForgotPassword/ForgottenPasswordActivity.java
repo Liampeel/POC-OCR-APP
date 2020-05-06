@@ -22,6 +22,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class for sending email to user if they have forgotten their password
+ */
+
 public class ForgottenPasswordActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextEmail;
 
@@ -60,6 +64,7 @@ public class ForgottenPasswordActivity extends AppCompatActivity implements View
         win.setAttributes(winParams);
     }
 
+
     private void sendEmail(){
         String email = editTextEmail.getText().toString();
         if(!email.matches("")){
@@ -72,6 +77,10 @@ public class ForgottenPasswordActivity extends AppCompatActivity implements View
         }
     }
 
+    /**
+     * Send a password reset code to the users email
+     * @param email
+     */
     private void resetPassword(String email) {
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()

@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+
+/**
+ * class to get Mongo Object ID
+ */
+
 public class ObjectResponse implements Serializable {
 
     @SerializedName("$oid")

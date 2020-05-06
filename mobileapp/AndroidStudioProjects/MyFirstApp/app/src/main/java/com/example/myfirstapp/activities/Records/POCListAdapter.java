@@ -14,6 +14,10 @@ import com.example.myfirstapp.R;
 
 import java.util.List;
 
+/**
+ * List adapter for the records page
+ */
+
 public class POCListAdapter extends ArrayAdapter {
 
     private final Activity context;

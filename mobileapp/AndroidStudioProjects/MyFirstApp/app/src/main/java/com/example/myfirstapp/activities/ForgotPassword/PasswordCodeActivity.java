@@ -16,6 +16,11 @@ import android.widget.Toast;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.activities.Main.RegisterActivity;
 
+
+/**
+ * Enter the code the user has received from email
+ */
+
 public class PasswordCodeActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextCode;
 

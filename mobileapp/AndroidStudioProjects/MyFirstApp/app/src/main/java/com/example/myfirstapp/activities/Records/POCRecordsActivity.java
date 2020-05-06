@@ -25,6 +25,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class for retrieving the list of submissions a user has made
+ */
+
 public class POCRecordsActivity extends AppCompatActivity implements View.OnClickListener{
 
     ListView listView;
@@ -43,6 +47,11 @@ public class POCRecordsActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    /**
+     * List all of the records for a user
+     * @param pocResponseList
+     */
+
     private void recordListView(final List<PocResponse> pocResponseList) {
         POCListAdapter listAdapter = new POCListAdapter(this, pocResponseList);
         listView = findViewById(R.id.listView);
@@ -60,6 +69,9 @@ public class POCRecordsActivity extends AppCompatActivity implements View.OnClic
         });
     }
 
+    /**
+     * Get the records for a given user
+     */
     private void getPocResponse() {
 
         Call<List<PocResponse>> call = RetrofitClient

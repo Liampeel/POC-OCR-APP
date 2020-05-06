@@ -24,6 +24,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+    /**Class for Resetting the password once the user has entered the
+     code they have received from the email*/
+
 public class ResetPasswordActivity extends AppCompatActivity {
     private EditText editTextPassword;
     private EditText editTextReEnterPassword;
@@ -92,6 +95,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         }
     }
+
+
+     /** Once the password has been entered and the user clicks the confirmation button
+       Call will be made to API to update the password of the user.*/
 
     private void resetPassword(String token, String newPassword) {
         Call<ResponseBody> call = RetrofitClient

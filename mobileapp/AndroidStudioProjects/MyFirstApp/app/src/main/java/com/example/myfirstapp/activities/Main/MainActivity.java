@@ -24,6 +24,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Class for logging in a user
+ */
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static final String EXTRA_MESSAGE = "Email Address";
     public static final String EXTRA_MESSAGE2 = "password";
@@ -72,6 +76,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         win.setAttributes(winParams);
     }
+
+    /**
+     * Validators for logging in
+     * Make request to API to log in
+     */
 
     private void userLogin(){
         final String email = editTextEmail.getText().toString().trim();

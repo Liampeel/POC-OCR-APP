@@ -4,6 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+/**
+ * Response class to get serialized values from GET Request to receive records
+ */
+
 public class PocResponse implements Serializable {
 
     @SerializedName("diastolic")
