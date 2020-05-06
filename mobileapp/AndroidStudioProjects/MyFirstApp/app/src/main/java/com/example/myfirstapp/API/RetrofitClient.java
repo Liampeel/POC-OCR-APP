@@ -14,7 +14,7 @@ public class RetrofitClient {
     /**
      * CHANGE IP HERE TO THE IP THAT SERVER IS RUNNING ON
      */
-    private static final String BASE_URL = "http://192.168.1.108:5000/api/";
+    private static final String BASE_URL = "http://0.0.0.0:5000/api/";
     private static RetrofitClient mInstance, mInstanceAuth, mInstanceToken;
     private Retrofit retrofit;
 
