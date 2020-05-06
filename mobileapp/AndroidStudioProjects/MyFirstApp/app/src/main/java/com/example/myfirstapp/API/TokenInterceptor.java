@@ -9,6 +9,10 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * Interceptor for adding an authorization token to the header when the user is logging in
+ */
+
 public class TokenInterceptor implements Interceptor {
 
     String bearer;

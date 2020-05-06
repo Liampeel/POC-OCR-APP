@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities.OCR;
+package com.example.myfirstapp.activities.OCR.Unused;
 
 import android.Manifest;
 import android.content.ContentValues;
@@ -47,8 +47,13 @@ import java.lang.annotation.Retention;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
+
+/** Class for the Tess OCR that is NOT being used for this application */
+
 public class TessOCRActivity extends AppCompatActivity {
 
+
+    /** Different modes for the Tess OCR*/
     public static final class PageSegMode {
         @Retention(SOURCE)
         @IntDef({PSM_OSD_ONLY, PSM_AUTO_OSD, PSM_AUTO_ONLY, PSM_AUTO, PSM_SINGLE_COLUMN,
@@ -99,20 +104,7 @@ public class TessOCRActivity extends AppCompatActivity {
         public static final int PSM_RAW_LINE = 13;
     }
 
-    /** Whitelist of characters to recognize. */
-    public static final String VAR_CHAR_WHITELIST = "tessedit_char_whitelist";
 
-    /** Blacklist of characters to not recognize. */
-    public static final String VAR_CHAR_BLACKLIST = "tessedit_char_blacklist";
-
-    /** Save blob choices allowing us to get alternative results. */
-    public static final String VAR_SAVE_BLOB_CHOICES = "save_blob_choices";
-
-    /** String value used to assign a boolean variable to true. */
-    public static final String VAR_TRUE = "T";
-
-    /** String value used to assign a boolean variable to false. */
-    public static final String VAR_FALSE = "F";
 
     @Retention(SOURCE)
     @IntDef({OEM_TESSERACT_ONLY, OEM_CUBE_ONLY, OEM_TESSERACT_CUBE_COMBINED, OEM_DEFAULT})

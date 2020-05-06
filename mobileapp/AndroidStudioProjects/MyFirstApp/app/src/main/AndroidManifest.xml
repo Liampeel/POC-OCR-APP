@@ -35,11 +35,11 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity android:name=".activities.DetailActivity" />
-        <activity android:name=".activities.OCR.TessOCRActivity" />
+        <activity android:name=".activities.OCR.Unused.TessOCRActivity" />
         <activity android:name=".activities.recordsActivity" />
         <activity android:name=".activities.Records.POCRecordsActivity" />
         <activity
-            android:name=".activities.OCR.OCR_Activity"
+            android:name=".activities.OCR.Unused.OCR_Activity"
             android:theme="@style/Theme.AppCompat.DayNight" />
         <activity android:name=".activities.OCR.FireBaseOCRActivity">
             <meta-data

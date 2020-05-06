@@ -4,12 +4,21 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * HTTP Client for making the API calls to the API
+ * Includes client for registering a user, logging in, and another client for authenticated requests
+ */
+
 public class RetrofitClient {
 
     private static final String BASE_URL = "http://192.168.1.108:5000/api/";
     private static RetrofitClient mInstance, mInstanceAuth, mInstanceToken;
     private Retrofit retrofit;
 
+
+    /**
+     * Basic client for registering user
+     */
     private RetrofitClient() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -17,7 +26,12 @@ public class RetrofitClient {
                 .build();
     }
 
-    // authenticated client adds in Authorization header
+    /**
+     * Client used for logging in
+     * uses the interceptor to add a token by converting the email and password
+     * @param email
+     * @param password
+     */
     private RetrofitClient(String email, String password) {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new BasicAuthInterceptor(email, password))
@@ -30,6 +44,10 @@ public class RetrofitClient {
                 .build();
     }
 
+    /**
+     * Client using the stored token to make an authenticated request
+     * @param bearer
+     */
     private RetrofitClient(String bearer) {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new TokenInterceptor(bearer))

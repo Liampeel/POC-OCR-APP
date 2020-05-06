@@ -51,6 +51,11 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
+/** Class for the Firbase API Text recognition.
+ * Class will take image from the user, convert to greyscale and binary,
+ * And then perform the algorithm on the image
+ */
+
 public class FireBaseOCRActivity extends AppCompatActivity {
 
     Button captureImageBtn, detectTextBtn, greyscalebtn;
@@ -131,10 +136,9 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 
     }
 
-
+ /** Method for alert the user to make sure they have read the instructions*/
     public void confirm()
     {
-
 
         android.app.AlertDialog.Builder termsDialogBuilder = new android.app.AlertDialog.Builder(this);
         termsDialogBuilder.setTitle("Tutorial");
@@ -142,18 +146,17 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         termsDialogBuilder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-
                 showImageImportDialog();
-
             }
         });
-
-
         android.app.AlertDialog alertDialog = termsDialogBuilder.create();
         alertDialog.show();
-
     }
 
+
+    /**
+     * Method to ask the user whether they want to use the Gallery or Camera option on their phone.
+     */
 
     private void showImageImportDialog() {
         String[] items = {" Camera", " Gallery"};
@@ -190,7 +193,14 @@ public class FireBaseOCRActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Once the image has been selected, perform the cropping function it.
+     * After receiving cropped image, Call the Pre-Processing methods
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //got image from camera
@@ -244,7 +254,10 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         }
     }
 
-
+    /** After receiving the processed bitmap, perform the text recognition algorithm on it
+     *
+     * @param bitmap
+     */
     private void detectTextFromImage(Bitmap bitmap) {
         if (bitmap != null){
             FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap);
@@ -265,7 +278,12 @@ public class FireBaseOCRActivity extends AppCompatActivity {
     }
 
 
-
+    /** After receviing the detected text, Loop through the text and put them in a StrinbBuilder
+     * Convert StringBuilder to an Array using regex for "," and "\n"
+     * Send values to corresponding header in next activity
+     *
+     * @param firebaseVisionText
+     */
     private void displayTextFromImage(FirebaseVisionText firebaseVisionText) {
 
         if (black/white > 0.7) {
@@ -306,15 +324,17 @@ public class FireBaseOCRActivity extends AppCompatActivity {
                     finish();
                 }
 
-
             }
         }
 
-
-
-
     }
 
+
+    /** Convert Cropped image to greyscale
+     *
+     * @param bmpOriginal
+     * @return
+     */
     public Bitmap toGrayscale(Bitmap bmpOriginal)
     {
         int width, height;
@@ -335,7 +355,12 @@ public class FireBaseOCRActivity extends AppCompatActivity {
     }
 
 
-
+    /** Convert greyscale image to bitmap by looping through the pixels and converting them based
+     * on a threshold
+     *
+     * @param bmpOriginal
+     * @return
+     */
     public Bitmap toBinary(Bitmap bmpOriginal) {
         int width, height, threshold;
         height = bmpOriginal.getHeight();
@@ -343,14 +368,11 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         threshold = 127;
         bmpBinary = Bitmap.createBitmap(bmpOriginal);
 
-
-
         for(int x = 0; x < width; ++x) {
             for(int y = 0; y < height; ++y) {
                 // get one pixel color
                 int pixel = bmpOriginal.getPixel(x, y);
                 int red = Color.red(pixel);
-
 
                 //get binary value
                 if(red < threshold){
@@ -372,6 +394,10 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         return bmpBinary;
     }
 
+
+    /**
+     * If the user chose gallery, show images in the phones gallery
+     */
     private void pickGallery() {
         //inent to pick image from gallery
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -380,6 +406,9 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         startActivityForResult(intent, IMAGE_PICK_GALLERY_CODE);
     }
 
+    /**
+     * If the user chose camera, bring up the phones camera
+     */
     private void pickCamera() {
         //intent to take image form camera
         ContentValues values = new ContentValues();
@@ -393,22 +422,36 @@ public class FireBaseOCRActivity extends AppCompatActivity {
         startActivityForResult(cameraIntent, IMAGE_PICK_CAMERA_CODE);
     }
 
+    /**
+     * request permission to access phones storage
+     */
     private void requestStoragePermission() {
         ActivityCompat.requestPermissions(this,
                 storagePermission, STORAGE_REQUEST_CODE);
     }
 
+    /**
+     * check if permission to access storage has been granted
+     * @return
+     */
     private boolean checkStoragePermission() {
         boolean result1 = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
         return result1;
     }
 
+    /**
+     * request permission to access phones camera
+     */
     private void requestCameraPermission() {
         ActivityCompat.requestPermissions(this,
                 cameraPermission, CAMERA_REQUEST_CODE);
     }
 
+    /**
+     * check permission to use camera has been granted
+     * @return
+     */
     private boolean checkCameraPermission(){
         /* check camera permission and return result
         in order to get hihg quality image have to save
@@ -424,9 +467,14 @@ public class FireBaseOCRActivity extends AppCompatActivity {
 
     }
 
-    //handle permissions
 
 
+    /**
+     * handling the permissions
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode){
@@ -461,13 +509,18 @@ public class FireBaseOCRActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Go to home screen, clear the current activity
+     */
     public void home() {
-
         Intent intent = new Intent(this, POCHomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
+    /**
+     * If not logged in, go back to login page
+     */
     @Override
     protected void onStart() {
         super.onStart();

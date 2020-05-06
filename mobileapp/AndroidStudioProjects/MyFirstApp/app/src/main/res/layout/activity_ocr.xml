@@ -9,7 +9,7 @@
     android:background="@drawable/gradient_start"
     android:fitsSystemWindows="true"
     android:gravity="center_horizontal"
-    tools:context=".activities.OCR.OCR_Activity">
+    tools:context=".activities.OCR.Unused.OCR_Activity">
 
     <Button
         android:id="@+id/capture_image_btn"

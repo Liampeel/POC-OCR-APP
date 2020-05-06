@@ -1,4 +1,4 @@
-package com.example.myfirstapp.activities.OCR;
+package com.example.myfirstapp.activities.OCR.Unused;
 
 import android.Manifest;
 import android.app.ActionBar;

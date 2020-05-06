@@ -1,5 +1,9 @@
 package com.example.myfirstapp.Model;
 
+/**
+ * Class to get Token and User from login response
+ */
+
 public class LoginResponse {
 
     private String token, error;
