@@ -2,6 +2,10 @@
 
 Android application client to run on and communicate with the base application.
 
+This application is using an optical character recognition algorithm to read the display from a point of care device.
+
+Testing for this application was done on an OMRON Blood Pressure Monitor.
+
 ## Prerequisites
 
 * Android Studio - Available from https://developer.android.com/studio
